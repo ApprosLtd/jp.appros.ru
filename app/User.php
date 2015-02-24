@@ -31,4 +31,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function getBaseRole()
+    {
+        return 'buyer';
+    }
+
+    public function isBuyer()
+    {
+        if ($this->getBaseRole() == 'buyer') {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isSeller()
+    {
+        if ($this->getBaseRole() == 'seller') {
+            return true;
+        }
+
+        return false;
+    }
+
 }

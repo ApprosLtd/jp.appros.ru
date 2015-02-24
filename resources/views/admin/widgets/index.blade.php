@@ -1,0 +1,1 @@
+resources/views/admin/widgets/index.blade.php
