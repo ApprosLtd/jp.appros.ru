@@ -13,7 +13,9 @@ class WidgetsController extends AdminController {
 	 */
 	public function getIndex()
 	{
-        return view('admin.widgets.index');
+        $widgets_models_arr = \App\Models\Widget::paginate(20);
+
+        return view('admin.widgets.index', ['widgets_models_arr' => $widgets_models_arr]);
 	}
 
 }

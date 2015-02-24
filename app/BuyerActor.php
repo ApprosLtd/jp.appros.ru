@@ -1,9 +1,7 @@
 <?php namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+class BuyerActor extends User {
 
-class BuyerActor extends Model {
-
-	//
+    //
 
 }
