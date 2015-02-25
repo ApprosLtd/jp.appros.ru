@@ -5,9 +5,7 @@ class IndexController extends SellerController {
 
     public function getIndex()
     {
-        $this->layout([
-            'content' => 'hello seller layout'
-        ]);
+        return view('seller.index');
     }
 
 }

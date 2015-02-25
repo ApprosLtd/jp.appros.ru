@@ -14,6 +14,8 @@
 </head>
 <body>
 
+SELLER LAYOUT
+
 @yield('content')
 
 <!-- Latest compiled and minified JavaScript -->
