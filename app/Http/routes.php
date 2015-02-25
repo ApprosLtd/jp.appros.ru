@@ -21,14 +21,16 @@ Route::controllers([
 	'admin/widgets' => 'Admin\WidgetsController',
 ]);
 
-
-Route::group(['prefix' => 'seller', 'namespace' => 'Seller'], function()
+/**
+ * Раздел "Продавцы"
+ */
+Route::group(['prefix' => 'seller'], function()
 {
 
     Route::controllers([
-        'auth' => 'AuthController',
-        'goods' => 'GoodsController',
-        '/' => 'IndexController',
+        'auth' => 'Seller\AuthController',
+        'goods' => 'Seller\GoodsController',
+        '/' => 'Seller\IndexController',
     ]);
 
 });
