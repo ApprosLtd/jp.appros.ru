@@ -7,6 +7,18 @@ abstract class SellerController extends Controller {
 
     protected $layout = 'seller.layout';
 
+    public function setContent($view, $data = [])
+    {
+
+        if ( ! is_null($this->layout))
+        {
+            return $this->layout->nest('child', $view, $data);
+        }
+
+        return view($view, $data);
+
+    }
+
     protected function setupLayout()
     {
         if (!is_null($this->layout))
