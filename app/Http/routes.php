@@ -21,8 +21,14 @@ Route::controllers([
 	'admin/widgets' => 'Admin\WidgetsController',
 ]);
 
-Route::controllers([
-	'seller' => 'Seller\IndexController',
-	'seller/auth' => 'Seller\AuthController',
-	'seller/goods' => 'Seller\GoodsController',
-]);
+
+Route::group(['prefix' => 'seller'], function()
+{
+
+    Route::controllers([
+        '/' => 'Seller\IndexController',
+        'auth' => 'Seller\AuthController',
+        'goods' => 'Seller\GoodsController',
+    ]);
+
+});
