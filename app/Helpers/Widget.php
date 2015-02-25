@@ -33,9 +33,10 @@ class Widget {
     /**
      * Выводит содержимое региона
      * @param $region_name
+     * @param $layout_name
      * @return string
      */
-    public static function region($region_name)
+    public static function region($region_name, $layout_name = null)
     {
         $widgets_models_arr = \App\Models\Widget::where('region', '=', $region_name)->where('status', '=', 1)->orderBy('position')->get();
 
@@ -46,6 +47,14 @@ class Widget {
         $output = '';
 
         foreach ($widgets_models_arr as $widget_model) {
+
+            $layouts = str_replace(' ', '', $widget_model->layouts);
+            $layouts = explode(',', $layouts);
+
+            if (!empty($layout_name) and !in_array($layout_name, $layouts)) {
+                continue;
+            }
+
             $widget_handler_name = $widget_model->handler;
 
             if (!class_exists($widget_handler_name)) {

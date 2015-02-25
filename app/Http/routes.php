@@ -29,7 +29,8 @@ Route::group(['prefix' => 'seller'], function()
 
     Route::controllers([
         'auth' => 'Seller\AuthController',
-        'goods' => 'Seller\GoodsController',
+        'products' => 'Seller\ProductsController',
+        'pricing-grids' => 'Seller\PricingGridsController',
         '/' => 'Seller\IndexController',
     ]);
 

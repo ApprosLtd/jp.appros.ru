@@ -14,6 +14,8 @@
 </head>
 <body>
 
+{!! \App\Helpers\Widget::region('top', 'admin') !!}
+
 @yield('content')
 
 <!-- Latest compiled and minified JavaScript -->

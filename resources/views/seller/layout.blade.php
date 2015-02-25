@@ -14,7 +14,7 @@
 </head>
 <body>
 
-{!! \App\Helpers\Widget::region('top') !!}
+{!! \App\Helpers\Widget::region('top', 'seller') !!}
 
 @yield('content')
 
