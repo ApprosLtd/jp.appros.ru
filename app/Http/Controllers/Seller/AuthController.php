@@ -25,6 +25,11 @@ class AuthController extends Controller {
 
     public function getIndex()
     {
-        return 'auth-form';
+        return 'seller-auth-form';
+    }
+
+    public function getLogin()
+    {
+        return 'seller-auth-login-form';
     }
 }
