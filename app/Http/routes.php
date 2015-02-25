@@ -22,7 +22,7 @@ Route::controllers([
 ]);
 
 
-Route::group(['prefix' => 'seller', 'namespace' => 'Seller'], function()
+Route::group(['prefix' => 'seller', 'namespace' => 'Seller2'], function()
 {
 
     Route::controllers([
