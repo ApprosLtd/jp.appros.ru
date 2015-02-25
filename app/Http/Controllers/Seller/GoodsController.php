@@ -7,7 +7,7 @@ class GoodsController extends SellerController {
 
     public function getIndex()
     {
-        //
+        return view('seller.goods.index');
     }
 
 }
