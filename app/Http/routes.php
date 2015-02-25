@@ -22,13 +22,13 @@ Route::controllers([
 ]);
 
 
-Route::group(['prefix' => 'seller', 'namespace' => 'Seller2'], function()
+Route::group(['prefix' => 'seller', 'namespace' => 'Seller'], function()
 {
 
     Route::controllers([
-        '/' => 'IndexController',
         'auth' => 'AuthController',
         'goods' => 'GoodsController',
+        '/' => 'IndexController',
     ]);
 
 });
