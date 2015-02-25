@@ -7,6 +7,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Home</div>
 
+                {!! \App\Helpers\Widget::region('center_1') !!}
+
 				<div class="panel-body">
 					You are logged in!
 				</div>

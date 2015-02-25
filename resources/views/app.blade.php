@@ -38,6 +38,7 @@
 					<li><a href="/">Доставка</a></li>
 					<li><a href="/">Правила</a></li>
 					<li><a href="/admin/widgets">Виджеты</a></li>
+					<li><a href="/seller/goods">Товары</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">

@@ -20,3 +20,9 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 	'admin/widgets' => 'Admin\WidgetsController',
 ]);
+
+Route::controllers([
+	'seller' => 'Seller\IndexController',
+	'seller/auth' => 'Seller\AuthController',
+	'seller/goods' => 'Seller\GoodsController',
+]);
