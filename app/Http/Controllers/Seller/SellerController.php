@@ -13,7 +13,7 @@ abstract class SellerController extends Controller {
 
         if (is_null($response) && !is_null($this->layout))
         {
-            $response = $this->layout;
+            $response = view($this->layout);
         }
 
         return $response;
