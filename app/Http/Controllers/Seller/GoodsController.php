@@ -1,11 +1,9 @@
 <?php namespace App\Http\Controllers\Seller;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 
-class GoodsController extends Controller {
+class GoodsController extends SellerController {
 
     public function getIndex()
     {

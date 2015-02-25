@@ -1,8 +1,7 @@
 <?php namespace App\Http\Controllers\Seller;
 
-use App\Http\Controllers\Controller;
 
-class IndexController extends Controller {
+class IndexController extends SellerController {
 
     public function getIndex()
     {
