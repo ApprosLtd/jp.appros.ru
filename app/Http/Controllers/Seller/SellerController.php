@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 abstract class SellerController extends Controller {
 
+    protected $layout = 'seller.layout';
+
     public function callAction($method, $parameters)
     {
         $response = call_user_func_array(array($this, $method), $parameters);
