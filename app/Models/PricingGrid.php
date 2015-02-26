@@ -6,4 +6,21 @@ class PricingGrid extends Model {
 
     protected $fillable = ['name', 'description'];
 
+    public static function getPricingGridsForCurrentUser()
+    {
+        $user = \Auth::user();
+
+        if (!$user) {
+            return [];
+        }
+
+        $result = self::where('user_id', '=', $user->id)->get(['id', 'name']);
+
+        if (!$result) {
+            return [];
+        }
+
+        return $result;
+    }
+
 }

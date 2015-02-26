@@ -1,11 +1,19 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 25.02.2015 23:53:58
+-- Дата скрипта: 26.02.2015 8:30:33
 -- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
+
+--
+-- Описание для базы данных joint_purchasing
+--
+DROP DATABASE IF EXISTS joint_purchasing;
+CREATE DATABASE joint_purchasing
+	CHARACTER SET utf8
+	COLLATE utf8_general_ci;
 
 -- 
 -- Отключение внешних ключей
@@ -30,8 +38,7 @@ USE joint_purchasing;
 --
 -- Описание для таблицы migrations
 --
-DROP TABLE IF EXISTS migrations;
-CREATE TABLE IF NOT EXISTS migrations (
+CREATE TABLE migrations (
   migration VARCHAR(255) NOT NULL,
   batch INT(11) NOT NULL
 )
@@ -43,8 +50,7 @@ COLLATE utf8_unicode_ci;
 --
 -- Описание для таблицы password_resets
 --
-DROP TABLE IF EXISTS password_resets;
-CREATE TABLE IF NOT EXISTS password_resets (
+CREATE TABLE password_resets (
   email VARCHAR(255) NOT NULL,
   token VARCHAR(255) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -56,15 +62,27 @@ CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
 --
+-- Описание для таблицы prices
+--
+CREATE TABLE prices (
+  product_id INT(11) NOT NULL,
+  column_id INT(11) NOT NULL,
+  price DECIMAL(19, 2) NOT NULL DEFAULT 0.00,
+  INDEX product_id (product_id)
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
 -- Описание для таблицы pricing_grids
 --
-DROP TABLE IF EXISTS pricing_grids;
-CREATE TABLE IF NOT EXISTS pricing_grids (
+CREATE TABLE pricing_grids (
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(500) NOT NULL DEFAULT '',
   user_id INT(11) NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id)
 )
@@ -72,18 +90,45 @@ ENGINE = INNODB
 AUTO_INCREMENT = 3
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT = 'Ценовые сетки';
+
+--
+-- Описание для таблицы pricing_grids_columns
+--
+CREATE TABLE pricing_grids_columns (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  pricing_grid_id INT(11) NOT NULL,
+  column_number INT(11) NOT NULL,
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 1
+CHARACTER SET utf8
+COLLATE utf8_general_ci
+COMMENT = 'Колонки ценовых сеток';
+
+--
+-- Описание для таблицы product_purchase
+--
+CREATE TABLE product_purchase (
+  purchase_id INT(11) NOT NULL,
+  product_id INT(11) NOT NULL
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_general_ci
+COMMENT = 'Промежуточная таблица "Закупки - продукты"';
 
 --
 -- Описание для таблицы products
 --
-DROP TABLE IF EXISTS products;
-CREATE TABLE IF NOT EXISTS products (
+CREATE TABLE products (
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(5000) NOT NULL DEFAULT '',
   user_id INT(11) NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id)
 )
@@ -91,13 +136,34 @@ ENGINE = INNODB
 AUTO_INCREMENT = 7
 AVG_ROW_LENGTH = 2730
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT = 'Продукты';
+
+--
+-- Описание для таблицы purchases
+--
+CREATE TABLE purchases (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  user_id INT(11) NOT NULL,
+  pricing_grid_id INT(11) NOT NULL,
+  pricing_grid_column INT(11) NOT NULL DEFAULT 1,
+  expiration_time TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  description VARCHAR(255) NOT NULL DEFAULT '',
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 5
+AVG_ROW_LENGTH = 4096
+CHARACTER SET utf8
+COLLATE utf8_general_ci
+COMMENT = 'Закупки';
 
 --
 -- Описание для таблицы users
 --
-DROP TABLE IF EXISTS users;
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
   id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
@@ -117,8 +183,7 @@ COLLATE utf8_unicode_ci;
 --
 -- Описание для таблицы widgets
 --
-DROP TABLE IF EXISTS widgets;
-CREATE TABLE IF NOT EXISTS widgets (
+CREATE TABLE widgets (
   id INT(11) NOT NULL AUTO_INCREMENT,
   name VARCHAR(100) NOT NULL,
   description VARCHAR(255) DEFAULT NULL,
@@ -127,15 +192,16 @@ CREATE TABLE IF NOT EXISTS widgets (
   region VARCHAR(50) DEFAULT NULL,
   `position` INT(11) NOT NULL DEFAULT 0,
   status TINYINT(1) NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NULL DEFAULT NULL,
-  updated_at TIMESTAMP NULL DEFAULT '0000-00-00 00:00:00',
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
 AUTO_INCREMENT = 4
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT = 'Виджеты';
 
 -- 
 -- Вывод данных для таблицы migrations
@@ -151,11 +217,29 @@ INSERT INTO migrations VALUES
 -- Таблица joint_purchasing.password_resets не содержит данных
 
 -- 
+-- Вывод данных для таблицы prices
+--
+
+-- Таблица joint_purchasing.prices не содержит данных
+
+-- 
 -- Вывод данных для таблицы pricing_grids
 --
 INSERT INTO pricing_grids VALUES
-(1, 'Тхэквондо23', '', 0, '2015-02-25 20:39:47', '2015-02-25 20:39:47'),
-(2, 'По категориям', '', 0, '2015-02-25 20:40:06', '2015-02-25 20:40:06');
+(1, 'Тхэквондо23', '', 1, '2015-02-25 20:39:47', '2015-02-25 20:39:47'),
+(2, 'По категориям', '', 1, '2015-02-25 20:40:06', '2015-02-25 20:40:06');
+
+-- 
+-- Вывод данных для таблицы pricing_grids_columns
+--
+
+-- Таблица joint_purchasing.pricing_grids_columns не содержит данных
+
+-- 
+-- Вывод данных для таблицы product_purchase
+--
+
+-- Таблица joint_purchasing.product_purchase не содержит данных
 
 -- 
 -- Вывод данных для таблицы products
@@ -167,6 +251,15 @@ INSERT INTO products VALUES
 (4, 'asetaryh', '', 0, '2015-02-25 20:26:14', '2015-02-25 20:26:14'),
 (5, 'Виталий', '', 0, '2015-02-25 20:31:17', '2015-02-25 20:31:17'),
 (6, 'Тхэквондо23', '', 0, '2015-02-25 20:33:48', '2015-02-25 20:33:48');
+
+-- 
+-- Вывод данных для таблицы purchases
+--
+INSERT INTO purchases VALUES
+(1, 1, 1, 1, '2015-03-05 04:29:39', 'первая закупка', '2015-02-26 04:30:03', '2015-02-26 04:30:03'),
+(2, 1, 2, 1, '2015-03-05 04:30:03', 'новая закупка', '2015-02-26 04:33:41', '2015-02-26 04:33:41'),
+(3, 1, 2, 1, '2015-03-05 04:33:58', 'уфа', '2015-02-26 04:34:02', '2015-02-26 04:34:02'),
+(4, 1, 1, 1, '2015-03-05 04:34:03', 'вамви', '2015-02-26 04:34:22', '2015-02-26 04:34:22');
 
 -- 
 -- Вывод данных для таблицы users

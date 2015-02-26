@@ -15,6 +15,7 @@
                 <li><a href="/">Home</a></li>
                 <li><a href="/seller/products">Товары</a></li>
                 <li><a href="/seller/pricing-grids">Ценовые сетки</a></li>
+                <li><a href="/seller/purchases">Закупки</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
