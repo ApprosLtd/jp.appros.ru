@@ -32,6 +32,7 @@ Route::group(['prefix' => 'seller'], function()
         'products' => 'Seller\ProductsController',
         'pricing-grids' => 'Seller\PricingGridsController',
         'purchases' => 'Seller\PurchasesController',
+        'prices' => 'Seller\PricesController',
         '/' => 'Seller\IndexController',
     ]);
 
