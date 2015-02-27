@@ -15,18 +15,29 @@ Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
 
+Route::get('zakupka/{id}', 'PurchasesController@getPurchase');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-	'admin/widgets' => 'Admin\WidgetsController',
 ]);
+
+/**
+ * Раздел "Админка"
+ */
+Route::group(['prefix' => 'admin'], function()
+{
+    Route::controllers([
+        'widgets' => 'Admin\WidgetsController',
+    ]);
+});
+
 
 /**
  * Раздел "Продавцы"
  */
 Route::group(['prefix' => 'seller'], function()
 {
-
     Route::controllers([
         'auth' => 'Seller\AuthController',
         'products' => 'Seller\ProductsController',
@@ -35,5 +46,4 @@ Route::group(['prefix' => 'seller'], function()
         'prices' => 'Seller\PricesController',
         '/' => 'Seller\IndexController',
     ]);
-
 });
