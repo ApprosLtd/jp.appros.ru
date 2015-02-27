@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PricingGrid extends Model {
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['user_id', 'name', 'description'];
 
     public static function getPricingGridsForCurrentUser()
     {

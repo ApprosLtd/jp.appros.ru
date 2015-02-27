@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 26.02.2015 8:30:33
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 27.02.2015 16:47:15
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -87,7 +87,7 @@ CREATE TABLE pricing_grids (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 13
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -227,7 +227,16 @@ INSERT INTO migrations VALUES
 --
 INSERT INTO pricing_grids VALUES
 (1, 'Тхэквондо23', '', 1, '2015-02-25 20:39:47', '2015-02-25 20:39:47'),
-(2, 'По категориям', '', 1, '2015-02-25 20:40:06', '2015-02-25 20:40:06');
+(2, 'По категориям', '', 1, '2015-02-25 20:40:06', '2015-02-25 20:40:06'),
+(3, 'Новая ценовая сетка', '', 1, '2015-02-27 09:50:46', '2015-02-27 09:50:46'),
+(5, 'Hello world', '', 1, '2015-02-27 10:41:28', '2015-02-27 10:41:28'),
+(6, '656576757575', '', 1, '2015-02-27 12:39:45', '2015-02-27 12:39:45'),
+(7, '44747uuir', 'irtitiuo', 1, '2015-02-27 12:40:04', '2015-02-27 12:40:04'),
+(8, 'titiyt', '', 1, '2015-02-27 12:40:13', '2015-02-27 12:40:13'),
+(9, 'ytiytoyu', '', 1, '2015-02-27 12:40:16', '2015-02-27 12:40:16'),
+(10, 'yuoyop', '', 1, '2015-02-27 12:40:20', '2015-02-27 12:40:20'),
+(11, 'yuoyop', '', 1, '2015-02-27 12:40:23', '2015-02-27 12:40:23'),
+(12, 'yuopyup', '', 1, '2015-02-27 12:40:28', '2015-02-27 12:40:28');
 
 -- 
 -- Вывод данных для таблицы pricing_grids_columns
@@ -265,7 +274,7 @@ INSERT INTO purchases VALUES
 -- Вывод данных для таблицы users
 --
 INSERT INTO users VALUES
-(1, 'Виталий', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-02-25 10:35:35');
+(1, 'Виталий Серов', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-02-25 10:35:35');
 
 -- 
 -- Вывод данных для таблицы widgets

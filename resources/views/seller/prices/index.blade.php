@@ -1,34 +1,39 @@
 @extends('seller.layout')
 
 @section('content')
-    <script>
-
-        angular.module('myApp', []).config(function($interpolateProvider){
-            $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-        });
-
-        angular.controller('ProductController', ['$scope', function($scope) {
-            $scope.products = [
-                {"name": "Nexus S",
-                    "snippet": "Fast just got faster with Nexus S."},
-                {"name": "Motorola XOOM™ with Wi-Fi",
-                    "snippet": "The Next, Next Generation tablet."},
-                {"name": "MOTOROLA XOOM™",
-                    "snippet": "The Next, Next Generation tablet."}
-            ];
-        }]);
-
-    </script>
-    <div class="container" ng-controller="ProductController">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Home</div>
-
-                    {!! \App\Helpers\Widget::region('center_1') !!}
+                    <div class="panel-heading">Управление ценами</div>
+                    <?php
+                    $user_pricing_grids = \App\Models\PricingGrid::where('user_id', '=', \Auth::user()->id)->get();
+                    ?>
+                    <div class="panel-body">
+                        <div class="btn-group btn-group-sm" style="margin-right: 30px">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Каталог товаров <span style="margin-left: 10px" class="glyphicon glyphicon-th-list"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Парфюмерия</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                            </ul>
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                Ценовая сетка <span style="margin-left: 5px" class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                            @foreach ($user_pricing_grids as $pricing_grid)
+                                <li><a href="#{{ $pricing_grid['id'] }}">{{ $pricing_grid['name'] }}</a></li>
+                            @endforeach
+                            </ul>
+                        </div>
+                    </div>
 
                     <div class="">
-                        <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
+                        <table ng-controller="ProductTableController" class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -39,9 +44,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="product in products">
+                                <tr ng-repeat="product in products" ng-click="alertData(product)">
                                     <th scope="row">1</th>
-                                    <td>{[{ product.name }]}</td>
+                                    <td>[[ product.name ]]</td>
                                     <td>3</td>
                                     <td>4</td>
                                     <td>5</td>

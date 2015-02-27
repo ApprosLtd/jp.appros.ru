@@ -25,6 +25,8 @@ class ProductsController extends SellerController {
             return 'Невалидные данные';
         }
 
+        $post_fields_arr['user_id'] = $this->user->id;
+
         if (isset($post_fields_arr['id'])) {
             $widget_model = \App\Models\Product::find($post_fields_arr['id']);
 
