@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="mainApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -16,15 +16,14 @@
     </style>
 
     <script src="http://yastatic.net/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="/app/app.js"></script>
 
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
-    <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+    <!--link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
+    <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script-->
 
     <title></title>
 </head>
-<body ng-controller="MainController">
+<body>
 
 {!! \App\Helpers\Widget::region('top', 'seller') !!}
 
@@ -32,8 +31,6 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-
 
 </body>
 </html>

@@ -11,6 +11,12 @@
 |
 */
 
+Route::get('phpinfo', function(){
+    return phpinfo();
+});
+
+Route::get('test', 'WelcomeController@test');
+
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
@@ -46,4 +52,12 @@ Route::group(['prefix' => 'seller'], function()
         'prices' => 'Seller\PricesController',
         '/' => 'Seller\IndexController',
     ]);
+});
+
+/**
+ * API
+ */
+Route::group(['prefix' => 'api'], function()
+{
+    Route::resource('model', 'Api\ModelController');
 });

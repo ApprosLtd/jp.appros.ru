@@ -20,20 +20,28 @@
                                 <li><a href="#">Something else here</a></li>
                             </ul>
                         </div>
-                        <div class="btn-group btn-group-sm">
+                        <div class="btn-group btn-group-sm" id="pricing-grid-selector">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                Ценовая сетка <span style="margin-left: 5px" class="caret"></span>
+                                <span class="text">Ценовая сетка</span> <span style="margin-left: 5px" class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
                             @foreach ($user_pricing_grids as $pricing_grid)
-                                <li><a href="#{{ $pricing_grid['id'] }}">{{ $pricing_grid['name'] }}</a></li>
+                                <li><a href="#" data-id="{{ $pricing_grid['id'] }}" data-name="{{ $pricing_grid['name'] }}">{{ $pricing_grid['name'] }}</a></li>
                             @endforeach
                             </ul>
                         </div>
+                        <script>
+                            $('#pricing-grid-selector .dropdown-menu a').on('click', function(){
+                                var self = $(this);
+                                var parent = self.parents('.btn-group');
+                                parent.find('button[data-toggle="dropdown"] .text').text(self.data('name'));
+                                return false;
+                            });
+                        </script>
                     </div>
 
                     <div class="">
-                        <table ng-controller="ProductTableController" class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
+                        <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
                             <thead>
                             <tr>
                                 <th>ID</th>
@@ -44,9 +52,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="product in products" ng-click="alertData(product)">
+                                <tr>
                                     <th scope="row">1</th>
-                                    <td>[[ product.name ]]</td>
+                                    <td>2</td>
                                     <td>3</td>
                                     <td>4</td>
                                     <td>5</td>

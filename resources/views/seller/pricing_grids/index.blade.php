@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="">
-                    <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD" id="myTable">
+                    <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
                         <thead>
                         <tr>
                             <th>ID</th>
@@ -43,12 +43,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function(){
-        $('#myTable').DataTable();
-    });
-</script>
 
 <!-- Modal -->
 <div class="modal" id="editPricingGrid" tabindex="-1" role="dialog" aria-hidden="true">
