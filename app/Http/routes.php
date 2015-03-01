@@ -60,4 +60,5 @@ Route::group(['prefix' => 'seller'], function()
 Route::group(['prefix' => 'api'], function()
 {
     Route::resource('model', 'Api\ModelController');
+    Route::resource('catalog-tree', 'Api\CatalogTreeController');
 });

@@ -61,77 +61,79 @@ webix.ready(function(){
     };
 
     webix.ui({
-        //type: "scrollview",
-        //body: {
-            type: "space",
-            //padding: 0,
-            //responsive: "a1",
-            height: '100%',
-            //autoheight: true,
-            rows: [{view:"toolbar",
-                height: 40,
-                elements:[
-                    {view:"label",  template: "<span class='main_title'>Webix Airlines Manager</span>"},{},
-                    {view:"icon",width: 40, icon:"info-circle"},
-                    {view:"icon", width: 40,icon:"comments"},
-                    {view:"icon",width: 40, icon:"cog", popup: "lang" }
-                ]
-            },{
-                type: "wide",
-                height: "100%",
-                cols: [{
-                    width: 300,
-                    rows: [{
-                        view: 'form',
-                        scroll: false,
-                        cols: [{
-                            view: "richselect",
-                            text: "Выберите проект",
-                            on: {
-                                'onChange': function (newv, oldv) {
-                                    webix.message("Value changed from: " + oldv + " to: " + newv);
-                                }
-                            },
-                            options: {
-                                body: {
-                                    template: "#name#",
-                                    //yCount:3,
-                                    data: [
-                                        {id: 1, name: "Banana"},
-                                        {id: 2, name: "Papai"},
-                                        {id: 3, name: "Apple"},
-                                        {id: 4, name: "Mango"}
-                                    ]
-                                }
+        type: "space",
+        height: '100%',
+        rows: [{view:"toolbar",
+            height: 40,
+            elements:[
+                {view:"label",  template: "<span class='main_title'>Админка</span>"},{},
+                {view:"icon",width: 40, icon:"info-circle"},
+                {view:"icon", width: 40,icon:"comments"},
+                {view:"icon",width: 40, icon:"cog", popup: "lang" }
+            ]
+        },{
+            type: "wide",
+            height: "100%",
+            cols: [{
+                width: 300,
+                rows: [{
+                    view: 'form',
+                    scroll: false,
+                    cols: [{
+                        view: "richselect",
+                        text: "Выберите проект",
+                        on: {
+                            'onChange': function (newv, oldv) {
+                                webix.message("Value changed from: " + oldv + " to: " + newv);
                             }
-                        }, {
-                            view: "button",
-                            label: "+",
-                            width: 40,
-                            tooltip: "Добавить проект",
-                            click: function () {
-                                alert("Форма нового проекта");
+                        },
+                        options: {
+                            body: {
+                                template: "#name#",
+                                //yCount:3,
+                                data: [
+                                    {id: 1, name: "Banana"},
+                                    {id: 2, name: "Papai"},
+                                    {id: 3, name: "Apple"},
+                                    {id: 4, name: "Mango"}
+                                ]
                             }
-                        }]
+                        }
+                    }, {
+                        view: "button",
+                        label: "+",
+                        width: 40,
+                        tooltip: "Добавить проект",
+                        click: function () {
+                            alert("Форма нового проекта");
+                        }
                     }]
-                }, {
-                    gravity:3,
-                    type: "clean",
-                    rows: [{
-                        view: "tabbar",
-                        multiview: true,
-                        selected: "products",
-                        options:[
-                            {id: "products", value: "Товары", width: 150},
-                            {id: "purchases", value: "Закупки", width: 150},
-                            {id: "pricing_grids", value: "Ценовые сетки", width: 150},
-                            {id: "prices", value: "Управление ценами", width: 250}
-                        ]
-                    },{
-                        view: "multiview",
-                        animate:false,
-                        cells:[{
-                            id: "products",
+                }]
+            }, {
+                gravity:3,
+                type: "clean",
+                rows: [{
+                    view: "tabbar",
+                    multiview: true,
+                    selected: "products",
+                    options:[
+                        {id: "products", value: "Товары", width: 150},
+                        {id: "purchases", value: "Закупки", width: 150},
+                        {id: "pricing_grids", value: "Ценовые сетки", width: 150},
+                        {id: "prices", value: "Управление ценами", width: 250}
+                    ]
+                },{
+                    view: "multiview",
+                    animate:false,
+                    cells:[{
+                        id: "products",
+                        cols: [{
+                            view: "tree",
+                            width: 300,
+                            drag: true,
+                            select: true,
+                            url:"api/catalog-tree"
+                        }, {
                             rows: [{
                                 view: "form",
                                 padding: 5,
@@ -174,19 +176,19 @@ webix.ready(function(){
                                     }
                                 }
                             }]
-                        },{
-                            id: "purchases",
-                            template: "hello 2"
-                        },{
-                            id: "pricing_grids",
-                            template: "hello 3"
-                        },{
-                            id: "prices",
-                            template: "hello 4"
                         }]
+                    },{
+                        id: "purchases",
+                        template: "hello 2"
+                    },{
+                        id: "pricing_grids",
+                        template: "hello 3"
+                    },{
+                        id: "prices",
+                        template: "hello 4"
                     }]
                 }]
             }]
-        //}
+        }]
     });
 });
