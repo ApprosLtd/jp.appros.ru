@@ -1,15 +1,38 @@
 @extends('seller.layout')
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Категории</div>
+                <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
+                    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editCategory">
+                        Добавить категорию
+                    </button>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">Товары</div>
 
+                <div class="pull-right">
+                    <ul class="pagination pagination-sm" style="margin: 10px 10px 0 0">
+                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                    </ul>
+                </div>
 
                 <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProduct">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct">
                         Добавить товар
                     </button>
                 </div>
@@ -70,6 +93,40 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="$('#editProduct form').submit()">Сохранить</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="editCategory" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Новая категория</h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/seller/products/save-category">
+                    <input type="hidden" name="project_id" value="1">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <label>Наименование*</label>
+                        <input name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Родительская категория</label>
+                        <select multiple class="form-control" style="height: 400px" name="parent_id">
+                            @foreach (\App\Models\Category::all() as $category_model)
+                                <option value="{{ $category_model->id }}">{{ $category_model->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <p class="help-block">* - Обязательно для заполнения</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="$('#editCategory form').submit()">Сохранить</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>

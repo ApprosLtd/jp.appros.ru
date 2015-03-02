@@ -45,4 +45,29 @@ class ProductsController extends SellerController {
         return redirect('/seller/products');
     }
 
+    public function postSaveCategory(Request $request)
+    {
+        $post_fields_arr = $request->all();
+
+        /**
+         * @var $category_model \Illuminate\Database\Eloquent\Model
+         */
+        if (isset($post_fields_arr['id'])) {
+            $category_model = \App\Models\Category::find($post_fields_arr['id']);
+
+            if (!$category_model) {
+                return 'Ошибка: нет категории с таким ID - ' . $post_fields_arr['id'];
+            }
+
+            $category_model->name       = $post_fields_arr['name'];
+            $category_model->parent_id  = $post_fields_arr['parent_id'];
+            $category_model->project_id = $post_fields_arr['project_id'];
+
+            $category_model->save();
+        } else {
+            \App\Models\Category::create($post_fields_arr);
+        }
+
+        return redirect('/seller/products');
+    }
 }

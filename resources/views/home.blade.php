@@ -77,6 +77,10 @@
 
                         <a href="#">Посмотреть все закупки по данному товару</a>
 
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Внимание!</strong> Лучше посмотрите, что-то здесь не в порядке.
+                        </div>
+
                         <div>
                             <span class="label label-danger">Опасность</span>
                             <span class="label label-danger">Опасность</span>
