@@ -28,18 +28,54 @@
                             Детали: сетчатая подкладка, воротник-стойка, карманы на потайной молнии, эластичные манжеты, застежка на молнию.
                         </p>
 
-                        <table class="table">
-                            <tbody>
-                            <tr><th class="product-content__th">Параметры модели</th><td>83-64-92 </td></tr>
-                            <tr><th class="product-content__th">Состав</th><td>Хлопок - 52%, Полиэстер - 48% </td></tr>
-                            <tr><th class="product-content__th">Материал подкладки</th><td>Полиэстер - 100% </td></tr>
-                            <tr><th class="product-content__th">Длина по спинке</th><td>60 см</td></tr>
-                            <tr><th class="product-content__th">Длина рукава</th><td>60 см</td></tr>
-                            <tr><th class="product-content__th">Цвет</th><td>розовый </td></tr>
-                            <tr><th class="product-content__th">Сезон</th><td>Мульти </td></tr>
-                            <tr><th class="product-content__th">Коллекция</th><td>Весна-лето </td></tr>
-                            </tbody>
-                        </table>
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h5 class="panel-title" style="font-weight: bold">
+                                    Выгодные закупки по этому товару:<br>
+                                    <span style="font-size: 12px; font-weight: normal">Список более выгодных закупок для этого товара</span>
+                                </h5>
+                            </div>
+                            <div class="panel-body">
+                                <div style="margin: 0 0 20px">
+                                    <p><a href="#">Олимпийка EUROPA TT</a> - 3 420 руб.<br>
+                                        <span style="font-size: 11px">Продавец: <a href="#">Хороший магазин товаров</a></span>
+                                    </p>
+                                    <div class="progress" style="height: 8px; margin: 3px 0 0">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 84%"></div>
+                                    </div>
+                                    <span style="font-size: 11px">
+                                        <a href="#">Закупка парфюмерии на сумму 50000руб.</a><br>
+                                        Закупка завершена на 84%, покупателей - 13, интенсивность - <span class="label label-danger" style="font-size: 10px">быстрая</span>
+                                    </span>
+                                </div>
+                                <div style="margin: 0 0 20px">
+                                    <p><a href="#">Олимпийка EUROPA TT</a> - 3 420 руб.<br>
+                                        <span style="font-size: 11px">Продавец: <a href="#">Хороший магазин товаров</a></span>
+                                    </p>
+                                    <div class="progress" style="height: 8px; margin: 3px 0 0">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 34%"></div>
+                                    </div>
+                                    <span style="font-size: 11px">
+                                        <a href="#">Закупка парфюмерии на сумму 50000руб.</a><br>
+                                        Закупка завершена на 84%, покупателей - 13, интенсивность - <span class="label label-danger" style="font-size: 10px">быстрая</span>
+                                    </span>
+                                </div>
+                                <div style="margin: 0 0 0px">
+                                    <p><a href="#">Олимпийка EUROPA TT</a> - 3 420 руб.<br>
+                                        <span style="font-size: 11px">Продавец: <a href="#">Хороший магазин товаров</a></span>
+                                    </p>
+                                    <div class="progress" style="height: 8px; margin: 3px 0 0">
+                                        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 64%"></div>
+                                    </div>
+                                    <span style="font-size: 11px">
+                                        <a href="#">Закупка парфюмерии на сумму 50000руб.</a><br>
+                                        Закупка завершена на 84%, покупателей - 13, интенсивность - <span class="label label-danger" style="font-size: 10px">быстрая</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#">Посмотреть все закупки по данному товару</a>
 
                         <div>
                             <span class="label label-danger">Опасность</span>
@@ -52,6 +88,11 @@
             <div class="col-md-12">
                 <div role="tabpanel" data-example-id="togglable-tabs">
                     <ul id="myTab" class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="">
+                            <a href="#set" id="set-tab" role="tab" data-toggle="tab" aria-controls="set" aria-expanded="true">
+                                Характеристики
+                            </a>
+                        </li>
                         <li role="presentation" class="active">
                             <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
                                 Отзывы
@@ -59,11 +100,25 @@
                         </li>
                         <li role="presentation" class="">
                             <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">
-                                Профиль
+                                Обсуждения
                             </a>
                         </li>
                     </ul>
                     <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade" id="set" aria-labelledby="set-tab">
+                            <table class="table" style="width: 50%">
+                                <tbody>
+                                <tr><th class="product-content__th">Параметры модели</th><td>83-64-92 </td></tr>
+                                <tr><th class="product-content__th">Состав</th><td>Хлопок - 52%, Полиэстер - 48% </td></tr>
+                                <tr><th class="product-content__th">Материал подкладки</th><td>Полиэстер - 100% </td></tr>
+                                <tr><th class="product-content__th">Длина по спинке</th><td>60 см</td></tr>
+                                <tr><th class="product-content__th">Длина рукава</th><td>60 см</td></tr>
+                                <tr><th class="product-content__th">Цвет</th><td>розовый </td></tr>
+                                <tr><th class="product-content__th">Сезон</th><td>Мульти </td></tr>
+                                <tr><th class="product-content__th">Коллекция</th><td>Весна-лето </td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
                             <div class="comment-item">
                                 <ul class="media-list">
@@ -139,7 +194,7 @@
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
-                            данные вкладки
+                            Список обсуждений
                         </div>
                     </div>
                 </div>
@@ -163,8 +218,7 @@
                         <p>Закупка завершена на: 84%</p>
 
                         <div class="progress">
-                            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 84%">
-                            </div>
+                            <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="width: 84%"></div>
                         </div>
 
                         <p>Срок истечения: 25 марта 2015 в 22.10 </p>
