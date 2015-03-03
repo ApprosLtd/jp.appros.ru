@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 03.03.2015 8:37:32
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 03.03.2015 18:33:19
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -36,6 +36,38 @@ SET NAMES 'utf8';
 USE joint_purchasing;
 
 --
+-- Описание для таблицы attribute_values
+--
+CREATE TABLE attribute_values (
+  product_id INT(11) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  value VARCHAR(255) NOT NULL DEFAULT ''
+)
+ENGINE = INNODB
+AVG_ROW_LENGTH = 1024
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
+-- Описание для таблицы attributes
+--
+CREATE TABLE attributes (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  name VARCHAR(50) NOT NULL,
+  attribute_group_id INT(11) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id),
+  UNIQUE INDEX name (name)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 5
+AVG_ROW_LENGTH = 4096
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
 -- Описание для таблицы attributes_groups
 --
 CREATE TABLE attributes_groups (
@@ -47,7 +79,7 @@ CREATE TABLE attributes_groups (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 2
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -67,6 +99,18 @@ CREATE TABLE categories (
 ENGINE = INNODB
 AUTO_INCREMENT = 4
 AVG_ROW_LENGTH = 5461
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
+-- Описание для таблицы category_product
+--
+CREATE TABLE category_product (
+  category_id INT(11) DEFAULT NULL,
+  product_id INT(11) DEFAULT NULL
+)
+ENGINE = INNODB
+AVG_ROW_LENGTH = 2340
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
@@ -123,7 +167,7 @@ CREATE TABLE pricing_grids (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 3
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -163,7 +207,6 @@ COMMENT = 'Промежуточная таблица "Закупки - прод�
 --
 CREATE TABLE products (
   id INT(11) NOT NULL AUTO_INCREMENT,
-  article VARCHAR(50) NOT NULL,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(5000) NOT NULL DEFAULT '',
   user_id INT(11) NOT NULL,
@@ -172,7 +215,7 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 9
 AVG_ROW_LENGTH = 2730
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -260,11 +303,40 @@ COLLATE utf8_general_ci
 COMMENT = 'Виджеты';
 
 -- 
+-- Вывод данных для таблицы attribute_values
+--
+INSERT INTO attribute_values VALUES
+(5, 'weight', '1'),
+(5, 'country', '2'),
+(5, 'brand', '3'),
+(5, 'article', '4'),
+(6, 'weight', '1'),
+(6, 'country', '2'),
+(6, 'brand', '3'),
+(6, 'article', '4'),
+(7, 'weight', '1'),
+(7, 'country', '2'),
+(7, 'brand', '3'),
+(7, 'article', '4'),
+(8, 'weight', 'yjdsq'),
+(8, 'country', 'hrllo'),
+(8, 'brand', 'hello'),
+(8, 'article', '33');
+
+-- 
+-- Вывод данных для таблицы attributes
+--
+INSERT INTO attributes VALUES
+(1, 'Вес', 'weight', 1, '2015-03-03 09:55:29', '2015-03-03 09:55:29'),
+(2, 'Страна производителя', 'country', 1, '2015-03-03 10:24:50', '2015-03-03 10:24:50'),
+(3, 'Бренд', 'brand', 1, '2015-03-03 10:25:24', '2015-03-03 10:25:24'),
+(4, 'Артикул', 'article', 1, '2015-03-03 10:34:45', '2015-03-03 10:34:45');
+
+-- 
 -- Вывод данных для таблицы attributes_groups
 --
 INSERT INTO attributes_groups VALUES
-(1, 'Тхэквондо23', 1, '2015-03-03 05:32:10', '2015-03-03 05:32:10'),
-(2, 'Товары для дома', 1, '2015-03-03 05:36:58', '2015-03-03 05:36:58');
+(1, 'Атрибуты товаров citynature.ru', 1, '2015-03-03 09:12:06', '2015-03-03 09:12:06');
 
 -- 
 -- Вывод данных для таблицы categories
@@ -273,6 +345,18 @@ INSERT INTO categories VALUES
 (1, 'Косметика', 0, 1, '2015-03-03 03:29:35', '2015-03-03 03:29:35'),
 (2, 'Для волос', 1, 1, '2015-03-03 04:26:28', '2015-03-03 04:26:28'),
 (3, 'Для лица', 1, 1, '2015-03-03 04:27:30', '2015-03-03 04:27:30');
+
+-- 
+-- Вывод данных для таблицы category_product
+--
+INSERT INTO category_product VALUES
+(1, 3),
+(2, 3),
+(1, 7),
+(2, 7),
+(3, 7),
+(1, 8),
+(3, 8);
 
 -- 
 -- Вывод данных для таблицы migrations
@@ -297,7 +381,8 @@ INSERT INTO migrations VALUES
 -- Вывод данных для таблицы pricing_grids
 --
 INSERT INTO pricing_grids VALUES
-(1, 'Основная колонка', '', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Основная колонка', '', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'weight', '', 0, 0, '2015-03-03 09:54:15', '2015-03-03 09:54:15');
 
 -- 
 -- Вывод данных для таблицы pricing_grids_columns
@@ -320,8 +405,15 @@ INSERT INTO pricing_grids_columns VALUES
 -- 
 -- Вывод данных для таблицы products
 --
-
--- Таблица joint_purchasing.products не содержит данных
+INSERT INTO products VALUES
+(1, 'Сухие духи Ваниль', 'Твердый парфюмированный тин для тела с нежным и ненавязчивым ароматом ванили. Способ применения. Небольшое количество парфюма нанести на участки с активной циркуляцией крови (за ушами, в ложбинке груди, внутренней части на сгибе рук)', 1, '2015-03-03 10:44:11', '2015-03-03 10:44:11'),
+(2, 'Тхэквондо23', 'фыупрвп', 1, '2015-03-03 11:26:52', '2015-03-03 11:26:52'),
+(3, 'sgg', 'dfhg', 1, '2015-03-03 12:03:10', '2015-03-03 12:03:10'),
+(4, 'вфуыпа', '', 1, '2015-03-03 13:03:25', '2015-03-03 13:03:25'),
+(5, 'вфуыпа', '', 1, '2015-03-03 13:04:22', '2015-03-03 13:04:22'),
+(6, 'вфуыпа', '', 1, '2015-03-03 13:05:04', '2015-03-03 13:05:04'),
+(7, 'вфуыпа', '', 1, '2015-03-03 13:05:32', '2015-03-03 13:05:32'),
+(8, 'sdfgdshf', 'sdgjsfjg', 1, '2015-03-03 13:08:11', '2015-03-03 13:08:11');
 
 -- 
 -- Вывод данных для таблицы projects
