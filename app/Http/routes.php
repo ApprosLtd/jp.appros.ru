@@ -44,6 +44,8 @@ Route::group(['prefix' => 'admin'], function()
  */
 Route::group(['prefix' => 'seller'], function()
 {
+    Route::get('attribute-group/{id}', 'Seller\AttributesController@getGroup');
+
     Route::controllers([
         'auth' => 'Seller\AuthController',
         'products' => 'Seller\ProductsController',

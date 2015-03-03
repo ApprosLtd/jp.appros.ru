@@ -3,6 +3,11 @@
 
 class Project {
 
+    public static function getDefaultAttributesGroupId()
+    {
+        return 1;
+    }
+
     public static function getCategoriesByProjectId($project_id)
     {
         $user = \Auth::user();
@@ -59,6 +64,24 @@ class Project {
         }
 
         return $attributes_groups;
+    }
+
+
+    public static function getAttributesByGroupId($group_id)
+    {
+        $user = \Auth::user();
+
+        if (!$user) {
+            return [];
+        }
+
+        $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $group_id)->get();
+
+        if (!$attributes) {
+            return [];
+        }
+
+        return $attributes;
     }
 
 }

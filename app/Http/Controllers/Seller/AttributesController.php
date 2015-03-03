@@ -34,4 +34,38 @@ class AttributesController extends SellerController {
 
         return redirect('/seller/attributes');
     }
+
+    public function getGroup($group_id)
+    {
+        $attributes_group = \App\Models\AttributesGroup::find($group_id);
+
+        if (!$attributes_group) {
+            return 'Группа не найдена';
+        }
+
+        return view('seller.attributes.group', $attributes_group->toArray());
+    }
+
+    public function postSave(Request $request)
+    {
+        $post_fields_arr = $request->all();
+
+        if (isset($post_fields_arr['id'])) {
+            $widget_model = \App\Models\Attribute::find($post_fields_arr['id']);
+
+            if (!$widget_model) {
+                return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
+            }
+
+            $widget_model->title              = $post_fields_arr['name'];
+            $widget_model->name               = $post_fields_arr['name'];
+            $widget_model->attribute_group_id = $post_fields_arr['attribute_group_id'];
+
+            $widget_model->save();
+        } else {
+            \App\Models\Attribute::create($post_fields_arr);
+        }
+
+        return redirect('/seller/attribute-group/' . $post_fields_arr['attribute_group_id']);
+    }
 }
