@@ -8,7 +8,8 @@
 		"laravel/framework": "5.0.*",
         "maatwebsite/excel": "~2.0.0",
         "panique/laravel-sass": "dev-master",
-        "kalnoy/nestedset": "~2.4"
+        "kalnoy/nestedset": "~2.4",
+        "barryvdh/laravel-debugbar": "2.0.*@dev"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

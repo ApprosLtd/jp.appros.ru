@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 
         'Maatwebsite\Excel\ExcelServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider',
 	],
 
 	/*
@@ -196,6 +197,7 @@ return [
         'Excel'     => 'Maatwebsite\Excel\Facades\Excel',
         'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
         'Node'      => 'Kalnoy\Nestedset\Node',
+        'Debugbar'  => 'Barryvdh\Debugbar\Facade',
 	],
 
 ];

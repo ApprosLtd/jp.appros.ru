@@ -92,7 +92,13 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             modal.find('[name="description"]').val(data.description);
 
             modal.find('[role="attr"]').each(function(){
-                this.value = data.attributes[this.name];
+                if (data.attributes[this.name]) {
+                    this.value = data.attributes[this.name];
+                }
+            });
+
+            $.each(data.categories_ids, function(index, item){
+                modal.find('[name="categories_ids"] [value="'+item+'"]').attr('selected', 'selected');
             });
 
             modal.modal('show');
@@ -107,6 +113,7 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
         });
 
         $.post('/seller/products/save', {
+            id: modal.find('[name="id"]').val(),
             name: modal.find('[name="name"]').val(),
             description: modal.find('[name="description"]').val(),
             project_id: '{{ $project_id }}',
@@ -129,9 +136,9 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             modal.find('[name="name"]').val('');
             modal.find('[name="description"]').val('');
 
-            modal.find('[role="attr"]').each(function(){
-                this.value = '';
-            });
+            modal.find('[role="attr"]').val('');
+
+            modal.find('[name="categories_ids"] option').attr('selected', null);
         })
     });
 

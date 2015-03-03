@@ -18,7 +18,7 @@ class Product extends Model {
 
     public function attributes()
     {
-        return $this->hasMany('\App\Models\AttributeValue', 'product_id', 'attribute_values');
+        return $this->hasMany('\App\Models\AttributeValue');
     }
 
 }

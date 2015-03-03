@@ -12,8 +12,16 @@ class ProductsController extends SellerController {
         return view('seller.products.index', ['goods_models_arr' => $goods_models_arr]);
     }
 
+    /**
+     * Возвращает данные о продукте
+     * @param $id
+     * @return json
+     */
     public function getProduct($id)
     {
+        /**
+         * @var $product \App\Models\Product
+         */
         $product = \App\Models\Product::find($id);
 
         if (!$product) {
@@ -26,15 +34,24 @@ class ProductsController extends SellerController {
         $product_mix = $product->toArray();
 
         $attributes_mix = [];
-        $attributes = $product->attributes();
+        $attributes = $product->attributes()->get();
         if ($attributes->count()) {
             foreach ($attributes as $attribute) {
                 $attributes_mix[$attribute->name] = $attribute->value;
             }
         }
 
+        $product_mix['attributes'] = $attributes_mix;
 
-        $product_mix['attributes'] = $attributes;
+        $categories_ids = [];
+        $categories = $product->categories()->get(['id']);
+        if ($categories) {
+            foreach ($categories as $category) {
+                $categories_ids[] = intval($category->id);
+            }
+        }
+
+        $product_mix['categories_ids'] = $categories_ids;
 
         return response()->json($product_mix);
     }
@@ -59,7 +76,12 @@ class ProductsController extends SellerController {
 
         $post_fields_arr['user_id'] = $this->user->id;
 
+        $product_id = 0;
         if (isset($post_fields_arr['id']) and intval($post_fields_arr['id']) > 0) {
+            $product_id = intval($post_fields_arr['id']);
+        }
+
+        if ($product_id) {
             $product = \App\Models\Product::find($post_fields_arr['id']);
 
             if (!$product) {
@@ -79,15 +101,21 @@ class ProductsController extends SellerController {
         }
 
         if (isset($post_fields_arr['attributes']) and !empty($post_fields_arr['attributes'])) {
-
             foreach ($post_fields_arr['attributes'] as $attribute_name => $attribute_value) {
-                \App\Models\AttributeValue::create([
-                    'product_id' => $product->id,
-                    'name' => $attribute_name,
-                    'value' => $attribute_value
-                ]);
-            }
 
+                $attribute = \App\Models\AttributeValue::where('product_id', '=', $product->id)->where('name', '=', $attribute_name)->first();
+
+                if ($attribute) {
+                    $attribute->value = $attribute_value;
+                    $attribute->save();
+                } else {
+                    \App\Models\AttributeValue::create([
+                        'product_id' => $product->id,
+                        'name' => $attribute_name,
+                        'value' => $attribute_value
+                    ]);
+                }
+            }
         }
     }
 
