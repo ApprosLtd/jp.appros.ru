@@ -16,4 +16,9 @@ class Product extends Model {
         return $this->belongsToMany('\App\Models\Category');
     }
 
+    public function attributes()
+    {
+        return $this->hasMany('\App\Models\AttributeValue', 'product_id', 'attribute_values');
+    }
+
 }

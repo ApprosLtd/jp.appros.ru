@@ -40,12 +40,9 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
                 <div class="panel-heading">Товары</div>
 
                 <div class="pull-right">
-                    <ul class="pagination pagination-sm" style="margin: 10px 10px 0 0">
-                        <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                    </ul>
+                    <div class="pagination pagination-sm" style="margin: 10px 10px 0 0">
+                        <!-- pager -->
+                    </div>
                 </div>
 
                 <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
@@ -68,8 +65,8 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
                         <tbody>
                         @foreach ($goods_models_arr as $widget_model)
                             <tr>
-                                <th scope="row">{{$widget_model->id}}</th>
-                                <td>{{ $widget_model->name }}</td>
+                                <th scope="row">{{ $widget_model->id }}</th>
+                                <td><a href="#" onclick="openProduct({{ $widget_model->id }}); return false;">{{ $widget_model->name }}</a></td>
                                 <td>{{ $widget_model->handler }}</td>
                                 <td>{{ $widget_model->region }}</td>
                                 <td>{{ $widget_model->status }}</td>
@@ -85,6 +82,22 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
 </div>
 
 <script>
+    function openProduct(product_id){
+        var modal = $('#editProduct');
+
+        $.get('/seller/product/' + product_id, function(data){
+
+            modal.find('[name="id"]').val(data.id);
+            modal.find('[name="name"]').val(data.name);
+            modal.find('[name="description"]').val(data.description);
+
+            modal.find('[role="attr"]').each(function(){
+                this.value = data.attributes[this.name];
+            });
+
+            modal.modal('show');
+        });
+    }
     function saveProduct(){
         var modal = $('#editProduct');
 
@@ -103,9 +116,25 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             categories_ids: modal.find('[name="categories_ids"]').val(),
             prices: []
         }, function(data){
-            //
+            modal.modal('hide');
+            window.location = window.location;
         });
     }
+
+    $(document).ready(function(){
+        $('#editProduct').on('hidden.bs.modal', function (e) {
+            var modal = $('#editProduct');
+
+            modal.find('[name="id"]').val('');
+            modal.find('[name="name"]').val('');
+            modal.find('[name="description"]').val('');
+
+            modal.find('[role="attr"]').each(function(){
+                this.value = '';
+            });
+        })
+    });
+
 </script>
 
 <!-- Modal -->
@@ -138,6 +167,7 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
                     </ul>
                     <div class="tab-content" style="margin-top: 20px">
                         <div class="tab-pane in active" id="home">
+                            <input type="hidden" name="id" value="">
                             <input type="hidden" name="project_id" value="{{ $project_id }}">
                             <input type="hidden" name="attributes_group_id" value="{{ $attributes_group_id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -147,7 +177,7 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
                             </div>
                             <div class="form-group">
                                 <label>Описание</label>
-                                <textarea name="description" class="form-control" rows="2"></textarea>
+                                <textarea name="description" class="form-control" rows="6"></textarea>
                             </div>
                             <p class="help-block">* - Обязательно для заполнения</p>
                         </div>

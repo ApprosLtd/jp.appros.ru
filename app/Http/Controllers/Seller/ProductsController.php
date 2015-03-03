@@ -12,6 +12,33 @@ class ProductsController extends SellerController {
         return view('seller.products.index', ['goods_models_arr' => $goods_models_arr]);
     }
 
+    public function getProduct($id)
+    {
+        $product = \App\Models\Product::find($id);
+
+        if (!$product) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Продукт не найден'
+            ]);
+        }
+
+        $product_mix = $product->toArray();
+
+        $attributes_mix = [];
+        $attributes = $product->attributes();
+        if ($attributes->count()) {
+            foreach ($attributes as $attribute) {
+                $attributes_mix[$attribute->name] = $attribute->value;
+            }
+        }
+
+
+        $product_mix['attributes'] = $attributes;
+
+        return response()->json($product_mix);
+    }
+
     /**
      * Создание или сохранение продукта
      * @param Request $request
@@ -32,7 +59,7 @@ class ProductsController extends SellerController {
 
         $post_fields_arr['user_id'] = $this->user->id;
 
-        if (isset($post_fields_arr['id'])) {
+        if (isset($post_fields_arr['id']) and intval($post_fields_arr['id']) > 0) {
             $product = \App\Models\Product::find($post_fields_arr['id']);
 
             if (!$product) {
@@ -54,13 +81,13 @@ class ProductsController extends SellerController {
         if (isset($post_fields_arr['attributes']) and !empty($post_fields_arr['attributes'])) {
 
             foreach ($post_fields_arr['attributes'] as $attribute_name => $attribute_value) {
-                \App\Models\Product::create([
+                \App\Models\AttributeValue::create([
+                    'product_id' => $product->id,
                     'name' => $attribute_name,
                     'value' => $attribute_value
                 ]);
             }
 
-            $product->categories()->attach($post_fields_arr['categories_ids']);
         }
     }
 
