@@ -5,7 +5,7 @@ class IndexController extends SellerController {
 
     public function getIndex()
     {
-        return view('atlant.layout');
+        return view('seller.index');
     }
 
 }

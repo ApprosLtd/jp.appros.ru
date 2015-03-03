@@ -16,7 +16,7 @@
     </style>
 
     <script src="http://yastatic.net/jquery/2.1.3/jquery.min.js"></script>
-    <script src="/app/app.js"></script>
+    <!--script src="/app/app.js"></script-->
 
     <!--link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script-->

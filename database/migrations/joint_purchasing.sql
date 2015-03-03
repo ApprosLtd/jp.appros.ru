@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 27.02.2015 16:47:15
--- Версия сервера: 5.5.40-0ubuntu0.14.04.1
+-- Дата скрипта: 03.03.2015 8:37:32
+-- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -34,6 +34,41 @@ SET NAMES 'utf8';
 -- Установка базы данных по умолчанию
 --
 USE joint_purchasing;
+
+--
+-- Описание для таблицы attributes_groups
+--
+CREATE TABLE attributes_groups (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  user_id INT(11) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 3
+AVG_ROW_LENGTH = 8192
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
+-- Описание для таблицы categories
+--
+CREATE TABLE categories (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  parent_id INT(11) NOT NULL,
+  project_id INT(11) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 4
+AVG_ROW_LENGTH = 5461
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 --
 -- Описание для таблицы migrations
@@ -82,12 +117,13 @@ CREATE TABLE pricing_grids (
   name VARCHAR(50) NOT NULL,
   description VARCHAR(500) NOT NULL DEFAULT '',
   user_id INT(11) NOT NULL,
+  project_id INT(11) NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 2
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -100,10 +136,12 @@ CREATE TABLE pricing_grids_columns (
   id INT(11) NOT NULL AUTO_INCREMENT,
   pricing_grid_id INT(11) NOT NULL,
   column_number INT(11) NOT NULL,
+  column_title VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 8
+AVG_ROW_LENGTH = 2340
 CHARACTER SET utf8
 COLLATE utf8_general_ci
 COMMENT = 'Колонки ценовых сеток';
@@ -125,6 +163,7 @@ COMMENT = 'Промежуточная таблица "Закупки - прод�
 --
 CREATE TABLE products (
   id INT(11) NOT NULL AUTO_INCREMENT,
+  article VARCHAR(50) NOT NULL,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(5000) NOT NULL DEFAULT '',
   user_id INT(11) NOT NULL,
@@ -133,11 +172,28 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 1
 AVG_ROW_LENGTH = 2730
 CHARACTER SET utf8
 COLLATE utf8_general_ci
 COMMENT = 'Продукты';
+
+--
+-- Описание для таблицы projects
+--
+CREATE TABLE projects (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  user_id INT(11) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 2
+AVG_ROW_LENGTH = 16384
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 --
 -- Описание для таблицы purchases
@@ -204,6 +260,21 @@ COLLATE utf8_general_ci
 COMMENT = 'Виджеты';
 
 -- 
+-- Вывод данных для таблицы attributes_groups
+--
+INSERT INTO attributes_groups VALUES
+(1, 'Тхэквондо23', 1, '2015-03-03 05:32:10', '2015-03-03 05:32:10'),
+(2, 'Товары для дома', 1, '2015-03-03 05:36:58', '2015-03-03 05:36:58');
+
+-- 
+-- Вывод данных для таблицы categories
+--
+INSERT INTO categories VALUES
+(1, 'Косметика', 0, 1, '2015-03-03 03:29:35', '2015-03-03 03:29:35'),
+(2, 'Для волос', 1, 1, '2015-03-03 04:26:28', '2015-03-03 04:26:28'),
+(3, 'Для лица', 1, 1, '2015-03-03 04:27:30', '2015-03-03 04:27:30');
+
+-- 
 -- Вывод данных для таблицы migrations
 --
 INSERT INTO migrations VALUES
@@ -226,23 +297,19 @@ INSERT INTO migrations VALUES
 -- Вывод данных для таблицы pricing_grids
 --
 INSERT INTO pricing_grids VALUES
-(1, 'Тхэквондо23', '', 1, '2015-02-25 20:39:47', '2015-02-25 20:39:47'),
-(2, 'По категориям', '', 1, '2015-02-25 20:40:06', '2015-02-25 20:40:06'),
-(3, 'Новая ценовая сетка', '', 1, '2015-02-27 09:50:46', '2015-02-27 09:50:46'),
-(5, 'Hello world', '', 1, '2015-02-27 10:41:28', '2015-02-27 10:41:28'),
-(6, '656576757575', '', 1, '2015-02-27 12:39:45', '2015-02-27 12:39:45'),
-(7, '44747uuir', 'irtitiuo', 1, '2015-02-27 12:40:04', '2015-02-27 12:40:04'),
-(8, 'titiyt', '', 1, '2015-02-27 12:40:13', '2015-02-27 12:40:13'),
-(9, 'ytiytoyu', '', 1, '2015-02-27 12:40:16', '2015-02-27 12:40:16'),
-(10, 'yuoyop', '', 1, '2015-02-27 12:40:20', '2015-02-27 12:40:20'),
-(11, 'yuoyop', '', 1, '2015-02-27 12:40:23', '2015-02-27 12:40:23'),
-(12, 'yuopyup', '', 1, '2015-02-27 12:40:28', '2015-02-27 12:40:28');
+(1, 'Основная колонка', '', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- 
 -- Вывод данных для таблицы pricing_grids_columns
 --
-
--- Таблица joint_purchasing.pricing_grids_columns не содержит данных
+INSERT INTO pricing_grids_columns VALUES
+(1, 1, 1, 'до 15 т.р.'),
+(2, 1, 2, '15 т.р - 30 т.р'),
+(3, 1, 3, '30 т.р - 50 т.р'),
+(4, 1, 4, '50 т.р - 70 т.р'),
+(5, 1, 5, '70 т.р - 100 т.р'),
+(6, 1, 6, '100 т.р - 300 т.р'),
+(7, 1, 7, 'от 300 т.р.');
 
 -- 
 -- Вывод данных для таблицы product_purchase
@@ -253,13 +320,14 @@ INSERT INTO pricing_grids VALUES
 -- 
 -- Вывод данных для таблицы products
 --
-INSERT INTO products VALUES
-(1, 'Виталий', '', 0, '2015-02-25 19:51:43', '2015-02-25 19:51:43'),
-(2, 'asdfasdgasgh', 'иваирварв', 0, '2015-02-25 19:51:48', '2015-02-25 19:51:48'),
-(3, 'Стул упорный', 'Предмет обихода для молодой семья', 0, '2015-02-25 19:52:14', '2015-02-25 19:52:14'),
-(4, 'asetaryh', '', 0, '2015-02-25 20:26:14', '2015-02-25 20:26:14'),
-(5, 'Виталий', '', 0, '2015-02-25 20:31:17', '2015-02-25 20:31:17'),
-(6, 'Тхэквондо23', '', 0, '2015-02-25 20:33:48', '2015-02-25 20:33:48');
+
+-- Таблица joint_purchasing.products не содержит данных
+
+-- 
+-- Вывод данных для таблицы projects
+--
+INSERT INTO projects VALUES
+(1, 'Первый проект', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- 
 -- Вывод данных для таблицы purchases

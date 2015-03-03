@@ -50,6 +50,7 @@ Route::group(['prefix' => 'seller'], function()
         'pricing-grids' => 'Seller\PricingGridsController',
         'purchases' => 'Seller\PurchasesController',
         'prices' => 'Seller\PricesController',
+        'attributes' => 'Seller\AttributesController',
         '/' => 'Seller\IndexController',
     ]);
 });

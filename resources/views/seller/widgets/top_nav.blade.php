@@ -18,6 +18,7 @@
                 <li><a href="/seller/pricing-grids">Ценовые сетки</a></li>
                 <li><a href="/seller/purchases">Закупки</a></li>
                 <li><a href="/seller/prices">Управление ценами</a></li>
+                <li><a href="/seller/attributes">Атрибуты</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
