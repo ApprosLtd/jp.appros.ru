@@ -12,6 +12,11 @@ class ProductsController extends SellerController {
         return view('seller.products.index', ['goods_models_arr' => $goods_models_arr]);
     }
 
+    /**
+     * Создание или сохранение продукта
+     * @param Request $request
+     * @return string
+     */
     public function postSave(Request $request)
     {
         $post_fields_arr = $request->all();
@@ -28,42 +33,61 @@ class ProductsController extends SellerController {
         $post_fields_arr['user_id'] = $this->user->id;
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\Product::find($post_fields_arr['id']);
+            $product = \App\Models\Product::find($post_fields_arr['id']);
 
-            if (!$widget_model) {
+            if (!$product) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
             }
 
-            $widget_model->name        = $post_fields_arr['name'];
-            $widget_model->description = $post_fields_arr['description'];
+            $product->name        = $post_fields_arr['name'];
+            $product->description = $post_fields_arr['description'];
 
-            $widget_model->save();
+            $product->save();
         } else {
-            \App\Models\Product::create($post_fields_arr);
+            $product = \App\Models\Product::create($post_fields_arr);
         }
 
-        return redirect('/seller/products');
+        if (isset($post_fields_arr['categories_ids']) and !empty($post_fields_arr['categories_ids'])) {
+            $product->categories()->attach($post_fields_arr['categories_ids']);
+        }
+
+        if (isset($post_fields_arr['attributes']) and !empty($post_fields_arr['attributes'])) {
+
+            foreach ($post_fields_arr['attributes'] as $attribute_name => $attribute_value) {
+                \App\Models\Product::create([
+                    'name' => $attribute_name,
+                    'value' => $attribute_value
+                ]);
+            }
+
+            $product->categories()->attach($post_fields_arr['categories_ids']);
+        }
     }
 
+    /**
+     * Создание или сохранение категории
+     * @param Request $request
+     * @return string
+     */
     public function postSaveCategory(Request $request)
     {
         $post_fields_arr = $request->all();
 
         /**
-         * @var $category_model \Illuminate\Database\Eloquent\Model
+         * @var $category \Illuminate\Database\Eloquent\Model
          */
         if (isset($post_fields_arr['id'])) {
-            $category_model = \App\Models\Category::find($post_fields_arr['id']);
+            $category = \App\Models\Category::find($post_fields_arr['id']);
 
-            if (!$category_model) {
+            if (!$category) {
                 return 'Ошибка: нет категории с таким ID - ' . $post_fields_arr['id'];
             }
 
-            $category_model->name       = $post_fields_arr['name'];
-            $category_model->parent_id  = $post_fields_arr['parent_id'];
-            $category_model->project_id = $post_fields_arr['project_id'];
+            $category->name       = $post_fields_arr['name'];
+            $category->parent_id  = $post_fields_arr['parent_id'];
+            $category->project_id = $post_fields_arr['project_id'];
 
-            $category_model->save();
+            $category->save();
         } else {
             \App\Models\Category::create($post_fields_arr);
         }

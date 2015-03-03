@@ -6,4 +6,9 @@ class Category extends Model {
 
     protected $fillable = ['name', 'parent_id', 'project_id'];
 
+    public function products()
+    {
+        return $this->belongsToMany('\App\Models\Product');
+    }
+
 }

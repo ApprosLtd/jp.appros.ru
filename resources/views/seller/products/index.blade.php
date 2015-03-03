@@ -8,6 +8,10 @@ $project_id = 1;
 
 $categories_models = \App\Helpers\Project::getCategoriesByProjectId($project_id);
 $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($project_id);
+
+$attributes_group_id = \App\Helpers\Project::getDefaultAttributesGroupId();
+
+$attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attributes_group_id)->get();
 ?>
 
 <div class="container-fluid">
@@ -40,9 +44,6 @@ $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($projec
                         <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
                         <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
                     </ul>
                 </div>
@@ -68,7 +69,7 @@ $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($projec
                         @foreach ($goods_models_arr as $widget_model)
                             <tr>
                                 <th scope="row">{{$widget_model->id}}</th>
-                                <td>{{ $widget_model->name }}<div style="font-size: 80%">{{ $widget_model->description }}</div></td>
+                                <td>{{ $widget_model->name }}</td>
                                 <td>{{ $widget_model->handler }}</td>
                                 <td>{{ $widget_model->region }}</td>
                                 <td>{{ $widget_model->status }}</td>
@@ -82,6 +83,30 @@ $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($projec
         </div>
     </div>
 </div>
+
+<script>
+    function saveProduct(){
+        var modal = $('#editProduct');
+
+        var attributes = {};
+        modal.find('[role="attr"]').each(function(){
+            attributes[this.name] = this.value;
+        });
+
+        $.post('/seller/products/save', {
+            name: modal.find('[name="name"]').val(),
+            description: modal.find('[name="description"]').val(),
+            project_id: '{{ $project_id }}',
+            attributes_group_id: '{{ $attributes_group_id }}',
+            _token: '{{ csrf_token() }}',
+            attributes: attributes,
+            categories_ids: modal.find('[name="categories_ids"]').val(),
+            prices: []
+        }, function(data){
+            //
+        });
+    }
+</script>
 
 <!-- Modal -->
 <div class="modal" id="editProduct" tabindex="-1" role="dialog" aria-hidden="true">
@@ -113,24 +138,23 @@ $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($projec
                     </ul>
                     <div class="tab-content" style="margin-top: 20px">
                         <div class="tab-pane in active" id="home">
-                            <form method="post" action="/seller/products/save">
-                                <input type="hidden" name="project_id" value="{{ $project_id }}">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                <div class="form-group">
-                                    <label>Наименование*</label>
-                                    <input name="name" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label>Описание</label>
-                                    <textarea name="description" class="form-control" rows="2"></textarea>
-                                </div>
-                                <p class="help-block">* - Обязательно для заполнения</p>
-                            </form>
+                            <input type="hidden" name="project_id" value="{{ $project_id }}">
+                            <input type="hidden" name="attributes_group_id" value="{{ $attributes_group_id }}">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <div class="form-group">
+                                <label>Наименование*</label>
+                                <input name="name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Описание</label>
+                                <textarea name="description" class="form-control" rows="2"></textarea>
+                            </div>
+                            <p class="help-block">* - Обязательно для заполнения</p>
                         </div>
                         <div class="tab-pane" id="profile">
                             <div class="form-group">
                                 <label>Категории каталога</label>
-                                <select multiple class="form-control" style="height: 400px" name="parent_id">
+                                <select multiple class="form-control" style="height: 400px" name="categories_ids">
                                     @foreach ($categories_models as $category_model)
                                         <option value="{{ $category_model->id }}">{{ $category_model->name }}</option>
                                     @endforeach
@@ -150,14 +174,19 @@ $pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($projec
                             photos
                         </div>
                         <div class="tab-pane" id="attributes">
-                            attributes
+                            @foreach ($attributes as $attribute)
+                                <div class="form-group">
+                                    <label>{{ $attribute->title }}</label>
+                                    <input role="attr" name="{{ $attribute->name }}" class="form-control">
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="$('#editProduct form').submit()">Сохранить</button>
+                <button type="button" class="btn btn-primary" onclick="saveProduct();">Сохранить</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
             </div>
         </div>
