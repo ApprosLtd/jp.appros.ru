@@ -11,7 +11,7 @@ class Project extends Model {
 
     public function pricing_grids()
     {
-        return $this->hasMany('\App\Models\PricingGrid');
+        return $this->belongsToMany('\App\Models\PricingGrid', 'projects_pricing_grids');
     }
 
 }

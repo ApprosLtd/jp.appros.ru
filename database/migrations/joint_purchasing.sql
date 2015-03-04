@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 04.03.2015 9:47:13
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 04.03.2015 18:19:43
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -243,6 +243,18 @@ CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
 --
+-- Описание для таблицы projects_pricing_grids
+--
+CREATE TABLE projects_pricing_grids (
+  project_id INT(11) NOT NULL,
+  pricing_grid_id INT(11) NOT NULL
+)
+ENGINE = INNODB
+AVG_ROW_LENGTH = 16384
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
 -- Описание для таблицы purchases
 --
 CREATE TABLE purchases (
@@ -372,7 +384,10 @@ INSERT INTO category_product VALUES
 (2, 7),
 (3, 7),
 (1, 8),
-(3, 8);
+(3, 8),
+(1, 1),
+(1, 1),
+(3, 1);
 
 -- 
 -- Вывод данных для таблицы migrations
@@ -438,6 +453,12 @@ INSERT INTO products VALUES
 --
 INSERT INTO projects VALUES
 (1, 'Первый проект', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+
+-- 
+-- Вывод данных для таблицы projects_pricing_grids
+--
+INSERT INTO projects_pricing_grids VALUES
+(1, 1);
 
 -- 
 -- Вывод данных для таблицы purchases

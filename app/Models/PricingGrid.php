@@ -23,4 +23,14 @@ class PricingGrid extends Model {
         return $result;
     }
 
+    public function projects()
+    {
+        return $this->belongsToMany('\App\Models\Project', 'projects_pricing_grids');
+    }
+
+    public function columns()
+    {
+        return $this->hasMany('\App\Models\PricingGridColumn');
+    }
+
 }
