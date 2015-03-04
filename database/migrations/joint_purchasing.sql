@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 03.03.2015 18:33:19
--- Версия сервера: 5.5.40-0ubuntu0.14.04.1
+-- Дата скрипта: 04.03.2015 9:47:13
+-- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -39,11 +39,15 @@ USE joint_purchasing;
 -- Описание для таблицы attribute_values
 --
 CREATE TABLE attribute_values (
+  id INT(11) NOT NULL AUTO_INCREMENT,
   product_id INT(11) NOT NULL,
   name VARCHAR(50) NOT NULL,
-  value VARCHAR(255) NOT NULL DEFAULT ''
+  value VARCHAR(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (id),
+  UNIQUE INDEX UK_attribute_values (product_id, name)
 )
 ENGINE = INNODB
+AUTO_INCREMENT = 29
 AVG_ROW_LENGTH = 1024
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -215,7 +219,7 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 9
+AUTO_INCREMENT = 11
 AVG_ROW_LENGTH = 2730
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -306,22 +310,34 @@ COMMENT = 'Виджеты';
 -- Вывод данных для таблицы attribute_values
 --
 INSERT INTO attribute_values VALUES
-(5, 'weight', '1'),
-(5, 'country', '2'),
-(5, 'brand', '3'),
-(5, 'article', '4'),
-(6, 'weight', '1'),
-(6, 'country', '2'),
-(6, 'brand', '3'),
-(6, 'article', '4'),
-(7, 'weight', '1'),
-(7, 'country', '2'),
-(7, 'brand', '3'),
-(7, 'article', '4'),
-(8, 'weight', 'yjdsq'),
-(8, 'country', 'hrllo'),
-(8, 'brand', 'hello'),
-(8, 'article', '33');
+(1, 5, 'article', '4'),
+(2, 5, 'brand', '3'),
+(3, 5, 'country', '2'),
+(4, 5, 'weight', '1**'),
+(5, 6, 'article', '4'),
+(6, 6, 'brand', '3'),
+(7, 6, 'country', '2'),
+(8, 6, 'weight', '1'),
+(9, 7, 'article', '4'),
+(10, 7, 'brand', '3'),
+(11, 7, 'country', '2'),
+(12, 7, 'weight', '1'),
+(13, 8, 'article', '33'),
+(14, 8, 'brand', 'hello'),
+(15, 8, 'country', 'hrllo'),
+(16, 8, 'weight', 'yjdsq'),
+(17, 9, 'article', '4-'),
+(18, 9, 'brand', '3-'),
+(19, 9, 'country', '2-'),
+(20, 9, 'weight', '1-'),
+(21, 10, 'article', '4=='),
+(22, 10, 'brand', '3=='),
+(23, 10, 'country', '2=='),
+(24, 10, 'weight', '1=='),
+(25, 1, 'weight', '119'),
+(26, 1, 'country', ''),
+(27, 1, 'brand', ''),
+(28, 1, 'article', '');
 
 -- 
 -- Вывод данных для таблицы attributes
@@ -413,7 +429,9 @@ INSERT INTO products VALUES
 (5, 'вфуыпа', '', 1, '2015-03-03 13:04:22', '2015-03-03 13:04:22'),
 (6, 'вфуыпа', '', 1, '2015-03-03 13:05:04', '2015-03-03 13:05:04'),
 (7, 'вфуыпа', '', 1, '2015-03-03 13:05:32', '2015-03-03 13:05:32'),
-(8, 'sdfgdshf', 'sdgjsfjg', 1, '2015-03-03 13:08:11', '2015-03-03 13:08:11');
+(8, 'sdfgdshf', 'sdgjsfjg', 1, '2015-03-03 13:08:11', '2015-03-03 13:08:11'),
+(9, 'вфуыпа', '', 1, '2015-03-03 17:37:26', '2015-03-03 17:37:26'),
+(10, 'вфуыпа', '', 1, '2015-03-03 17:38:11', '2015-03-03 17:38:11');
 
 -- 
 -- Вывод данных для таблицы projects
