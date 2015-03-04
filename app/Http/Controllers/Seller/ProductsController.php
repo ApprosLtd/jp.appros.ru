@@ -127,6 +127,15 @@ class ProductsController extends SellerController {
         }
     }
 
+    public function getDelete($id)
+    {
+        $product = \App\Models\Product::find($id);
+
+        if ($product) {
+            $product->delete();
+        }
+    }
+
     /**
      * Создание или сохранение категории
      * @param Request $request

@@ -58,20 +58,20 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Блок</th>
-                            <th>Обработчик</th>
-                            <th>Регион</th>
-                            <th>Статус</th>
+                            <th>Товар</th>
+                            <th></th>
+                            <th></th>
+                            <th style="width: 80px"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($goods_models_arr as $widget_model)
+                        @foreach ($goods_models_arr as $product)
                             <tr>
-                                <th scope="row">{{ $widget_model->id }}</th>
-                                <td><a href="#" onclick="openProduct({{ $widget_model->id }}); return false;">{{ $widget_model->name }}</a></td>
-                                <td>{{ $widget_model->handler }}</td>
-                                <td>{{ $widget_model->region }}</td>
-                                <td>{{ $widget_model->status }}</td>
+                                <th scope="row">{{ $product->id }}</th>
+                                <td><a href="#" onclick="openProduct({{ $product->id }}); return false;">{{ $product->name }}</a></td>
+                                <td></td>
+                                <td></td>
+                                <td><button class="btn btn-danger btn-xs" onclick="deleteProduct({{ $product->id }})">Удалить</button></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -84,6 +84,15 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
 </div>
 
 <script>
+    function deleteProduct(product_id) {
+        if (!confirm('При удалении продукта, будут удалены все связанные с ним данные. Продолжить?')) {
+            return;
+        }
+
+        $.get('/seller/product/delete/' + product_id, function(){
+            window.location = window.location;
+        });
+    }
     function openProduct(product_id){
         var modal = $('#editProduct');
 
@@ -135,7 +144,7 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             prices: prices
         }, function(data){
             modal.modal('hide');
-            //window.location = window.location;
+            window.location = window.location;
         });
     }
 
