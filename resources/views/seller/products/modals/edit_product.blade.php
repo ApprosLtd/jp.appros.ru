@@ -1,8 +1,3 @@
-<?php
-/**
- * @var $project \App\Models\Project
- */
-?>
 <div class="modal" id="editProduct" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -71,7 +66,7 @@
                                     <tbody>
                                         <tr>
                                         @foreach ($pricing_grid_model->columns as $column)
-                                            <td><input style="width: 65px" name="pg_{{ $pricing_grid_model->id }}_{{ $column->id }}" value=""></td>
+                                            <td><input style="width: 65px" name="col_{{ $column->id }}" value=""></td>
                                         @endforeach
                                         </tr>
                                     </tbody>

@@ -21,4 +21,13 @@ class Product extends Model {
         return $this->hasMany('\App\Models\AttributeValue');
     }
 
+    /**
+     * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток"
+     * @return mixed
+     */
+    public function prices()
+    {
+        return \DB::table(\App\Helpers\Project::PRICES_TABLE_NAME)->where('product_id', $this->id)->get(['column_id', 'price']);
+    }
+
 }

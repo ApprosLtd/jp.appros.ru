@@ -40,7 +40,6 @@ class ProductsController extends SellerController {
                 $attributes_mix[$attribute->name] = $attribute->value;
             }
         }
-
         $product_mix['attributes'] = $attributes_mix;
 
         $categories_ids = [];
@@ -50,8 +49,11 @@ class ProductsController extends SellerController {
                 $categories_ids[] = intval($category->id);
             }
         }
-
         $product_mix['categories_ids'] = $categories_ids;
+
+        $prices = $product->prices();
+
+        $product_mix['prices'] = $prices;
 
         return response()->json($product_mix);
     }
@@ -115,6 +117,12 @@ class ProductsController extends SellerController {
                         'value' => $attribute_value
                     ]);
                 }
+            }
+        }
+
+        if (isset($post_fields_arr['prices']) and !empty($post_fields_arr['prices'])) {
+            foreach ($post_fields_arr['prices'] as $price_code => $price_value) {
+                \App\Models\PricingGrid::setPriceByPriceCode($price_code, $price_value, $product->id);
             }
         }
     }

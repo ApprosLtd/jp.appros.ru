@@ -3,6 +3,8 @@
 
 class Project {
 
+    const PRICES_TABLE_NAME = 'prices';
+
     public static function getDefaultAttributesGroupId()
     {
         return 1;

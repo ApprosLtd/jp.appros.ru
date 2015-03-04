@@ -35,6 +35,10 @@ class WelcomeController extends Controller {
 
     public function test()
     {
+        \App\Models\PricingGrid::setPriceByPriceCode('col_11', '23456', 1);
+
+        return '';
+
         return view('test.page');
     }
 }
