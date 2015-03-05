@@ -17,7 +17,7 @@ Route::get('phpinfo', function(){
 
 Route::get('test', 'WelcomeController@test');
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', 'IndexController@getIndex');
 
 Route::get('home', 'HomeController@index');
 
