@@ -76,7 +76,23 @@
                         @endforeach
                         </div>
                         <div class="tab-pane" id="photos">
-                            photos
+
+                            <div>
+                                <span class="btn btn-success fileinput-button">
+                                    <i class="glyphicon glyphicon-plus"></i>
+                                    <span>Add files...</span>
+                                    <input id="fileupload" type="file" name="files[]" multiple>
+                                </span>
+                                <br>
+                                <br>
+                                <!-- The global progress bar -->
+                                <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+                                <!-- The container for the uploaded files -->
+                                <div id="files" class="files"></div>
+                            </div>
+
                         </div>
                         <div class="tab-pane" id="attributes">
                             @foreach ($attributes as $attribute)

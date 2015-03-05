@@ -160,6 +160,23 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             modal.find('[role="pricing_grid"] input').val('');
 
             modal.find('[name="categories_ids"] option').attr('selected', null);
+        });
+
+        $('#fileupload').fileupload({
+            url: '/seller/media/upload',
+            formData: {
+                product_id: $('#editProduct input[name="id"]').val(),
+                _token: '{{ csrf_token() }}'
+            },
+            dataType: 'json',
+            autoUpload: true,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            maxFileSize: 5000000, // 5 MB
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+            previewMaxWidth: 100,
+            previewMaxHeight: 100,
+            previewCrop: true
         })
     });
 

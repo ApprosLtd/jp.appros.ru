@@ -21,6 +21,8 @@
     <!--link rel="stylesheet" href="//cdn.datatables.net/1.10.5/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script-->
 
+    <link rel="stylesheet" href="/public/fileupload/css/jquery.fileupload.css">
+
     <title></title>
 </head>
 <body>
@@ -31,6 +33,11 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="/public/jquery-ui/jquery-ui.min.js"></script>
+
+<script src="/public/fileupload/js/jquery.fileupload.js"></script>
+<script src="/public/fileupload/js/jquery.fileupload-process.js"></script>
 
 </body>
 </html>
