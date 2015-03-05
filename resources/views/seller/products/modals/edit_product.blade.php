@@ -16,7 +16,7 @@
                             <a href="#attributes" data-toggle="tab">Атрибуты</a>
                         </li>
                         <li>
-                            <a href="#profile" data-toggle="tab">Категории</a>
+                            <a href="#categories" data-toggle="tab">Категории</a>
                         </li>
                         <li>
                             <a href="#prices" data-toggle="tab">Цены</a>
@@ -41,7 +41,15 @@
                             </div>
                             <p class="help-block">* - Обязательно для заполнения</p>
                         </div>
-                        <div class="tab-pane" id="profile">
+                        <div class="tab-pane" id="attributes">
+                            @foreach ($attributes as $attribute)
+                                <div class="form-group">
+                                    <label>{{ $attribute->title }}</label>
+                                    <input role="attr" name="attr_{{ $attribute->id }}" class="form-control">
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="tab-pane" id="categories">
                             <div class="form-group">
                                 <label>Категории каталога</label>
                                 <select multiple class="form-control" style="height: 400px" name="categories_ids">
@@ -93,14 +101,6 @@
                                 <div id="files" class="files"></div>
                             </div>
 
-                        </div>
-                        <div class="tab-pane" id="attributes">
-                            @foreach ($attributes as $attribute)
-                                <div class="form-group">
-                                    <label>{{ $attribute->title }}</label>
-                                    <input role="attr" name="{{ $attribute->name }}" class="form-control">
-                                </div>
-                            @endforeach
                         </div>
                     </div>
                 </div>

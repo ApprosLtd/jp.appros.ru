@@ -37,7 +37,7 @@ class ProductsController extends SellerController {
         $attributes = $product->attributes()->get();
         if ($attributes->count()) {
             foreach ($attributes as $attribute) {
-                $attributes_mix[$attribute->name] = $attribute->value;
+                $attributes_mix['attr_' . $attribute->attribute_id] = $attribute->value;
             }
         }
         $product_mix['attributes'] = $attributes_mix;
@@ -70,8 +70,8 @@ class ProductsController extends SellerController {
         $post_fields_arr = $request->all();
 
         $validator = \Validator::make($post_fields_arr, [
-            'name' => 'required|max:100',
-            'description' => 'max:255',
+            'name' => 'required|max:255',
+            'description' => 'max:5000',
         ]);
 
         if ($validator->fails()) {
@@ -105,9 +105,13 @@ class ProductsController extends SellerController {
         }
 
         if (isset($post_fields_arr['attributes']) and !empty($post_fields_arr['attributes'])) {
-            foreach ($post_fields_arr['attributes'] as $attribute_name => $attribute_value) {
+            foreach ($post_fields_arr['attributes'] as $attribute_code => $attribute_value) {
 
-                $attribute = \App\Models\AttributeValue::where('product_id', '=', $product->id)->where('name', '=', $attribute_name)->first();
+                $attribute_id = intval(substr($attribute_code, 5));
+
+                echo substr($attribute_code, 5);
+
+                $attribute = \App\Models\AttributeValue::where('product_id', '=', $product->id)->where('attribute_id', '=', $attribute_id)->first();
 
                 if ($attribute) {
                     $attribute->value = $attribute_value;
@@ -115,7 +119,7 @@ class ProductsController extends SellerController {
                 } else {
                     \App\Models\AttributeValue::create([
                         'product_id' => $product->id,
-                        'name' => $attribute_name,
+                        'attribute_id' => $attribute_id,
                         'value' => $attribute_value
                     ]);
                 }

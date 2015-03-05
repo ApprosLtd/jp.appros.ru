@@ -12,6 +12,13 @@ class Product extends Model {
         \DB::table('category_product')->where('product_id', '=', $this->id)->delete();
         \DB::table('attribute_values')->where('product_id', '=', $this->id)->delete();
 
+        $media = $this->media()->get();
+        if ($media->count()) {
+            foreach ($media as $media_object) {
+                $media_object->delete();
+            }
+        }
+
         parent::delete();
     }
 

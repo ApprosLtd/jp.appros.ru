@@ -6,6 +6,6 @@ class AttributeValue extends Model {
 
     public $timestamps = false;
 
-    protected $fillable = ['name', 'value', 'product_id'];
+    protected $fillable = ['attribute_id', 'value', 'product_id'];
 
 }
