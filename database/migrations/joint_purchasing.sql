@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 05.03.2015 9:13:45
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 05.03.2015 18:26:24
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -119,6 +119,22 @@ CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
 --
+-- Описание для таблицы media
+--
+CREATE TABLE media (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  product_id INT(11) NOT NULL,
+  type VARCHAR(10) NOT NULL DEFAULT 'image',
+  file_name VARCHAR(255) NOT NULL DEFAULT '',
+  `position` INT(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (id)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 1
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
 -- Описание для таблицы migrations
 --
 CREATE TABLE migrations (
@@ -188,7 +204,7 @@ CREATE TABLE pricing_grids_columns (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 8
+AUTO_INCREMENT = 18
 AVG_ROW_LENGTH = 2340
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -381,6 +397,12 @@ INSERT INTO category_product VALUES
 (3, 7),
 (1, 8),
 (3, 8);
+
+-- 
+-- Вывод данных для таблицы media
+--
+
+-- Таблица joint_purchasing.media не содержит данных
 
 -- 
 -- Вывод данных для таблицы migrations
