@@ -55,6 +55,8 @@ class ProductsController extends SellerController {
 
         $product_mix['prices'] = $prices;
 
+        $product_mix['images'] = $product->media('image')->get();
+
         return response()->json($product_mix);
     }
 

@@ -83,6 +83,11 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
     </div>
 </div>
 
+<!-- Modals -->
+@include('seller.products.modals.edit_product')
+@include('seller.products.modals.edit_category')
+
+<!-- Scripts -->
 <script>
     function deleteProduct(product_id) {
         if (!confirm('При удалении продукта, будут удалены все связанные с ним данные. Продолжить?')) {
@@ -114,6 +119,10 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
 
             $.each(data.prices, function(index, item){
                 modal.find('[role="pricing_grid"] input[name="col_'+item.column_id+'"]').val(item.price);
+            });
+
+            $.each(data.images, function(index, item){
+                modal.find('#files').append('<img src="/cdn/images/'+item.file_name+'" alt="" class="img-rounded" style="width:100px; height:100px">');
             });
 
             modal.modal('show');
@@ -151,23 +160,18 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
     $(document).ready(function(){
         $('#editProduct').on('hidden.bs.modal', function (e) {
             var modal = $('#editProduct');
-
             modal.find('[name="id"]').val('');
             modal.find('[name="name"]').val('');
             modal.find('[name="description"]').val('');
-
             modal.find('[role="attr"]').val('');
             modal.find('[role="pricing_grid"] input').val('');
-
+            modal.find('#files').html('');
             modal.find('[name="categories_ids"] option').attr('selected', null);
         });
 
-        $('#fileupload').fileupload({
+        $('#fileupload')
+        .fileupload({
             url: '/seller/media/upload',
-            formData: {
-                product_id: $('#editProduct input[name="id"]').val(),
-                _token: '{{ csrf_token() }}'
-            },
             dataType: 'json',
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
@@ -178,12 +182,17 @@ $attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attribute
             previewMaxHeight: 100,
             previewCrop: true
         })
+        .bind('fileuploadsubmit', function (e, data) {
+            data.formData = {
+                product_id: $('#editProduct input[name="id"]').val(),
+                _token: '{{ csrf_token() }}'
+            };
+        })
+        .bind('fileuploaddone', function (e, data) {
+            $('#editProduct #files').append('<img src="'+data.result.file_path+'" alt="" class="img-rounded" style="width:100px; height:100px">');
+        })
     });
 
 </script>
-
-<!-- Modal -->
-@include('seller.products.modals.edit_product')
-@include('seller.products.modals.edit_category')
 
 @endsection

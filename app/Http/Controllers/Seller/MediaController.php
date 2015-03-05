@@ -7,12 +7,23 @@ class MediaController extends SellerController {
     {
         $file_data = $_FILES['files'];
 
-        $tmp_name = $file_data['tmp_name'];
+        $tmp_name = $file_data['tmp_name'][0];
 
-        $form_data = \Input::all();
+        $file_extention = 'jpg';
 
+        $file_name = md5(microtime()) . '.' . $file_extention;
 
-        return $form_data;
+        $file_path = "/cdn/images/" . $file_name;
+
+        move_uploaded_file($tmp_name, base_path() . "/public" . $file_path);
+
+        $media_model = new \App\Models\MediaModel;
+
+        $media_model->product_id = \Input::get('product_id');
+        $media_model->file_name  = $file_name;
+        $media_model->save();
+
+        return ['file_path' => $file_path];
     }
 
 }

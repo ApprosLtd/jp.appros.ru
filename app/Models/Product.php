@@ -30,6 +30,17 @@ class Product extends Model {
         return $this->hasMany('\App\Models\AttributeValue');
     }
 
+    public function media($type = null)
+    {
+        $media = $this->hasMany('\App\Models\MediaModel')->orderBy('position');
+
+        if ($type) {
+            $media = $media->where('type', '=', $type);
+        }
+
+        return $media;
+    }
+
     /**
      * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток"
      * @return mixed
