@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 05.03.2015 18:26:24
--- Версия сервера: 5.5.40-0ubuntu0.14.04.1
+-- Дата скрипта: 06.03.2015 0:01:11
+-- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -41,13 +41,13 @@ USE joint_purchasing;
 CREATE TABLE attribute_values (
   id INT(11) NOT NULL AUTO_INCREMENT,
   product_id INT(11) NOT NULL,
-  name VARCHAR(50) NOT NULL,
+  attribute_id INT(11) NOT NULL,
   value VARCHAR(255) NOT NULL DEFAULT '',
   PRIMARY KEY (id),
-  UNIQUE INDEX UK_attribute_values (product_id, name)
+  UNIQUE INDEX UK_attribute_values (product_id, attribute_id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 29
+AUTO_INCREMENT = 6
 AVG_ROW_LENGTH = 1024
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -66,7 +66,7 @@ CREATE TABLE attributes (
   UNIQUE INDEX name (name)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 6
 AVG_ROW_LENGTH = 4096
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -101,7 +101,7 @@ CREATE TABLE categories (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 6
 AVG_ROW_LENGTH = 5461
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -130,7 +130,8 @@ CREATE TABLE media (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 3
+AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
@@ -170,6 +171,7 @@ CREATE TABLE prices (
   UNIQUE INDEX product_id_column_id (product_id, column_id)
 )
 ENGINE = INNODB
+AVG_ROW_LENGTH = 2340
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
@@ -235,7 +237,7 @@ CREATE TABLE products (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 11
+AUTO_INCREMENT = 3
 AVG_ROW_LENGTH = 2730
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -338,30 +340,11 @@ COMMENT = 'Виджеты';
 -- Вывод данных для таблицы attribute_values
 --
 INSERT INTO attribute_values VALUES
-(1, 5, 'article', '4'),
-(2, 5, 'brand', '3'),
-(3, 5, 'country', '2'),
-(4, 5, 'weight', '1**'),
-(5, 6, 'article', '4'),
-(6, 6, 'brand', '3'),
-(7, 6, 'country', '2'),
-(8, 6, 'weight', '1'),
-(9, 7, 'article', '4'),
-(10, 7, 'brand', '3'),
-(11, 7, 'country', '2'),
-(12, 7, 'weight', '1'),
-(13, 8, 'article', '33'),
-(14, 8, 'brand', 'hello'),
-(15, 8, 'country', 'hrllo'),
-(16, 8, 'weight', 'yjdsq'),
-(17, 9, 'article', '4-'),
-(18, 9, 'brand', '3-'),
-(19, 9, 'country', '2-'),
-(20, 9, 'weight', '1-'),
-(21, 10, 'article', '4=='),
-(22, 10, 'brand', '3=='),
-(23, 10, 'country', '2=='),
-(24, 10, 'weight', '1==');
+(1, 2, 1, '100 мл'),
+(2, 2, 2, 'Германия'),
+(3, 2, 3, 'Weleda'),
+(4, 2, 4, '9511'),
+(5, 2, 5, 'http://www.citynature.ru/catalog/product/view/258/22882');
 
 -- 
 -- Вывод данных для таблицы attributes
@@ -370,7 +353,8 @@ INSERT INTO attributes VALUES
 (1, 'Вес', 'weight', 1, '2015-03-03 09:55:29', '2015-03-03 09:55:29'),
 (2, 'Страна производителя', 'country', 1, '2015-03-03 10:24:50', '2015-03-03 10:24:50'),
 (3, 'Бренд', 'brand', 1, '2015-03-03 10:25:24', '2015-03-03 10:25:24'),
-(4, 'Артикул', 'article', 1, '2015-03-03 10:34:45', '2015-03-03 10:34:45');
+(4, 'Артикул', 'article', 1, '2015-03-03 10:34:45', '2015-03-03 10:34:45'),
+(5, 'Ссылка на товар', 'cn_link', 1, '2015-03-05 18:31:52', '2015-03-05 18:31:52');
 
 -- 
 -- Вывод данных для таблицы attributes_groups
@@ -384,25 +368,32 @@ INSERT INTO attributes_groups VALUES
 INSERT INTO categories VALUES
 (1, 'Косметика', 0, 1, '2015-03-03 03:29:35', '2015-03-03 03:29:35'),
 (2, 'Для волос', 1, 1, '2015-03-03 04:26:28', '2015-03-03 04:26:28'),
-(3, 'Для лица', 1, 1, '2015-03-03 04:27:30', '2015-03-03 04:27:30');
+(3, 'Для лица', 1, 1, '2015-03-03 04:27:30', '2015-03-03 04:27:30'),
+(4, 'Мама и малыш', 0, 1, '2015-03-05 18:10:46', '2015-03-05 18:10:46'),
+(5, 'Для мамы', 4, 1, '2015-03-05 18:11:06', '2015-03-05 18:11:06');
 
 -- 
 -- Вывод данных для таблицы category_product
 --
 INSERT INTO category_product VALUES
-(1, 3),
-(2, 3),
-(1, 7),
-(2, 7),
-(3, 7),
-(1, 8),
-(3, 8);
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2),
+(5, 2);
 
 -- 
 -- Вывод данных для таблицы media
 --
-
--- Таблица joint_purchasing.media не содержит данных
+INSERT INTO media VALUES
+(1, 2, 'image', '164bec15453aa6896bdab66bce2f9845.jpg', 1),
+(2, 2, 'image', 'c0ead06d49b69b8282ab2f5cc7b72a42.jpg', 1);
 
 -- 
 -- Вывод данных для таблицы migrations
@@ -420,8 +411,14 @@ INSERT INTO migrations VALUES
 -- 
 -- Вывод данных для таблицы prices
 --
-
--- Таблица joint_purchasing.prices не содержит данных
+INSERT INTO prices VALUES
+(2, 11, 1005.09),
+(2, 12, 968.76),
+(2, 13, 958.23),
+(2, 14, 947.70),
+(2, 15, 937.17),
+(2, 16, 926.64),
+(2, 17, 916.11);
 
 -- 
 -- Вывод данных для таблицы pricing_grids
@@ -452,21 +449,13 @@ INSERT INTO pricing_grids_columns VALUES
 -- Вывод данных для таблицы products
 --
 INSERT INTO products VALUES
-(2, 'Тхэквондо23', 'фыупрвп', 1, '2015-03-03 11:26:52', '2015-03-03 11:26:52'),
-(3, 'sgg', 'dfhg', 1, '2015-03-03 12:03:10', '2015-03-03 12:03:10'),
-(4, 'вфуыпа', '', 1, '2015-03-03 13:03:25', '2015-03-03 13:03:25'),
-(5, 'вфуыпа', '', 1, '2015-03-03 13:04:22', '2015-03-03 13:04:22'),
-(6, 'вфуыпа', '', 1, '2015-03-03 13:05:04', '2015-03-03 13:05:04'),
-(7, 'вфуыпа', '', 1, '2015-03-03 13:05:32', '2015-03-03 13:05:32'),
-(8, 'sdfgdshf', 'sdgjsfjg', 1, '2015-03-03 13:08:11', '2015-03-03 13:08:11'),
-(9, 'вфуыпа', '', 1, '2015-03-03 17:37:26', '2015-03-03 17:37:26'),
-(10, 'вфуыпа', '', 1, '2015-03-03 17:38:11', '2015-03-03 17:38:11');
+(2, 'Масло для профилактики растяжек', 'Растяжки - это поражение кожи, которое появляется в период повышенной гормональной активности (во время беременности, в период полового созревания, резкого увеличения или снижения веса, эндокринных заболеваний).\nГормональные изменения в организме приводят к нарушению синтеза двух важнейших составляющих кожи — белков-полимеров коллагена и эластина.\nПри заживлении растяжек на коже образуются фиброзные тяжи, которые не содержат пигмента и при загаре не изменяет свой цвет, так что на пляже растяжки становятся особенно заметными, создавая косметическую проблему.\nМасло от растяжек Weleda - натуральный, высококачественный продукт по уходу за кожей тела во время беременности. Предохраняет кожу от сухости и при регулярном применении препятствует появлению растяжек на животе, бедрах, ягодицах и груди.', 1, '2015-03-05 18:09:43', '2015-03-05 18:09:43');
 
 -- 
 -- Вывод данных для таблицы projects
 --
 INSERT INTO projects VALUES
-(1, 'Первый проект', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+(1, 'Проект citynature.ru', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- 
 -- Вывод данных для таблицы projects_pricing_grids
