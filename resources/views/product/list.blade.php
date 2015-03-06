@@ -34,8 +34,29 @@
                 </div>
             </div-->
 
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="#" class="list-group-item active" style="margin: -11px -16px 5px;">Косметика</a>
+                    <ul>
+                        <li><a href="#">Для волос</a></li>
+                        <li>Для лица</li>
+                        <li>Для тела</li>
+                        <li>Для ногтей</li>
+                        <li>Для ванны и душа</li>
+                        <li>Депиляция</li>
+                        <li>Аксессуары</li>
+                    </ul>
+                </li>
+                <li class="list-group-item"><a href="#">Парфюмерия</a></li>
+                <li class="list-group-item"><a href="#">Подарки</a></li>
+                <li class="list-group-item"><a href="#">Макияж</a></li>
+                <li class="list-group-item"><a href="#">Мама и малыш</a></li>
+                <li class="list-group-item"><a href="#">Бытовая химия</a></li>
+            </ul>
+
             <div class="list-group">
                 <a href="#" class="list-group-item active">Косметика</a>
+                <a href="#" class="list-group-item">Парфюмерия</a>
                 <a href="#" class="list-group-item">Парфюмерия</a>
                 <a href="#" class="list-group-item">Подарки</a>
                 <a href="#" class="list-group-item">Макияж</a>

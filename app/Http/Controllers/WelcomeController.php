@@ -35,6 +35,27 @@ class WelcomeController extends Controller {
 
     public function test()
     {
+        return '';
+
+        $catalog = \App\Helpers\CitynatureHelper::getCatalogArrayFromCsvFile( base_path('storage/app/price.csv') );
+
+        foreach ($catalog as $item_level_1) {
+
+            foreach ($item_level_1['items'] as $item_level_2) {
+                //
+                foreach ($item_level_2['items'] as $item_level_3) {
+                    //
+                    foreach ($item_level_3['items'] as $item_level_4) {
+                        //
+                        foreach ($item_level_4 as $product) {
+                            //
+                        }
+                    }
+                }
+            }
+
+        }
+
         return view('test.page');
     }
 }

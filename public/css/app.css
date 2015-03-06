@@ -1,6 +1,6 @@
 body {
     background: #F1F1F1;
-    background: url("/img/bg.png");
+    background: url("/img/pattern-6.png") fixed;
 }
 
 .h1, .h2, .h3, h1, h2, h3 {
