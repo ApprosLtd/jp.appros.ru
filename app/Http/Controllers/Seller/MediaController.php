@@ -26,4 +26,12 @@ class MediaController extends SellerController {
         return ['file_path' => $file_path];
     }
 
+    public function getImage()
+    {
+        $image_path = base_path() . '/public' . \Input::get('src');
+
+        $img = \Image::make($image_path)->fit(273, 200);
+
+        return $img->response('jpg');
+    }
 }

@@ -34,8 +34,6 @@
                 </div>
             </div-->
 
-            <h4>Каталог товаров</h4>
-
             <div class="list-group">
                 <a href="#" class="list-group-item active">Косметика</a>
                 <a href="#" class="list-group-item">Парфюмерия</a>

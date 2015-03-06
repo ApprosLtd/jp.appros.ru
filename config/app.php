@@ -147,6 +147,7 @@ return [
 
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
 	],
 
 	/*
@@ -198,6 +199,7 @@ return [
         'NestedSet' => 'Kalnoy\Nestedset\NestedSet',
         'Node'      => 'Kalnoy\Nestedset\Node',
         'Debugbar'  => 'Barryvdh\Debugbar\Facade',
+        'Image'     => 'Intervention\Image\Facades\Image',
 	],
 
 ];

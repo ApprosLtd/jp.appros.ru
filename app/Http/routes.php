@@ -45,6 +45,7 @@ Route::group(['prefix' => 'admin'], function()
 Route::group(['prefix' => 'seller'], function()
 {
     Route::post('media/upload', 'Seller\MediaController@postUpload');
+    Route::get('media/image', 'Seller\MediaController@getImage');
 
     Route::get('attribute-group/{id}', 'Seller\AttributesController@getGroup');
     Route::get('product/{id}', 'Seller\ProductsController@getProduct');
