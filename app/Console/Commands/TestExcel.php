@@ -41,11 +41,6 @@ class TestExcel extends Command {
         \Excel::selectSheetsByIndex(0)->load(base_path() . '/storage/app/price1.xls', function($reader) {
 
             /**
-             * @var $reader \Maatwebsite\Excel\Readers\LaravelExcelReader
-             */
-            $reader->setValueBinder(new \App\Helpers\MyValueBinder);
-
-            /**
              * @var $results \Maatwebsite\Excel\Readers\LaravelExcelReader
              */
             $results = $reader->skip(9)->get();

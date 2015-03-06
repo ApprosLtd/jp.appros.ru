@@ -15,6 +15,8 @@ Route::get('phpinfo', function(){
     return phpinfo();
 });
 
+Route::get('product-{alias}', 'ProductController@getProduct');
+
 Route::get('test', 'WelcomeController@test');
 
 Route::get('/', 'IndexController@getIndex');

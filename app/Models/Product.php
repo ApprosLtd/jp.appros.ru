@@ -49,12 +49,35 @@ class Product extends Model {
     }
 
     /**
-     * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток"
+     * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток",
+     * @param int $column_id
+     * @return array
+     */
+    public function prices(array $columns_ids_arr = [])
+    {
+        $res = \DB::table(\App\Helpers\Project::PRICES_TABLE_NAME)->where('product_id', $this->id);
+
+        if (!empty($columns_ids_arr)) {
+            $res = $res->whereIn('column_id', $columns_ids_arr);
+        }
+
+        return $res->get(['column_id', 'price']);
+    }
+
+    /**
+     * Возвращает значение атрибута, связанного с продуктом
+     * @param $attribute_name
      * @return mixed
      */
-    public function prices()
+    public function attr($attribute_name)
     {
-        return \DB::table(\App\Helpers\Project::PRICES_TABLE_NAME)->where('product_id', $this->id)->get(['column_id', 'price']);
+        $attribute_name = trim($attribute_name);
+
+        $attribute_obj = \App\Models\Attribute::where('name', '=', $attribute_name)->first(['id']);
+
+        $attribute_value_obj = $this->attributes()->where('attribute_id', '=', $attribute_obj->id)->first(['value']);
+
+        return $attribute_value_obj->value;
     }
 
 }
