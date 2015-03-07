@@ -60,7 +60,7 @@
                         <textarea name="description" class="form-control" rows="2"></textarea>
                     </div>
                     <?php
-                    $pricing_grids = \App\Models\PricingGrid::getPricingGridsForCurrentUser();
+                    $pricing_grids = \App\Models\PricingGridModel::getPricingGridsForCurrentUser();
                     ?>
                     <div class="form-group">
                         <label>Ценовая сетка</label>

@@ -3,7 +3,7 @@
 @section('content')
     <?php
 
-    $attributes = \App\Helpers\Project::getAttributesByGroupId($id);
+    $attributes = \App\Helpers\ProjectHelper::getAttributesByGroupId($id);
 
     ?>
     <div class="container">

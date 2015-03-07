@@ -7,7 +7,7 @@ class PricingGridsController extends SellerController {
 
     public function getIndex()
     {
-        $goods_models_arr = \App\Models\PricingGrid::paginate(50);
+        $goods_models_arr = \App\Models\PricingGridModel::paginate(50);
 
         return view('seller.pricing_grids.index', ['goods_models_arr' => $goods_models_arr]);
     }
@@ -28,7 +28,7 @@ class PricingGridsController extends SellerController {
         $post_fields_arr['user_id'] = $this->user->id;
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\PricingGrid::find($post_fields_arr['id']);
+            $widget_model = \App\Models\PricingGridModel::find($post_fields_arr['id']);
 
             if (!$widget_model) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
@@ -39,7 +39,7 @@ class PricingGridsController extends SellerController {
 
             $widget_model->save();
         } else {
-            \App\Models\PricingGrid::create($post_fields_arr);
+            \App\Models\PricingGridModel::create($post_fields_arr);
         }
 
         return redirect('/seller/pricing-grids');

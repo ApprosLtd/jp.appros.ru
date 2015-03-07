@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Управление ценами</div>
                     <?php
-                    $user_pricing_grids = \App\Models\PricingGrid::where('user_id', '=', \Auth::user()->id)->get();
+                    $user_pricing_grids = \App\Models\PricingGridModel::where('user_id', '=', \Auth::user()->id)->get();
                     ?>
                     <div class="panel-body">
                         <div class="btn-group btn-group-sm" style="margin-right: 30px">

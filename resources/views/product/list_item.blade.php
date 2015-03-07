@@ -2,7 +2,7 @@
     <div class="thumbnail">
         <img alt="" src="/seller/media/image?src=/cdn/images/c0ead06d49b69b8282ab2f5cc7b72a42.jpg" data-holder-rendered="true" style="height: 200px; width: 100%; display: block;">
         <div class="caption">
-            <h4><a href="/home">Масло для подготовки интимной области к родам</a></h4>
+            <h4><a href="/product-2">Масло для подготовки интимной области к родам</a></h4>
             <div style="padding: 2px 0 5px">
                 <img src="/img/stars_80.png">
 

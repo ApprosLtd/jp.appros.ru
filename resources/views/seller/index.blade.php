@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Home</div>
 
-                {!! \App\Helpers\Widget::region('center_1') !!}
+                {!! \App\Helpers\WidgetHelper::region('center_1') !!}
 
                 <div class="panel-body">
                     !!! HELLO SELLER LAYOU !!!

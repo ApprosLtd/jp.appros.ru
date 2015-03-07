@@ -8,14 +8,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    {!! \App\Helpers\Widget::region('center_1') !!}
+                    {!! \App\Helpers\WidgetHelper::region('center_1') !!}
                 </div>
             </div>
             <div class="col-md-8">
                 <div class="col-md-5">
                     <div class="panel panel-default" style="text-align: center">
-                        <!--img src="/seller/media/preset_200_300/image?src=/cdn/images/c0ead06d49b69b8282ab2f5cc7b72a42.jpg" alt=""-->
-
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -49,14 +47,7 @@
                             <p>Объем: {{ $product->attr('weight') }}</p>
                             <p>{{ $product->description }}</p>
 
-                            <?php
-                            /**
-                             * @var $purchase \App\Models\Purchase
-                             */
-                            $pricing_grid_mix = $purchase->getPricingGridMixForProduct($product->id);
-                            ?>
-
-                            <div class="alert alert-warning" role="alert">
+                            <div class="alert alert-warning" role="alert" style="margin: 0">
                                 <strong>Внимание!</strong> Лучше посмотрите, что-то здесь не в порядке.
                             </div>
 
@@ -64,8 +55,8 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <div role="tabpanel" data-example-id="togglable-tabs">
-                        <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <div role="tabpanel">
+                        <ul class="nav nav-tabs nav-tabs-modern" role="tablist">
                             <li role="presentation" class="active">
                                 <a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
                                     Отзывы
@@ -169,10 +160,6 @@
 
                             <p style="padding: 5px 0">
                                 <button class="btn btn-danger">ПРИСОЕДИНИТЬСЯ К ЗАКУПКЕ</button>
-                            <span style="padding-left: 10px">
-                                <a href="#">Сравнить</a><br>
-                                <a href="#">В закладки</a>
-                            </span>
                             </p>
 
                             <div class="panel panel-primary">
@@ -184,7 +171,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Условия закупки</th>
-                                                <th>Цена</th>
+                                                <th style="width: 90px">Цена</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -198,7 +185,7 @@
                                                              aria-valuemax="100" style="width: 84%"></div>
                                                     </div>
                                                 </td>
-                                                <td>{{ $pricing_grid_mix['price'] }}</td>
+                                                <td><h4>{{ $pricing_grid_mix['price'] }}</h4></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

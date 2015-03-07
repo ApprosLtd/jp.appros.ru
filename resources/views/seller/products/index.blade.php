@@ -6,14 +6,14 @@
 
 $project_id = 1;
 
-$project = \App\Models\Project::find($project_id);
+$project = \App\Models\ProjectModel::find($project_id);
 
-$categories_models = \App\Helpers\Project::getCategoriesByProjectId($project_id);
-$pricing_grids_models = \App\Helpers\Project::getPricingGridsByProjectId($project_id);
+$categories_models = \App\Helpers\ProjectHelper::getCategoriesByProjectId($project_id);
+$pricing_grids_models = \App\Helpers\ProjectHelper::getPricingGridsByProjectId($project_id);
 
-$attributes_group_id = \App\Helpers\Project::getDefaultAttributesGroupId();
+$attributes_group_id = \App\Helpers\ProjectHelper::getDefaultAttributesGroupId();
 
-$attributes = \App\Models\Attribute::where('attribute_group_id', '=', $attributes_group_id)->get();
+$attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attributes_group_id)->get();
 ?>
 
 <div class="container-fluid">

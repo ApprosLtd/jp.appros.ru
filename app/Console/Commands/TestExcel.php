@@ -79,7 +79,7 @@ class TestExcel extends Command {
                     continue;
                 }
 
-                $product = new \App\Models\Product;
+                $product = new \App\Models\ProductModel;
 
                 $product->article = $column_first;
                 $product->name = $column_title;

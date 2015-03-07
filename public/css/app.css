@@ -48,3 +48,14 @@ body {
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
 }
+
+.nav-tabs-modern{
+    background: #337AB7;
+    padding: 4px 4px 0;
+}
+.nav-tabs-modern a {
+    color: #F6FCFF;
+}
+.nav-tabs-modern a:hover {
+    color: #337AB7;
+}

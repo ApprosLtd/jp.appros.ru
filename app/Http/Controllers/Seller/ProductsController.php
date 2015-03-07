@@ -7,7 +7,7 @@ class ProductsController extends SellerController {
 
     public function getIndex()
     {
-        $goods_models_arr = \App\Models\Product::paginate(50);
+        $goods_models_arr = \App\Models\ProductModel::paginate(50);
 
         return view('seller.products.index', ['goods_models_arr' => $goods_models_arr]);
     }
@@ -20,9 +20,9 @@ class ProductsController extends SellerController {
     public function getProduct($id)
     {
         /**
-         * @var $product \App\Models\Product
+         * @var $product \App\Models\ProductModel
          */
-        $product = \App\Models\Product::find($id);
+        $product = \App\Models\ProductModel::find($id);
 
         if (!$product) {
             return response()->json([
@@ -86,7 +86,7 @@ class ProductsController extends SellerController {
         }
 
         if ($product_id) {
-            $product = \App\Models\Product::find($post_fields_arr['id']);
+            $product = \App\Models\ProductModel::find($post_fields_arr['id']);
 
             if (!$product) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
@@ -97,7 +97,7 @@ class ProductsController extends SellerController {
 
             $product->save();
         } else {
-            $product = \App\Models\Product::create($post_fields_arr);
+            $product = \App\Models\ProductModel::create($post_fields_arr);
         }
 
         if (isset($post_fields_arr['categories_ids']) and !empty($post_fields_arr['categories_ids'])) {
@@ -111,7 +111,7 @@ class ProductsController extends SellerController {
 
                 echo substr($attribute_code, 5);
 
-                $attribute = \App\Models\AttributeValue::where('product_id', '=', $product->id)->where('attribute_id', '=', $attribute_id)->first();
+                $attribute = \App\Models\AttributeValueModel::where('product_id', '=', $product->id)->where('attribute_id', '=', $attribute_id)->first();
 
                 if ($attribute) {
                     $attribute->value = $attribute_value;
@@ -128,14 +128,14 @@ class ProductsController extends SellerController {
 
         if (isset($post_fields_arr['prices']) and !empty($post_fields_arr['prices'])) {
             foreach ($post_fields_arr['prices'] as $price_code => $price_value) {
-                \App\Models\PricingGrid::setPriceByPriceCode($price_code, $price_value, $product->id);
+                \App\Models\PricingGridModel::setPriceByPriceCode($price_code, $price_value, $product->id);
             }
         }
     }
 
     public function getDelete($id)
     {
-        $product = \App\Models\Product::find($id);
+        $product = \App\Models\ProductModel::find($id);
 
         if ($product) {
             $product->delete();
@@ -155,7 +155,7 @@ class ProductsController extends SellerController {
          * @var $category \Illuminate\Database\Eloquent\Model
          */
         if (isset($post_fields_arr['id'])) {
-            $category = \App\Models\Category::find($post_fields_arr['id']);
+            $category = \App\Models\CategoryModel::find($post_fields_arr['id']);
 
             if (!$category) {
                 return 'Ошибка: нет категории с таким ID - ' . $post_fields_arr['id'];
@@ -167,7 +167,7 @@ class ProductsController extends SellerController {
 
             $category->save();
         } else {
-            \App\Models\Category::create($post_fields_arr);
+            \App\Models\CategoryModel::create($post_fields_arr);
         }
 
         return redirect('/seller/products');

@@ -3,7 +3,7 @@
 @section('content')
     <?php
 
-    $attributes_groups = \App\Helpers\Project::getAttributesGroups();
+    $attributes_groups = \App\Helpers\ProjectHelper::getAttributesGroups();
 
     ?>
     <div class="container">

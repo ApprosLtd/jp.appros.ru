@@ -8,7 +8,7 @@ class PurchasesController extends SellerController {
 
     public function getIndex()
     {
-        $items_models_arr = \App\Models\Purchase::where('user_id', '=', $this->user->id)->paginate(50);
+        $items_models_arr = \App\Models\PurchaseModel::where('user_id', '=', $this->user->id)->paginate(50);
 
         return view('seller.purchases.index', ['items_models_arr' => $items_models_arr]);
     }
@@ -31,7 +31,7 @@ class PurchasesController extends SellerController {
         $post_fields_arr['user_id'] = $this->user->id;
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\Purchase::find($post_fields_arr['id']);
+            $widget_model = \App\Models\PurchaseModel::find($post_fields_arr['id']);
 
             if (!$widget_model) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
@@ -42,7 +42,7 @@ class PurchasesController extends SellerController {
 
             $widget_model->save();
         } else {
-            \App\Models\Purchase::create($post_fields_arr);
+            \App\Models\PurchaseModel::create($post_fields_arr);
         }
 
         return redirect('/seller/purchases');

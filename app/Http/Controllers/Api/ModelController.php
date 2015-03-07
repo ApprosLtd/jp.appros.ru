@@ -14,7 +14,7 @@ class ModelController extends Controller {
 	 */
 	public function index()
 	{
-		$data = \App\Models\Product::all()->toArray();
+		$data = \App\Models\ProductModel::all()->toArray();
 
         return response()->json($data);
 	}

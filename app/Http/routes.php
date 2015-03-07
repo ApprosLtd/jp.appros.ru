@@ -17,6 +17,8 @@ Route::get('phpinfo', function(){
 
 Route::get('product-{alias}', 'ProductController@getProduct');
 
+Route::get('admin', 'DashboardController@getIndex');
+
 Route::get('test', 'WelcomeController@test');
 
 Route::get('/', 'IndexController@getIndex');
@@ -29,6 +31,14 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+/**
+ * RESTful роуты
+ */
+Route::group(['prefix' => 'rest'], function()
+{
+    Route::resource('products-list', 'Rest\ProductsListController');
+});
 
 /**
  * Раздел "Админка"

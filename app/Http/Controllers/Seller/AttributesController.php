@@ -19,7 +19,7 @@ class AttributesController extends SellerController {
          * @var $attributes_group_model \Illuminate\Database\Eloquent\Model
          */
         if (isset($post_fields_arr['id'])) {
-            $attributes_group_model = \App\Models\AttributesGroup::find($post_fields_arr['id']);
+            $attributes_group_model = \App\Models\AttributesGroupModel::find($post_fields_arr['id']);
 
             if (!$attributes_group_model) {
                 return 'Ошибка: нет категории с таким ID - ' . $post_fields_arr['id'];
@@ -29,7 +29,7 @@ class AttributesController extends SellerController {
 
             $attributes_group_model->save();
         } else {
-            \App\Models\AttributesGroup::create($post_fields_arr);
+            \App\Models\AttributesGroupModel::create($post_fields_arr);
         }
 
         return redirect('/seller/attributes');
@@ -37,7 +37,7 @@ class AttributesController extends SellerController {
 
     public function getGroup($group_id)
     {
-        $attributes_group = \App\Models\AttributesGroup::find($group_id);
+        $attributes_group = \App\Models\AttributesGroupModel::find($group_id);
 
         if (!$attributes_group) {
             return 'Группа не найдена';

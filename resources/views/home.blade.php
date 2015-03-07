@@ -5,7 +5,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-default">
-                {!! \App\Helpers\Widget::region('center_1') !!}
+                {!! \App\Helpers\WidgetHelper::region('center_1') !!}
 			</div>
 		</div>
 		<div class="col-md-9">

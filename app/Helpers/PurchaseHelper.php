@@ -13,11 +13,11 @@ class PurchaseHelper {
     {
 
         /**
-         * @var $product \App\Models\Product
-         * @var $purchase \App\Models\Purchase
+         * @var $product \App\Models\ProductModel
+         * @var $purchase \App\Models\PurchaseModel
          */
-        $product = \App\Models\Product::find($product_id);
-        $purchase = \App\Models\Purchase::find($purchase_id);
+        $product = \App\Models\ProductModel::find($product_id);
+        $purchase = \App\Models\PurchaseModel::find($purchase_id);
 
         $pricing_grid_columns = $purchase->getPricingGridColumns();
 

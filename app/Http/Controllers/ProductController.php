@@ -9,13 +9,13 @@ class ProductController extends Controller {
             return response(view('errors.product_404'), 404);
         }
 
-        $product = \App\Models\Product::find($alias);
+        $product = \App\Models\ProductModel::find($alias);
 
         if (!$product) {
             return response(view('errors.product_404'), 404);
         }
 
-        $purchase = \App\Models\Purchase::find(1);
+        $purchase = \App\Models\PurchaseModel::find(1);
 
         return view('product.card', [
             'product' => $product,

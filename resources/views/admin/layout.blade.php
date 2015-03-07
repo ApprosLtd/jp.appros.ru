@@ -22,7 +22,7 @@
 </head>
 <body>
 
-{!! \App\Helpers\Widget::region('top', 'admin') !!}
+{!! \App\Helpers\WidgetHelper::region('top', 'admin') !!}
 
 @yield('content')
 
