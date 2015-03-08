@@ -1,15 +1,9 @@
-Ext.define('App.view.seller.Products.ProductsListToolbarPanel', {
+Ext.define('App.view.seller.Products.TopToolbarPanel', {
     extend: 'Ext.toolbar.Toolbar',
     defaults: {
         scale: 'medium'
     },
     items: [
-        {
-            text: 'Создать категорию',
-            handler: function(){
-                alert('Создать категорию');
-            }
-        },
         {
             text: 'Добавить продукт',
             handler: function(){
@@ -23,7 +17,7 @@ Ext.define('App.view.seller.Products.ProductsListToolbarPanel', {
             xtype: 'textfield',
             name: 'field1',
             width: 300,
-            emptyText: 'введите фразу для поиска'
+            emptyText: 'введите фразу для поиска товара'
         },
         {
             text: 'Поиск',

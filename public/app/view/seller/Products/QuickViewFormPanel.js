@@ -1,10 +1,10 @@
 /**
- * Панель "Быстрый просмотр продукта"
+ * Панель "Быстрый просмотр товара"
  */
 Ext.define('App.view.seller.Products.QuickViewFormPanel', {
     extend: 'Ext.form.Panel',
-    title: 'Быстрый просмотр продукта',
-    width: 300,
+    title: 'Быстрый просмотр товара',
+    width: 350,
     minWidth: 200,
     maxWidth: 500,
     split: true,

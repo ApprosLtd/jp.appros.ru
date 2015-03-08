@@ -43,7 +43,9 @@ Ext.define('App.view.main.Main', {
         items:[
             Ext.create('App.view.seller.Products.MainTab'),
             Ext.create('App.view.seller.PricingGrids.MainTab'),
-            Ext.create('App.view.seller.Purchases.MainTab')
+            Ext.create('App.view.seller.Purchases.MainTab'),
+            Ext.create('App.view.seller.Catalog.MainTab'),
+            Ext.create('App.view.seller.Users.MainTab')
         ]
     }]
 });
