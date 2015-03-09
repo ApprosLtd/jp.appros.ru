@@ -38,6 +38,7 @@ Route::controllers([
 Route::group(['prefix' => 'rest'], function()
 {
     Route::resource('products-list', 'Rest\ProductsListController');
+    Route::resource('catalog', 'Rest\CatalogController');
 });
 
 /**

@@ -8,6 +8,10 @@
 
     <link rel="stylesheet" type="text/css" href="/bootstrap.css">
 
+    <script>
+        var __TOKEN__ = '{{ csrf_token() }}';
+    </script>
+
     <!-- The line below must be kept intact for Sencha Cmd to build your application -->
     <script type="text/javascript" src="/ext/build/ext-all.js"></script>
     <script type="text/javascript" src="/app/app.js"></script>

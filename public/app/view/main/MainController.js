@@ -22,5 +22,9 @@ Ext.define('App.view.main.MainController', {
         if (choice === 'yes') {
             //
         }
+    },
+
+    init: function() {
+        //
     }
 });

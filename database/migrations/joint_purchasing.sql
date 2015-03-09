@@ -1,7 +1,7 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 06.03.2015 0:01:11
+-- Дата скрипта: 10.03.2015 0:55:00
 -- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
@@ -148,6 +148,24 @@ CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
 --
+-- Описание для таблицы nested_sets
+--
+CREATE TABLE nested_sets (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  level INT(11) NOT NULL,
+  left_key INT(11) NOT NULL,
+  right_key INT(11) NOT NULL,
+  name VARCHAR(50) DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE INDEX IDX_nested_sets (left_key, right_key, level)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 4
+AVG_ROW_LENGTH = 5461
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
+
+--
 -- Описание для таблицы password_resets
 --
 CREATE TABLE password_resets (
@@ -201,8 +219,11 @@ COMMENT = 'Ценовые сетки';
 CREATE TABLE pricing_grids_columns (
   id INT(11) NOT NULL AUTO_INCREMENT,
   pricing_grid_id INT(11) NOT NULL,
-  column_number INT(11) NOT NULL,
-  column_title VARCHAR(255) DEFAULT NULL,
+  column_title VARCHAR(255) NOT NULL,
+  min_sum DECIMAL(19, 2) NOT NULL COMMENT 'Минимальная сумма колонки',
+  min_sum_inclusive TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Минимальная сумма колонки - включительно',
+  max_sum DECIMAL(19, 2) NOT NULL COMMENT 'Максимальная сумма колонки',
+  max_sum_inclusive TINYINT(1) NOT NULL DEFAULT 0 COMMENT 'Максимальная сумма колонки - включительно',
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
@@ -392,7 +413,7 @@ INSERT INTO category_product VALUES
 -- Вывод данных для таблицы media
 --
 INSERT INTO media VALUES
-(1, 2, 'image', '164bec15453aa6896bdab66bce2f9845.jpg', 1),
+(1, 2, 'image', '164bec15453aa6896bdab66bce2f9845.jpg', 2),
 (2, 2, 'image', 'c0ead06d49b69b8282ab2f5cc7b72a42.jpg', 1);
 
 -- 
@@ -401,6 +422,14 @@ INSERT INTO media VALUES
 INSERT INTO migrations VALUES
 ('2014_10_12_000000_create_users_table', 1),
 ('2014_10_12_100000_create_password_resets_table', 1);
+
+-- 
+-- Вывод данных для таблицы nested_sets
+--
+INSERT INTO nested_sets VALUES
+(1, 1, 0, 0, 'Каталог'),
+(2, 2, 0, 0, 'Парфюмерия'),
+(3, 2, 0, 1, 'Косметика');
 
 -- 
 -- Вывод данных для таблицы password_resets
@@ -431,13 +460,13 @@ INSERT INTO pricing_grids VALUES
 -- Вывод данных для таблицы pricing_grids_columns
 --
 INSERT INTO pricing_grids_columns VALUES
-(11, 1, 1, 'до 15 т.р.'),
-(12, 1, 2, '15 т.р - 30 т.р'),
-(13, 1, 3, '30 т.р - 50 т.р'),
-(14, 1, 4, '50 т.р - 70 т.р'),
-(15, 1, 5, '70 т.р - 100 т.р'),
-(16, 1, 6, '100 т.р - 300 т.р'),
-(17, 1, 7, 'от 300 т.р.');
+(11, 1, 'до 15 т.р.', 0.00, 0, 15000.00, 1),
+(12, 1, '15 т.р - 30 т.р', 15000.00, 0, 30000.00, 1),
+(13, 1, '30 т.р - 50 т.р', 30000.00, 0, 50000.00, 1),
+(14, 1, '50 т.р - 70 т.р', 50000.00, 0, 70000.00, 1),
+(15, 1, '70 т.р - 100 т.р', 70000.00, 0, 100000.00, 1),
+(16, 1, '100 т.р - 300 т.р', 100000.00, 0, 300000.00, 1),
+(17, 1, 'от 300 т.р.', 300000.00, 0, 0.00, 0);
 
 -- 
 -- Вывод данных для таблицы product_purchase

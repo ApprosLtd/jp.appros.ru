@@ -13,7 +13,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
     dockedItems: [{
         dock: 'bottom',
         xtype: 'toolbar',
-        items: [{
+        items: ['->', {
             xtype: 'button',
             text: 'Сохранить',
             handler: function(){
