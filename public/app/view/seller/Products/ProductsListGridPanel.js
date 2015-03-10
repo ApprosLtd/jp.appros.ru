@@ -7,8 +7,8 @@ Ext.define('App.view.seller.Products.ProductsListGridPanel', {
     //controller: 'seller.products_list_grid',
     store: Ext.create('App.store.seller.Products.ProductsListStore'),
     columns: [
-        { text: 'Наименование',  dataIndex: 'firstName', flex: 1 },
-        { text: 'Группа', dataIndex: 'age' }//,
+        { text: 'Наименование',  dataIndex: 'name', flex: 1 }//,
+        //{ text: 'Группа', dataIndex: 'age' }//,
         //{ text: 'Брэнд', dataIndex: 'id' }
     ],
     dockedItems: [{

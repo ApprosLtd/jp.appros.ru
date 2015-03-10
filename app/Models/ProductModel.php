@@ -31,7 +31,7 @@ class ProductModel extends Model {
 
     public function categories()
     {
-        return $this->belongsToMany('\App\Models\CategoryModel', 'category_product', 'product_id', 'category_id');
+        return $this->belongsToMany('\App\Models\CatalogModel', 'category_product', 'product_id', 'category_id');
     }
 
     public function attributes()

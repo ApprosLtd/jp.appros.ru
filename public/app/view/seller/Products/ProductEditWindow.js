@@ -18,12 +18,30 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             text: 'Сохранить',
             handler: function(){
                 var baseForm = Ext.getCmp('productEditWindowBaseForm');
+                var fields = baseForm.getValues();
+                var upWindow = this.up('window');
 
-                console.log(baseForm);
+                var product = Ext.create('App.model.seller.Products.ProductModel', {
+                    name: fields.name,
+                    description: fields.description,
+                    catalog_ids: [],
+                    attributes: []
+
+                });
+
+                product.save({
+                    params: {
+                        _token: __TOKEN__
+                    },
+                    success: function(){
+                        upWindow.destroy();
+                        Ext.data.StoreManager.lookup('sellerProductsListStore').load();
+                    }
+                });
             }
-        },{
+      /*  },{
             xtype: 'button',
-            text: 'Сохранить и создать новый'
+            text: 'Сохранить и создать новый'*/
         },{
             xtype: 'button',
             text: 'Отмена',
@@ -180,115 +198,6 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                                 }]
                             }]
                         },{
-                            name: 'Europe, ME, Africa',
-                            mtype: 'Territory',
-                            children: [{
-                                name: 'UK of GB & NI',
-                                mtype: 'Country',
-                                children: [{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                }]
-                            }]
-                        },{
-                            name: 'Europe, ME, Africa',
-                            mtype: 'Territory',
-                            children: [{
-                                name: 'UK of GB & NI',
-                                mtype: 'Country',
-                                checked: true,
-                                children: [{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                }]
-                            }]
-                        },{
-                            name: 'Europe, ME, Africa',
-                            mtype: 'Territory',
-                            children: [{
-                                name: 'UK of GB & NI',
-                                mtype: 'Country',
-                                children: [{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                },{
-                                    name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                }]
-                            }]
-                        }, {
                             name: 'North America',
                             mtype: 'Territory',
                             children: [{
@@ -304,33 +213,6 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                     }
                 }
             }
-        },{
-            title: 'Цены',
-            bodyPadding: 5,
-            layout: {
-                type: 'anchor'
-            },
-            items: [{
-                xtype: 'grid',
-                title: 'Основная колонка',
-                columns: [{
-                    text: 'от 15т.р.'
-                },{
-                    text: '15т.р.- 30т.р.'
-                },{
-                    text: '30т.р. - 50т.р.'
-                }]
-            },{
-                xtype: 'grid',
-                title: 'Основная колонка',
-                columns: [{
-                    text: 'от 15т.р.'
-                },{
-                    text: '15т.р.- 30т.р.'
-                },{
-                    text: '30т.р. - 50т.р.'
-                }]
-            }]
         },{
             title: 'Фотогалерея',
             html: 'Фотогалерея'

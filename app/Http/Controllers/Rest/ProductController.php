@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class ProductsListController extends RestController {
+class ProductController extends RestController {
 
 	/**
 	 * Display a listing of the resource.
@@ -16,14 +16,7 @@ class ProductsListController extends RestController {
 	{
 		$data = [];
 
-        $data['success'] = true;
-        $data['data'] = [
-            ['id' => 1, 'firstName' => 'Иван', 'age' => 112],
-            ['id' => 2, 'firstName' => 'Драго', 'age' => 8999],
-            ['id' => 3, 'firstName' => 'Драго', 'age' => 8999],
-            ['id' => 4, 'firstName' => 'Драго', 'age' => 8999],
-            ['id' => 5, 'firstName' => 'Драго', 'age' => 8999],
-        ];
+        $data['data'] = \App\Models\ProductModel::offset(\Input::get('start'))->take(\Input::get('limit'))->get();
 
         return $data;
 	}
@@ -35,7 +28,7 @@ class ProductsListController extends RestController {
 	 */
 	public function create()
 	{
-		//
+		return 'create';
 	}
 
 	/**
@@ -45,7 +38,11 @@ class ProductsListController extends RestController {
 	 */
 	public function store()
 	{
-		//
+        \App\Models\ProductModel::create([
+            'user_id' => \Auth::user()->id,
+            'name' => \Input::get('name'),
+            'description' => \Input::get('description'),
+        ]);
 	}
 
 	/**

@@ -6,7 +6,7 @@ Ext.define('App.store.seller.Products.ProductsListStore', {
     model: 'App.model.seller.Products.ProductsListModel',
     proxy: {
         type: 'rest',
-        url: '/rest/products-list',
+        url: '/rest/product',
         reader: {
             type: 'json',
             rootProperty: 'data'

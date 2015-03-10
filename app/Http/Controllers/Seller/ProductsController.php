@@ -155,7 +155,7 @@ class ProductsController extends SellerController {
          * @var $category \Illuminate\Database\Eloquent\Model
          */
         if (isset($post_fields_arr['id'])) {
-            $category = \App\Models\CategoryModel::find($post_fields_arr['id']);
+            $category = \App\Models\CatalogModel::find($post_fields_arr['id']);
 
             if (!$category) {
                 return 'Ошибка: нет категории с таким ID - ' . $post_fields_arr['id'];
@@ -167,7 +167,7 @@ class ProductsController extends SellerController {
 
             $category->save();
         } else {
-            \App\Models\CategoryModel::create($post_fields_arr);
+            \App\Models\CatalogModel::create($post_fields_arr);
         }
 
         return redirect('/seller/products');

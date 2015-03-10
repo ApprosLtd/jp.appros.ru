@@ -8,7 +8,7 @@ class ProjectModel extends Model {
 
 	public function categories()
     {
-        return $this->hasMany('\App\Models\CategoryModel', 'project_id');
+        return $this->hasMany('\App\Models\CatalogModel', 'project_id');
     }
 
     public function pricing_grids()

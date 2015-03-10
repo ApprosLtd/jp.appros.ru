@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryModel extends Model {
+class CatalogModel extends Model {
 
     public $table = 'categories';
 
