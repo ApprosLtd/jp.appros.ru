@@ -22,5 +22,19 @@ Ext.define('App.view.seller.Catalog.CatalogListTreePanel', {
             }
         }]
     }],
-    store: Ext.create('App.store.seller.Catalog.CatalogListStore')
+    store: Ext.create('App.store.seller.Catalog.CatalogListStore'),
+    listeners: {
+        itemdblclick: function(el, record, item, index, e, eOpts){
+            var data = record.getData();
+
+            Ext.create('App.view.seller.Catalog.CatalogEditWindow', {
+                title: 'Новый элемент каталога',
+                fields: {
+                    id: data.id,
+                    name: data.text,
+                    parent_id: data.parentId
+                }
+            });
+        }
+    }
 });

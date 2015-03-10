@@ -1,12 +1,12 @@
 <?php namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class NestedSets extends Model {
+class NestedSets extends \Kalnoy\Nestedset\Node {
 
     public $timestamps = false;
 
-	public static function append($parent_id, array $fields)
+    protected $fillable = array('name', 'parent_id');
+
+	public static function append2($parent_id, array $fields)
     {
         $parent_id = intval($parent_id);
 

@@ -35,6 +35,22 @@ class WelcomeController extends Controller {
 
     public function test()
     {
+        $result = \App\Models\NestedSets::withDepth()->having('depth', '=', 1)->get();
+
+        return $result;
+
+        $parent = \App\Models\NestedSets::find(1);
+
+        \App\Models\NestedSets::create(['name' => 'Парфюмерия'], $parent);
+
+        return;
+
+        $node = new \App\Models\NestedSets;
+
+        $node->name = 'hello NS';
+
+        $node->save();
+
         return '';
 
         $catalog = \App\Helpers\CitynatureHelper::getCatalogArrayFromCsvFile( base_path('storage/app/price.csv') );

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller {
 
-    const ROOT_NESTED_SETS_ID = 1;
+    const ROOT_NESTED_SETS_ID = 1; // Корневой NS элемент для каталога товаров
 
 	/**
 	 * Display a listing of the resource.
@@ -50,9 +50,15 @@ class CatalogController extends Controller {
             $parent_id = self::ROOT_NESTED_SETS_ID;
         }
 
-        $item = \App\Models\NestedSets::append($parent_id, ['name' => $name]);
+        $parent = \App\Models\NestedSets::find($parent_id);
 
-        return ['item' => $item];
+        if (!$parent) {
+            return ['success' => false, 'msg' => 'Parent not found'];
+        }
+
+        $item = \App\Models\NestedSets::create(['name' => $name], $parent);
+
+        return ['item' => $item->get(['id', 'name'])];
 	}
 
 	/**
@@ -61,15 +67,22 @@ class CatalogController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($node_id)
 	{
-        $id = intval($id);
+        $node_id = intval($node_id);
+
+        if (!$node_id) {
+            $node_id = self::ROOT_NESTED_SETS_ID;
+        }
+
+        $node_obj = \App\Models\NestedSets::find($node_id);
+
+        if (!$node_obj) {
+            return [];
+        }
 
         return [
-            'children' => [
-                ['text' => 'Парфюмерия'],
-                ['text' => 'Косметика'],
-            ]
+            'children' => $node_obj->children()->get(['id', 'name as text'])
         ];
 	}
 

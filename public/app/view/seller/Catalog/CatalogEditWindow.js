@@ -18,23 +18,16 @@ Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
             text: 'Сохранить',
             handler: function(){
                 var baseForm = Ext.getCmp('catalogEditWindowBaseForm');
-
                 baseForm.submit({
                     url: '/rest/catalog',
                     params: {
                         _token: __TOKEN__
-                    }
-                }); return;
-
-                var values = baseForm.getValues();
-
-                var store = Ext.data.StoreManager.lookup('sellerCatalogListStore');
-
-                store.add(values);
-
-                store.save();
-
-                //console.log(store.getRecords());
+                    },
+                    success: function(form, action){
+                        this.up('window').destroy();
+                    },
+                    failure: function(form, action) {}
+                });
             }
         },{
             xtype: 'button',
@@ -62,21 +55,25 @@ Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
             name: 'name',
             allowBlank: false
         },{
-            fieldLabel: 'Родитель',
-            xtype: 'combobox',
+            xtype: 'hidden',
             name: 'parent_id',
-            allowBlank: false,
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'abbr',
-            store: {
-                xtype: 'store',
-                fields: ['abbr', 'name'],
-                data : [
-                    {"abbr":"AL", "name":"Alabama"},
-                    {"abbr":"AK", "name":"Alaska"},
-                    {"abbr":"AZ", "name":"Arizona"}
-                ]
+            allowBlank: true
+        },
+        {
+            fieldLabel: 'Родитель',
+            xtype: 'treepanel',
+            name: 'parent_id',
+            height: 200,
+            rootVisible: false,
+            //store: Ext.data.StoreManager.lookup('sellerCatalogListStore'),
+            store: Ext.create('App.store.seller.Catalog.CatalogListStore'),
+            listeners: {
+                select: function(el, record){
+                    var baseForm = Ext.getCmp('catalogEditWindowBaseForm').getForm();
+                    baseForm.setValues({
+                        parent_id: record.getData().id
+                    });
+                }
             }
         }]
     }
