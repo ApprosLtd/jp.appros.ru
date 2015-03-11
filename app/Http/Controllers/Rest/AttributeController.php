@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class ProductController extends RestController {
+class AttributeController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,11 +14,34 @@ class ProductController extends RestController {
 	 */
 	public function index()
 	{
-		$data = [];
+        $attributes_groups = \App\Models\AttributesGroupModel::all();
 
-        $data['data'] = \App\Models\ProductModel::offset(\Input::get('start'))->take(\Input::get('limit'))->get();
+        if (!$attributes_groups) {
+            return [];
+        }
 
-        return $data;
+        $output_arr = [];
+
+        foreach ($attributes_groups as $attributes_group) {
+            $attributes = $attributes_group->attributes;
+
+            if (!$attributes) {
+                continue;
+            }
+
+            foreach ($attributes as $attribute) {
+                $output_arr[] = [
+                    'id' => $attribute->id,
+                    'name' => $attribute->name,
+                    'title' => $attribute->title,
+                    'value' => '',
+                    'group' => $attributes_group->name,
+                    'group_id' => $attributes_group->id
+                ];
+            }
+        }
+
+		return $output_arr;
 	}
 
 	/**
@@ -28,7 +51,7 @@ class ProductController extends RestController {
 	 */
 	public function create()
 	{
-		return 'create';
+        return 'create';
 	}
 
 	/**
@@ -38,28 +61,7 @@ class ProductController extends RestController {
 	 */
 	public function store()
 	{
-        $product = \App\Models\ProductModel::create([
-            'user_id' => \Auth::user()->id,
-            'name' => \Input::get('name'),
-            'description' => \Input::get('description'),
-        ]);
-
-        if (!$product) {
-            return;
-        }
-
-        $attributes_mix_arr = (array) \Input::get('attributes', []);
-
-        if (!empty($attributes_mix_arr)) {
-            foreach ($attributes_mix_arr as $attribute_mix) {
-                $attributes[] = new \App\Models\AttributeValueModel([
-                    'attribute_id' => $attribute_mix['id'],
-                    'value' => $attribute_mix['value'],
-                ]);
-            }
-
-            $product->attributes()->saveMany($attributes);
-        }
+        return 'store';
 	}
 
 	/**
@@ -70,7 +72,7 @@ class ProductController extends RestController {
 	 */
 	public function show($id)
 	{
-		//
+        return 'show';
 	}
 
 	/**
@@ -81,7 +83,7 @@ class ProductController extends RestController {
 	 */
 	public function edit($id)
 	{
-		//
+        return 'edit';
 	}
 
 	/**
@@ -92,7 +94,7 @@ class ProductController extends RestController {
 	 */
 	public function update($id)
 	{
-		//
+        return 'update';
 	}
 
 	/**
@@ -103,7 +105,7 @@ class ProductController extends RestController {
 	 */
 	public function destroy($id)
 	{
-		//
+        return 'destroy';
 	}
 
 }
