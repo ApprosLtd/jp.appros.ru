@@ -41,7 +41,7 @@ class CatalogController extends Controller {
             $parent_id = \App\Models\CatalogModel::ROOT_NESTED_SETS_ID;
         }
 
-        $parent = \App\Models\NestedSets::find($parent_id);
+        $parent = \App\Models\CatalogModel::find($parent_id);
 
         if (!$parent) {
             return ['success' => false, 'msg' => 'Parent not found'];
@@ -72,9 +72,20 @@ class CatalogController extends Controller {
             return [];
         }
 
+        $children = $node_obj->children()->get(['id', 'name']);
+        $children_arr = [];
+        foreach ($children as $child) {
+            $sub_children_count = $child->children()->count();
+            $children_arr[] = [
+                'id' => $child->id,
+                'text' => $child->name . ' (' . $child->id . ')',
+                'leaf' => $sub_children_count ? false : true
+            ];
+        }
+
         return [
             'text' => $node_obj->name,
-            'children' => $node_obj->children()->get(['id', 'name as text'])
+            'children' => $children_arr
         ];
 	}
 

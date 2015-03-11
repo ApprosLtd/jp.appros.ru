@@ -16,21 +16,36 @@ Ext.define('App.view.seller.Products.CatalogListTreePanel', {
             ptype: 'treeviewdragdrop'
         }
     },
+  /*  constructor: function() {
+        this.callParent(arguments);
+    },*/
     contextmenu: Ext.create('Ext.menu.Menu', {
         contextmenu_record: 0,
         items: [{
             text: 'Редактировать',
             handler: function(item, e){
                 var record = this.up('menu').contextmenu_record;
-                //
+                var data = record.getData();
+                Ext.create('App.view.seller.Catalog.CatalogEditWindow', {
+                    title: 'Редактирование элемента каталога',
+                    fields: {
+                        id: data.id,
+                        name: data.text,
+                        parent_id: data.parentId
+                    }
+                });
             }
         },{
             text: 'Удалить',
             handler: function(item, e){
                 var record = this.up('menu').contextmenu_record;
-                var store = Ext.data.StoreManager.lookup('sellerCatalogListStore');
+                //var store = Ext.data.StoreManager.lookup('sellerCatalogListStore');
+                var store = this.up('menu');
+                console.log(store); return;
+                //store.beginUpdate();
                 store.remove(record);
-                store.save();
+                //store.endUpdate();
+                //store.sync();
             }
         }]
     }),

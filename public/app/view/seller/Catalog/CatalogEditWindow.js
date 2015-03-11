@@ -26,6 +26,7 @@ Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
                         _token: __TOKEN__
                     },
                     success: function(form, action){
+                        //Ext.data.StoreManager.lookup('sellerCatalogListStore').load();
                         upWindow.destroy();
                     },
                     failure: function(form, action) {}
