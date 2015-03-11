@@ -146,9 +146,12 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                 rootVisible: false,
                 border: false,
                 viewConfig: {
-                    plugins: { ptype: 'treeviewdragdrop' }
+                    plugins: {
+                        ptype: 'treeviewdragdrop'
+                    }
                 },
-                store: {
+                store: Ext.create('App.store.seller.Catalog.CatalogListStore'),
+                store2: {
                     fields: [{
                         name: 'text',
                         mapping: 'name'
@@ -193,18 +196,6 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                                     leaf: true
                                 },{
                                     name: 'London',
-                                    mtype: 'City',
-                                    leaf: true
-                                }]
-                            }]
-                        },{
-                            name: 'North America',
-                            mtype: 'Territory',
-                            children: [{
-                                name: 'USA',
-                                mtype: 'Country',
-                                children: [{
-                                    name: 'Redwood City',
                                     mtype: 'City',
                                     leaf: true
                                 }]

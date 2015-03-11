@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller {
 
-    const ROOT_NESTED_SETS_ID = 1; // Корневой NS элемент для каталога товаров
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -47,7 +45,7 @@ class CatalogController extends Controller {
 		$parent_id = intval(\Input::get('parent_id'));
 
         if (!$parent_id) {
-            $parent_id = self::ROOT_NESTED_SETS_ID;
+            $parent_id = \App\Models\CatalogModel::ROOT_NESTED_SETS_ID;
         }
 
         $parent = \App\Models\NestedSets::find($parent_id);
@@ -72,7 +70,7 @@ class CatalogController extends Controller {
         $node_id = intval($node_id);
 
         if (!$node_id) {
-            $node_id = self::ROOT_NESTED_SETS_ID;
+            $node_id = \App\Models\CatalogModel::ROOT_NESTED_SETS_ID;
         }
 
         $node_obj = \App\Models\NestedSets::find($node_id);
