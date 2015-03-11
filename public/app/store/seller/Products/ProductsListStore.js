@@ -4,20 +4,5 @@ Ext.define('App.store.seller.Products.ProductsListStore', {
     autoLoad: true,
     autoSync: true,
     model: 'App.model.seller.Products.ProductsListModel',
-    proxy: {
-        type: 'rest',
-        url: '/rest/product',
-        reader: {
-            type: 'json',
-            rootProperty: 'data'
-        },
-        writer: {
-            type: 'json'
-        }
-    },
-    listeners: {
-        load: function(self, records, successful, eOpts) {
-            //
-        }
-    }
+    proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/product'})
 });

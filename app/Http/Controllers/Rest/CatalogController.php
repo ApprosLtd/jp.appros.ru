@@ -34,8 +34,12 @@ class CatalogController extends Controller {
 	 */
 	public function store()
 	{
-		$name = \Input::get('name');
+		$name = trim(\Input::get('name'));
 		$parent_id = intval(\Input::get('parent_id'));
+
+        if (empty($name)) {
+            return ['success' => false];
+        }
 
         if (!$parent_id) {
             $parent_id = \App\Models\CatalogModel::ROOT_NESTED_SETS_ID;
@@ -128,7 +132,7 @@ class CatalogController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        return 'destroy';
+        \App\Models\CatalogModel::destroy($id);
 	}
 
 }

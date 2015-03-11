@@ -11,7 +11,6 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
     modal: true,
     layout: 'fit',
     constructor: function() {
-
         var me = this;
 
         me.attributesStore = Ext.create('Ext.data.Store', {

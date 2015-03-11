@@ -14,9 +14,27 @@ class ProductController extends RestController {
 	 */
 	public function index()
 	{
-		$data = [];
+        $start = intval(\Input::get('start'));
+        $limit = intval(\Input::get('limit'));
 
-        $data['data'] = \App\Models\ProductModel::offset(\Input::get('start'))->take(\Input::get('limit'))->get();
+        $products = \App\Models\ProductModel::offset($start)->take($limit)->get(['id', 'name']);
+
+        if (!$products) {
+            return [];
+        }
+
+        $data = [];
+
+        /**
+         * @var $product \App\Models\ProductModel
+         */
+        foreach ($products as $product) {
+            $data[] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'cn_link' => $product->attr('cn_link')
+            ];
+        }
 
         return $data;
 	}
@@ -103,7 +121,7 @@ class ProductController extends RestController {
 	 */
 	public function destroy($id)
 	{
-		//
+        \App\Models\ProductModel::destroy($id);
 	}
 
 }

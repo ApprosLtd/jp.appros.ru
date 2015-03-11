@@ -5,6 +5,7 @@ Ext.define('App.common.proxies.RestProxy', {
     },
     reader: {
         type: 'json'
+    //    ,rootProperty: 'rows'
     },
     writer: {
         type: 'json'
