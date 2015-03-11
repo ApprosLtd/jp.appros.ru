@@ -14,14 +14,7 @@ class CatalogController extends Controller {
 	 */
 	public function index()
 	{
-        return [
-            'success' => true,
-            'items' => [
-                ['id' => 1, 'name' => 'My Name']
-            ]
-        ];
-
-		return \App\Models\NestedSets::all();
+        return [];
 	}
 
 	/**
@@ -54,9 +47,9 @@ class CatalogController extends Controller {
             return ['success' => false, 'msg' => 'Parent not found'];
         }
 
-        $item = \App\Models\NestedSets::create(['name' => $name], $parent);
+        $item = \App\Models\CatalogModel::create(['name' => $name], $parent);
 
-        return ['item' => $item->get(['id', 'name'])];
+        return ['success' => true, 'item' => $item->get(['id', 'name'])];
 	}
 
 	/**
@@ -73,13 +66,14 @@ class CatalogController extends Controller {
             $node_id = \App\Models\CatalogModel::ROOT_NESTED_SETS_ID;
         }
 
-        $node_obj = \App\Models\NestedSets::find($node_id);
+        $node_obj = \App\Models\CatalogModel::find($node_id);
 
         if (!$node_obj) {
             return [];
         }
 
         return [
+            'text' => $node_obj->name,
             'children' => $node_obj->children()->get(['id', 'name as text'])
         ];
 	}
@@ -92,7 +86,7 @@ class CatalogController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		return 'edit';
 	}
 
 	/**
@@ -101,9 +95,18 @@ class CatalogController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($node_id)
 	{
-		//
+        $node_obj = \App\Models\CatalogModel::find($node_id);
+
+        if (!$node_obj) {
+            return;
+        }
+
+        $parent_id = intval(\Input::get('parentId'));
+
+        $node_obj->parent_id = $parent_id;
+        $node_obj->save();
 	}
 
 	/**
@@ -114,7 +117,7 @@ class CatalogController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        return 'destroy';
 	}
 
 }

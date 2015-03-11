@@ -3,6 +3,7 @@
  */
 Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
     extend: 'Ext.window.Window',
+    id: 'sellerCatalogEditWindow',
     title: 'Редактирование элемента каталога',
     //height: 300,
     width: 500,
@@ -17,6 +18,7 @@ Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
             xtype: 'button',
             text: 'Сохранить',
             handler: function(){
+                var upWindow = this.up('window');
                 var baseForm = Ext.getCmp('catalogEditWindowBaseForm');
                 baseForm.submit({
                     url: '/rest/catalog',
@@ -24,7 +26,7 @@ Ext.define('App.view.seller.Catalog.CatalogEditWindow', {
                         _token: __TOKEN__
                     },
                     success: function(form, action){
-                        this.up('window').destroy();
+                        upWindow.destroy();
                     },
                     failure: function(form, action) {}
                 });

@@ -143,13 +143,8 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             title: 'Каталог',
             items: {
                 xtype: 'treepanel',
-                rootVisible: false,
+                rootVisible: true,
                 border: false,
-                viewConfig: {
-                    plugins: {
-                        ptype: 'treeviewdragdrop'
-                    }
-                },
                 store: Ext.create('App.store.seller.Catalog.CatalogListStore'),
                 store2: {
                     fields: [{

@@ -33,6 +33,7 @@ Ext.define('App.view.main.Main', {
         maxWidth: 500,
         split: true,
         collapsible: true,
+        collapsed: true,
         tbar: [{
             text: 'Button',
             handler: 'onClickButton'
