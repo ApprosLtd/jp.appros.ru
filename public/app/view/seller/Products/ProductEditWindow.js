@@ -48,6 +48,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                         fieldLabel: 'Описание',
                         xtype: 'textarea',
                         name: 'description',
+                        height: 200,
                         allowBlank: true
                     }]
                 }
@@ -77,7 +78,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                         hideable: false
                     }, {
                         header: 'Значение',
-                        width: 180,
+                        width: 240,
                         sortable: true,
                         dataIndex: 'value',
                         field: {
@@ -96,7 +97,40 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                 }
             },{
                 title: 'Фотогалерея',
-                html: 'Фотогалерея'
+                items: [{
+                    xtype: 'form',
+                    padding: 5,
+                    border: false,
+                    items: [{
+                        xtype: 'filefield',
+                        name: 'photo',
+                        fieldLabel: 'Файл',
+                        labelWidth: 50,
+                        msgTarget: 'side',
+                        allowBlank: false,
+                        anchor: '100%',
+                        buttonText: 'Выбрать фото',
+                        listeners: {
+                            //
+                        }
+                    }]
+                }/*,{
+                    xtype: 'dataview',
+                    tpl: [
+                        '<tpl for=".">',
+                        '<div class="dataview-multisort-item">',
+                        '<img src="resources/images/touch-icons/{thumb}" />',
+                        '<h3>{name}</h3>',
+                        '</div>',
+                        '</tpl>'
+                    ],
+                    store: Ext.create('Ext.data.Store', {
+                        autoLoad: true,
+                        sortOnLoad: true,
+                        fields: ['name', 'thumb', 'url', 'type'],
+                        proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/media'})
+                    })
+                }*/]
             }]
         };
 

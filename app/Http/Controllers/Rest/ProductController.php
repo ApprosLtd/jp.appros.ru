@@ -42,7 +42,7 @@ class ProductController extends RestController {
 
             $product_mix = [
                 'id' => $product->id,
-                'name' => $product->name,
+                'name' => $product->name . '(' . $product->id . ')',
                 'cn_link' => $product->attr('cn_link'),
             ];
 

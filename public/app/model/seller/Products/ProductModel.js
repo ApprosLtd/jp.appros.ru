@@ -5,8 +5,5 @@ Ext.define('App.model.seller.Products.ProductModel', {
         {name: 'name',  type: 'string'},
         {name: 'description',  type: 'string'}
     ],
-    proxy: {
-        type: 'rest',
-        url : '/rest/product'
-    }
+    proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/product'})
 });

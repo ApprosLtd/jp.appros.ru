@@ -42,6 +42,7 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('catalog', 'Rest\CatalogController');
     Route::resource('pricing-grid', 'Rest\PricingGridController');
     Route::resource('pricing-grid-column', 'Rest\PricingGridColumnController');
+    Route::resource('media', 'Rest\MediaController');
 });
 
 /**
