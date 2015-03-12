@@ -1,6 +1,6 @@
-Ext.define('App.store.seller.PricingGrids.PricingGridsListStore', {
+Ext.define('App.store.seller.PricingGrids.PricingGridsStore', {
     extend: 'Ext.data.Store',
-    //storeId:'',
+    storeId:'pricingGridsStore',
     autoLoad: true,
     autoSync: true,
     model: 'App.model.seller.PricingGrids.PricingGridModel'

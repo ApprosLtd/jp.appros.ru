@@ -28,21 +28,16 @@ Ext.define('App.view.seller.Products.TopToolbarPanel', {
             xtype: 'combo',
             fieldLabel: 'Ценовая сетка',
             width: 350,
-            store: {
-                xtype: 'store',
-                fields: ['abbr', 'name'],
-                data : [
-                    {"abbr":"0", "name":"---"},
-                    {"abbr":"AL", "name":"Alabama"},
-                    {"abbr":"AK", "name":"Alaska"},
-                    {"abbr":"AZ", "name":"Arizona"}
-                    //...
-                ]
-            },
             queryMode: 'local',
             displayField: 'name',
-            valueField: 'abbr',
-            renderTo: Ext.getBody()
+            valueField: 'id',
+            store: Ext.create('App.store.seller.PricingGrids.PricingGridsStore'),
+            listeners: {
+                select: function(combo, record, eOpts){
+                    var store = Ext.data.StoreManager.lookup('pricingGridsStore');
+                    console.log(store);
+                }
+            }
         },
         {
             xtype: 'textfield',

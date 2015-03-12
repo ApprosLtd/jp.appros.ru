@@ -25,6 +25,9 @@ Ext.define('App.view.main.MainController', {
     },
 
     init: function() {
-        //
+        Ext.data.StoreManager.register([
+            Ext.create('App.store.seller.PricingGrids.PricingGridsStore'),
+            Ext.create('App.store.seller.PricingGrids.PricingGridColumnsStore')
+        ]);
     }
 });

@@ -7,7 +7,7 @@ Ext.define('App.view.seller.PricingGrids.PricingGridsListGridPanel', {
     constructor: function() {
         var me = this;
 
-        me.store = Ext.create('App.store.seller.PricingGrids.PricingGridsListStore');
+        me.store = Ext.create('App.store.seller.PricingGrids.PricingGridsStore');
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
