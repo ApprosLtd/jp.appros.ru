@@ -9,7 +9,9 @@ Ext.define('App.view.main.Main', {
     extend: 'Ext.container.Container',
     requires: [
         'App.view.main.MainController',
-        'App.view.main.MainModel'
+        'App.view.main.MainModel',
+        'App.model.seller.PricingGrids.PricingGridModel',
+        'App.model.seller.PricingGrids.PricingGridColumnModel'
     ],
 
     xtype: 'app-main',

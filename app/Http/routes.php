@@ -40,6 +40,8 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('product', 'Rest\ProductController');
     Route::resource('attribute', 'Rest\AttributeController');
     Route::resource('catalog', 'Rest\CatalogController');
+    Route::resource('pricing-grid', 'Rest\PricingGridController');
+    Route::resource('pricing-grid-column', 'Rest\PricingGridColumnController');
 });
 
 /**

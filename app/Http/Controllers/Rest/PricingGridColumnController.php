@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AttributeController extends RestController {
+class PricingGridColumnController extends RestController {
 
 	/**
 	 * Display a listing of the resource.
@@ -14,34 +14,9 @@ class AttributeController extends RestController {
 	 */
 	public function index()
 	{
-        $attributes_groups = \App\Models\AttributesGroupModel::all();
-
-        if (!$attributes_groups) {
-            return [];
-        }
-
-        $output_arr = [];
-
-        foreach ($attributes_groups as $attributes_group) {
-            $attributes = $attributes_group->attributes;
-
-            if (!$attributes) {
-                continue;
-            }
-
-            foreach ($attributes as $attribute) {
-                $output_arr[] = [
-                    'id' => $attribute->id,
-                    'name' => $attribute->name,
-                    'title' => $attribute->title,
-                    'value' => '',
-                    'group' => $attributes_group->name,
-                    'group_id' => $attributes_group->id
-                ];
-            }
-        }
-
-		return $output_arr;
+		return [
+            ['id' > 1, 'column_title' => 'первая колонка']
+        ];
 	}
 
 	/**
@@ -51,7 +26,7 @@ class AttributeController extends RestController {
 	 */
 	public function create()
 	{
-        return 'create';
+		//
 	}
 
 	/**
@@ -61,7 +36,7 @@ class AttributeController extends RestController {
 	 */
 	public function store()
 	{
-        return 'store';
+		//
 	}
 
 	/**
@@ -72,7 +47,7 @@ class AttributeController extends RestController {
 	 */
 	public function show($id)
 	{
-        return 'show';
+		//
 	}
 
 	/**
@@ -83,7 +58,7 @@ class AttributeController extends RestController {
 	 */
 	public function edit($id)
 	{
-        return 'edit';
+		//
 	}
 
 	/**
@@ -94,7 +69,7 @@ class AttributeController extends RestController {
 	 */
 	public function update($id)
 	{
-        return 'update';
+		//
 	}
 
 	/**
@@ -105,7 +80,7 @@ class AttributeController extends RestController {
 	 */
 	public function destroy($id)
 	{
-        return 'destroy';
+		//
 	}
 
 }
