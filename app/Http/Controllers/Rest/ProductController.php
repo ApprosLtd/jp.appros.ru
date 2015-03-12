@@ -25,15 +25,38 @@ class ProductController extends RestController {
 
         $data = [];
 
+        $pricing_grid_id = intval(\Input::get('pricing_grid_id'));
+
+        $pricing_grid = \App\Models\PricingGridModel::find($pricing_grid_id);
+
+        $columns_ids_arr = [];
+
+        if ($pricing_grid) {
+            $columns_ids_arr = $pricing_grid->columnsIdsArr();
+        }
+
         /**
          * @var $product \App\Models\ProductModel
          */
         foreach ($products as $product) {
-            $data[] = [
+
+            $product_mix = [
                 'id' => $product->id,
                 'name' => $product->name,
-                'cn_link' => $product->attr('cn_link')
+                'cn_link' => $product->attr('cn_link'),
             ];
+
+            if ($pricing_grid) {
+                $prices = $product->prices($columns_ids_arr);
+
+                if (!empty($prices)) {
+                    foreach ($prices as $price) {
+                        $product_mix['col_' . $price->column_id] = $price->price;
+                    }
+                }
+            }
+
+            $data[] = $product_mix;
         }
 
         return $data;
@@ -110,7 +133,21 @@ class ProductController extends RestController {
 	 */
 	public function update($id)
 	{
-		//
+		$product = \App\Models\ProductModel::find($id);
+
+        if (!$product) {
+            return;
+        }
+
+        $input_fields = \Input::all();
+
+        if (empty($input_fields)) {
+            return;
+        }
+
+        foreach ($input_fields as $field_name => $field_value) {
+            \App\Models\PricingGridModel::setPriceByPriceCode($field_name, $field_value, $product->id);
+        }
 	}
 
 	/**

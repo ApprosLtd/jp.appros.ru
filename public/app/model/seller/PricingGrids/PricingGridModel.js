@@ -3,5 +3,15 @@ Ext.define('App.model.seller.PricingGrids.PricingGridModel', {
     entityName: 'pricingGridModel',
     proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/pricing-grid'}),
     fields: ['id', 'name'],
-    hasMany: 'pricingGridColumnModel'
+    getColumns: function(){
+        var me = this;
+        var columnsStore = Ext.data.StoreManager.lookup('pricingGridColumnsStore');
+        var columnsModels = [];
+        columnsStore.each(function(record){
+            if (record.get('pricing_grid_id') == me.getId()) {
+                columnsModels.push(record);
+            }
+        });
+        return columnsModels;
+    }
 });

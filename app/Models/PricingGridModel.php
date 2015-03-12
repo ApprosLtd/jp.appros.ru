@@ -36,10 +36,32 @@ class PricingGridModel extends Model {
     }
 
     /**
+     * Возвращает массив идентификаторов своих колонок
+     * @return array
+     */
+    public function columnsIdsArr()
+    {
+        $columns = $this->columns()->get(['id']);
+
+        if (empty($columns)) {
+            return [];
+        }
+
+        $columns_ids_arr = [];
+
+        foreach ($columns as $column) {
+            $columns_ids_arr[] = $column->id;
+        }
+
+        return $columns_ids_arr;
+    }
+
+    /**
      * Устанавливает значение колонки цены
      * @param $price_code
      * @param $price_value
      * @param $product_id
+     * @return void
      */
     public static function setPriceByPriceCode($price_code, $price_value, $product_id)
     {
@@ -48,7 +70,7 @@ class PricingGridModel extends Model {
         preg_match('/^col_([\d]+)$/', $price_code, $matches);
 
         if (count($matches) != 2) {
-            return false;
+            return;
         }
 
         $price_value = str_replace(' ', '', $price_value);

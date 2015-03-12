@@ -4,8 +4,9 @@
 Ext.define('App.view.seller.Products.ProductsListGridPanel', {
     extend: 'Ext.grid.Panel',
     xtype: 'locking-grid',
+    id: 'productsListGridPanelView',
     title: 'Список товаров',
-    constructor: function() {
+    constructor: function(config) {
         var me = this;
 
         me.store = Ext.create('App.store.seller.Products.ProductsListStore');
@@ -26,28 +27,23 @@ Ext.define('App.view.seller.Products.ProductsListGridPanel', {
             }]
         });
 
-        this.callParent(arguments);
+        this.callParent([config]);
     },
+    plugins: [
+        Ext.create('Ext.grid.plugin.CellEditing', {
+            clicksToEdit: 1
+        })
+    ],
     columns: [
         {
             text: 'Наименование',
             dataIndex: 'name',
             locked: true,
-            width: 500,
+            width: 600,
             //flex: 1,
             renderer: function(value, metaData, rec){
                 return value + ' (<a href="' + rec.get('cn_link') + '" target="_blank">ссылка</a>)';
             }
-        },
-        {
-            text: 'Наименование1',
-            locked: false,
-            dataIndex: 'name'
-        },
-        {
-            text: 'Наименование2',
-            locked: false,
-            dataIndex: 'name'
         }
     ],
     viewConfig: {

@@ -14,9 +14,7 @@ class PricingGridColumnController extends RestController {
 	 */
 	public function index()
 	{
-		return [
-            ['id' > 1, 'column_title' => 'первая колонка']
-        ];
+        return \App\Models\PricingGridColumnModel::get(['id', 'column_title', 'pricing_grid_id']);
 	}
 
 	/**
