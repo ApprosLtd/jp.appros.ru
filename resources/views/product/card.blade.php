@@ -38,18 +38,60 @@
                         </div>
                         <div class="col-md-7">
                             <div>
-                                <div>
-                                    <span style="font-size: 27px; line-height: 23px;">{{ $product->name }} <img src="/img/stars_110.png"></span>
-                                    <h4>{{ $product->attr('brand') }} ({{ $product->attr('country') }})</h4>
+                                <div style="padding: 20px 20px 10px 10px">
+                                    <span style="font-size: 27px; line-height: 23px;">{{ $product->name }}</span>
+                                    <p>
+                                        <span class="product-stars">
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star"></span>
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                            <span class="glyphicon glyphicon-star-empty"></span>
+                                        </span>
+                                    </p>
+                                    <h4><a href="#">{{ $product->attr('brand') }}</a> ({{ $product->attr('country') }})</h4>
                                     <p>Объем: {{ $product->attr('weight') }}</p>
                                     <p class="truncate" style="height: 110px">{{ $product->description }}</p>
-                                    <a href="#" class="button button-rounded button-flat button-small">подробнее</a>
-                                    <p style="padding: 5px 0">
-                                        <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;">
-                                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                                            ДОБАВИТЬ В КОРЗИНУ
-                                        </button>
-                                    </p>
+
+                                    <div class="row" style="margin: 5px 0 10px">
+                                        <div class="col-md-4">
+                                            <a href="#" class="button button-rounded button-flat button-small">подробнее</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><span class="glyphicon glyphicon-paperclip"></span> в избранное</a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="#"><span class="glyphicon glyphicon-duplicate"></span> к сравнению</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin: 20px 0 30px; color: #B6B6B6">
+                                        <div class="col-md-4">
+                                            <span class="glyphicon glyphicon-eye-open"></span> Просмотры: 30
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span> Рекомендации: 5
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="glyphicon glyphicon-comment"></span> Комментарии: 12
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6" style="text-align: center">
+                                            <div style="font-size: 35px; padding: 0; line-height: 34px;">
+                                                от 560,00
+                                                <sup style="font-size: 20px"><span class="glyphicon glyphicon-ruble" title="Рублей"></span></sup>
+                                            </div>
+                                            <a href="#" style="font-size: 12px; color: #DB3232;">как формируются цены?</a>
+                                        </div>
+                                        <div class="col-md-6" style="text-align: right">
+                                            <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;">
+                                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                ДОБАВИТЬ В КОРЗИНУ
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,12 +99,8 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div style="background: #373737; padding: 20px 50px; margin: 10px -1px 10px -2px; color: #f5f5f9">
+                            <div class="middle-block">
                                 <div id="carousel-similar-offers" class="carousel slide" data-ride="carousel">
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#carousel-similar-offers" data-slide-to="0" class="active"></li>
-                                        <li data-target="#carousel-similar-offers" data-slide-to="1" class=""></li>
-                                    </ol>
                                     <div class="carousel-inner" role="listbox">
                                         <ul class="media-list media-slider item active">
                                             <li class="media">
@@ -135,6 +173,10 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-similar-offers" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-similar-offers" data-slide-to="1" class=""></li>
+                                    </ol>
                                     <a class="left carousel-control" href="#carousel-similar-offers" role="button" data-slide="prev">
                                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
@@ -166,7 +208,7 @@
                                             <h4 class="media-heading">Ирина Завалова</h4>
                                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                                             <div class="media-footer">
-                                                <span class="media-start">
+                                                <span class="comment-stars">
                                                     <span class="glyphicon glyphicon-star"></span>
                                                     <span class="glyphicon glyphicon-star"></span>
                                                     <span class="glyphicon glyphicon-star"></span>
@@ -280,7 +322,10 @@
                             </table>
                         </div>
                         <div class="content-block">
-                            <h5 class="content-block-title">Текущее состояние закупки <span class="glyphicon glyphicon-question-sign"></span></h5>
+                            <h5 class="content-block-title">
+                                Текущее состояние закупки
+                                <span class="glyphicon glyphicon-question-sign" data-container="body" data-toggle="popover" data-placement="left" data-content="Справочная информация, описывающая раздел.<a href=&#34;#&#34; onclick=&#34;alert('hello');&#34;>ссылка</a>" title="Текущее состояние закупки"></span>
+                            </h5>
 
                             <table class="table table-stats table-condensed table-hover">
                                 <tr>
@@ -337,6 +382,8 @@
     <script>
         $(function(){
             //$('.carousel').carousel();
+
+            $('[data-toggle="popover"]').popover({html : true});
         })
     </script>
 @endsection

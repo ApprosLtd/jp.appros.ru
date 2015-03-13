@@ -86,12 +86,19 @@ body {
     padding: 0;
 }
 
+/*-- stars --*/
+.product-stars {
+    color: #FF4242;
+    font-size: 20px;
+}
+.comment-stars {
+    color: #FF7E00
+}
+/*-- /stars --*/
+
 .media-footer {
     margin: 0;
     padding: 6px 0 2px;
-}
-.media-footer .media-start {
-    color: #FF7E00
 }
 .media-footer .comment-published {
     font-size: 11px;
@@ -124,11 +131,43 @@ body {
 
 }
 .media-slider .media {
-    width: 200px;
+    width: 216px;
     display: inline-block;
 }
 .media-slider .media-body {
     font-size: 12px;
+}
+
+.middle-block{
+    background: #373737;
+    padding: 20px 50px;
+    margin: 10px -1px 10px -2px;
+    color: #f5f5f9;
+}
+.middle-block .carousel{
+    margin: -10px 0;
+}
+.middle-block .carousel .left.carousel-control, .middle-block .carousel .right.carousel-control{
+    margin-top: -20px;
+}
+.middle-block .carousel .left.carousel-control{
+    margin-left: -50px;
+    width: 50px;
+}
+.middle-block .carousel .right.carousel-control{
+    margin-right: -50px;
+    width: 50px;
+}
+.middle-block .carousel .carousel-indicators {
+    position: inherit;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
 }
 
 .table-stats {
