@@ -8,10 +8,10 @@
         <div class="row">
             <div class="col-md-12 container-wrapper">
                 <div class="col-md-8 container-item container-item-shadow">
-                    <div class="row">
+                    <div class="row product-info">
                         <div class="col-md-5">
                             <div style="text-align: center">
-                                <!--div id="carousel-images-gallery" class="carousel slide" data-ride="carousel">
+                                <div id="carousel-images-gallery" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li data-target="#carousel-images-gallery" data-slide-to="0" class="active"></li>
                                         @for($im = 1; $im <= ($product_images->count() - 1); $im++)
@@ -33,7 +33,7 @@
                                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                     </a>
-                                </div-->
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-7">

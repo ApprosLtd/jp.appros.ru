@@ -12,6 +12,8 @@ class ProjectHelper {
 
     public static function getCategoriesByProjectId($project_id)
     {
+        return \App\Models\CatalogModel::all();
+
         $user = \Auth::user();
 
         if (!$user) {
