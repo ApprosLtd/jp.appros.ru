@@ -6,7 +6,7 @@ class WidgetsController extends AdminController {
 
 	public function getIndex()
 	{
-        $widgets_models_arr = \App\Models\Widget::orderBy('region')->orderBy('position')->paginate(50);
+        $widgets_models_arr = \App\Models\WidgetModel::orderBy('region')->orderBy('position')->paginate(50);
 
         return view('admin.widgets.index', ['widgets_models_arr' => $widgets_models_arr]);
 	}
@@ -27,7 +27,7 @@ class WidgetsController extends AdminController {
         }
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\Widget::find($post_fields_arr['id']);
+            $widget_model = \App\Models\WidgetModel::find($post_fields_arr['id']);
 
             if (!$widget_model) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
@@ -41,7 +41,7 @@ class WidgetsController extends AdminController {
 
             $widget_model->save();
         } else {
-            \App\Models\Widget::create($post_fields_arr);
+            \App\Models\WidgetModel::create($post_fields_arr);
         }
 
         return redirect('/admin/widgets');
