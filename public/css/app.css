@@ -1,6 +1,6 @@
 body {
-    background: #F1F1F1;
-    background: url("/img/pattern-6.png") fixed;
+    background: #F4F4F4;
+   /* background: url("/img/pattern-6.png") fixed;*/
 }
 
 .h1, .h2, .h3, h1, h2, h3 {
@@ -19,6 +19,34 @@ body {
     padding: 15px;
 }
 
+.sidebar-block {
+    padding: 18px 50px 10px;
+    border-bottom: 1px solid #DFDFDF;
+}
+.sidebar-block:last-of-type {
+    border-bottom: none;
+}
+
+.content-block {
+    padding: 0 0 20px;
+}
+.content-block-title {
+    text-transform: uppercase;
+    color: #797979;
+    cursor: default;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.container-wrapper {
+    background-color: #F8F8F8;
+    border-radius: 6px 5px 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.container-item-shadow {
+    box-shadow: 2px 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+
 .tab-content {
     background: #ffffff;
     padding: 15px;
@@ -26,9 +54,42 @@ body {
     border-width: 0 1px 1px 1px;
     border-style: solid;
 }
-
+.comments-wrapper, .comments-header, .comments-footer {
+    padding: 10px 50px;
+}
 .comment-item {
     padding: 10px 0;
+    margin: 0 0 10px;
+    border-bottom: 1px solid #E8E8E8;
+}
+.comment-item:last-of-type {
+    border-bottom: none;
+}
+.comment-published:before {
+    content: "\02022";
+    margin-right: 5px;
+}
+.comment-published{
+    font-size: 12px;
+    color: #B5B5B5;
+    font-style: italic;
+    padding: 0;
+}
+
+.media-footer {
+    margin: 0;
+    padding: 6px 0 2px;
+}
+.media-footer .media-start {
+    color: #FF7E00
+}
+.media-footer .comment-published {
+    font-size: 11px;
+    color: #909090;
+    font-style: normal;
+    padding: 0;
+    line-height: 17px;
+    vertical-align: top;
 }
 
 .carousel-control.left {
@@ -47,6 +108,18 @@ body {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0) 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+
+.table-stats {
+    font-size: 12px;
+    cursor: default;
+    border-bottom: 1px solid #DDD;
+    margin: 0;
+}
+
+.table-stats .data-value{
+    text-align: right;
+    font-weight: bold;
 }
 
 .nav-tabs-modern{

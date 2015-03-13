@@ -6,11 +6,11 @@
     ?>
     <div class="container">
         <div class="row">
-            <div class="col-md-12 panel panel-default">
-                <div class="col-md-8">
+            <div class="col-md-12 container-wrapper">
+                <div class="col-md-8 container-item container-item-shadow">
                     <div class="row">
                         <div class="col-md-5">
-                            <div class="panel panel-default" style="text-align: center">
+                            <div style="text-align: center">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -37,12 +37,16 @@
                             </div>
                         </div>
                         <div class="col-md-7">
-                            <div class="panel panel-default">
-                                <div class="panel-wrapper">
+                            <div>
+                                <div>
                                     <span style="font-size: 27px; line-height: 23px;">{{ $product->name }} <img src="/img/stars_110.png"></span>
                                     <h4>{{ $product->attr('brand') }} ({{ $product->attr('country') }})</h4>
                                     <p>Объем: {{ $product->attr('weight') }}</p>
                                     <p>{{ $product->description }}</p>
+
+                                    <p style="padding: 5px 0">
+                                        <button class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> ПРИСОЕДИНИТЬСЯ К ЗАКУПКЕ</button>
+                                    </p>
 
                                     <div class="alert alert-warning" role="alert" style="margin: 0">
                                         <strong>Внимание!</strong> Лучше посмотрите, что-то здесь не в порядке.
@@ -52,135 +56,204 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="background: #373737; padding: 20px 50px; margin: 10px 0; color: #f5f5f9">
+                        текст
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="comment-item">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="media-left" href="#">
-                                            <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
-                                        </a>
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Ирина Завалова</h4>
-                                            <img src="/img/stars_80.png"> 24 декабря 2014
-                                        </div>
-                                    </li>
-                                </ul>
-                                <p>
-                                    <strong>Достоинства</strong> - Компактный
-                                    -Высокая(заявленная) автономность
-                                    -Отличный сочный/чёткий FHD экран.
-                                    -Отлично ловит LTE и/или WI-FI.
-                                    Полноценная W8.1, работает шустро.
-                                    Бесплатный Office 365(на 1 планшет + 1 ПК/MAC), активируется на одну учётку.
-                                    ИМХО, презентабельный внешний вид.
-                                    Нормальный звук через колонки.
-                                    Приятный материал задней крышки
-                                </p>
-                                <p>
-                                    <strong>Недостатки</strong>
-                                    MicroUSB и только 1 :(
-                                    Внешнему(пассивному) винту на 1 gb(WD Passport 2,5``) не хватило питания
-                                    Зарядка через тот же единственный порт microUSB
-                                    Отключил автоподсветку экрана(проблема скорее всего софтовая, жду обновления)
-                                </p>
-                                <p>
-                                    <strong>Общие впечатления</strong>
-                                    В целом, создаёт приятное впечатление. Сразу докупил кабель OTG(MicroUSB->USB), USB тройник, беспроводную мышь(ес-но Logitech) и конечно 64 GB micro SDXC. Для удалённой работы(например через VPN, в SAP GUI:) - один из лучших вариантов. На использование для игр - не рассчитываю, а как рабочая лошадка - рекомендую.
-                                    P.S.: Тоже успел урвать до подорожания(за 26,5)
-                                </p>
+                            <div class="comments-header">
+                                <h3>Комментарии и обсуждение (12 сообщений)</h3>
+                                <p>Вы должны <a href="#">авторизоваться</a>, что бы оставить сообщение</p>
                             </div>
-                            <div class="comment-item">
-                                <ul class="media-list">
-                                    <li class="media">
-                                        <a class="media-left" href="#">
-                                            <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
-                                        </a>
+                            <div class="comments-wrapper">
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
                                         <div class="media-body">
                                             <h4 class="media-heading">Ирина Завалова</h4>
-                                            <img src="/img/stars_80.png"> 24 декабря 2014
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                            <div class="media-footer">
+                                                <span class="media-start">
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star"></span>
+                                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                                </span>
+                                                <span class="comment-published">24 декабря 2014</span>
+                                            </div>
                                         </div>
-                                    </li>
-                                </ul>
-                                <p>
-                                    <strong>Достоинства</strong> - Компактный
-                                    -Высокая(заявленная) автономность
-                                    -Отличный сочный/чёткий FHD экран.
-                                    -Отлично ловит LTE и/или WI-FI.
-                                    Полноценная W8.1, работает шустро.
-                                    Бесплатный Office 365(на 1 планшет + 1 ПК/MAC), активируется на одну учётку.
-                                    ИМХО, презентабельный внешний вид.
-                                    Нормальный звук через колонки.
-                                    Приятный материал задней крышки
-                                </p>
-                                <p>
-                                    <strong>Недостатки</strong>
-                                    MicroUSB и только 1 :(
-                                    Внешнему(пассивному) винту на 1 gb(WD Passport 2,5``) не хватило питания
-                                    Зарядка через тот же единственный порт microUSB
-                                    Отключил автоподсветку экрана(проблема скорее всего софтовая, жду обновления)
-                                </p>
-                                <p>
-                                    <strong>Общие впечатления</strong>
-                                    В целом, создаёт приятное впечатление. Сразу докупил кабель OTG(MicroUSB->USB), USB тройник, беспроводную мышь(ес-но Logitech) и конечно 64 GB micro SDXC. Для удалённой работы(например через VPN, в SAP GUI:) - один из лучших вариантов. На использование для игр - не рассчитываю, а как рабочая лошадка - рекомендую.
-                                    P.S.: Тоже успел урвать до подорожания(за 26,5)
-                                </p>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Ирина Завалова</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Ирина Завалова</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Ирина Завалова</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Ирина Завалова</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <a href="#">
+                                                <img width="50" height="50" src="http://cs421320.vk.me/v421320600/dd16/L0_MNmRYFCo.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Ирина Завалова</h4>
+                                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comments-footer">
+                                <a href="#" class="button button-block button-rounded button-flat-primary" onclick="return false;">показать еще</a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="panel panel-default">
-                        <div class="panel-wrapper">
-                            <p><strong>Информация о закупке</strong></p>
-                            <p>Целевая сумма: 50 000 руб.</p>
-                            <p>Закупка завершена на: 84%</p>
+                <div class="col-md-4 container-item">
+                    <div class="sidebar-block">
+                        <div class="content-block">
+                            <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
 
-                            <p style="padding: 5px 0">
-                                <button class="btn btn-danger">ПРИСОЕДИНИТЬСЯ К ЗАКУПКЕ</button>
-                            </p>
+                            <table class="table table-stats table-condensed table-hover">
+                                <tr>
+                                    <td style="width: 22px"><span class="glyphicon glyphicon-eye-open"></span></td>
+                                    <td>Просмотры</td>
+                                    <td class="data-value">250</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-thumbs-up"></span></td>
+                                    <td>Рекомендации</td>
+                                    <td class="data-value">10</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-comment"></span></td>
+                                    <td>Комментарии</td>
+                                    <td class="data-value">12</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="content-block">
+                            <h5 class="content-block-title">Текущее состояние закупки <span class="glyphicon glyphicon-question-sign"></span></h5>
 
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h5 class="panel-title">Таблица цен</h5>
-                                </div>
-                                <div class="panel-body" style="padding: 1px">
-                                    <table class="table table-bordered table-condensed table-hover" style="margin: 0;">
-                                        <thead>
-                                        <tr>
-                                            <th>Условия закупки</th>
-                                            <th style="width: 90px">Цена</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach(\App\Helpers\PurchaseHelper::getPricingGridMixForProduct($product->id, $purchase->id) as $pricing_grid_mix)
-                                            <tr>
-                                                <td>{{ $pricing_grid_mix['title'] }}
-                                                    <br><span style="font-size: 12px">Крайний срок: {{ $pricing_grid_mix['expiry_date'] }}</span>
-                                                    <div class="progress" style="height: 8px; margin: 3px 0 0">
-                                                        <div class="progress-bar progress-bar-danger progress-bar-striped"
-                                                             role="progressbar" aria-valuenow="84" aria-valuemin="0"
-                                                             aria-valuemax="100" style="width: 84%"></div>
-                                                    </div>
-                                                </td>
-                                                <td><h4>{{ $pricing_grid_mix['price'] }}</h4></td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            <table class="table table-stats table-condensed table-hover">
+                                <tr>
+                                    <td style="width: 22px"><span class="glyphicon glyphicon-user"></span></td>
+                                    <td>Участники</td>
+                                    <td class="data-value">34</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-ruble"></span></td>
+                                    <td>Целевая сумма, руб.</td>
+                                    <td class="data-value">50`000</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-time"></span></td>
+                                    <td>Время истечения</td>
+                                    <td class="data-value">13.03.2015 13:30</td>
+                                </tr>
+                            </table>
 
-                            <p>Срок истечения: 25 марта 2015 в 22.10 </p>
-                            <p><a href="/zakupka/23456" class="btn btn-default btn-sm">Подробная информация о <strong>закупке</strong></a></p>
+                        </div>
+                        <div class="content-block">
+                            <h5 class="content-block-title">Таблица цен <span class="glyphicon glyphicon-question-sign"></span></h5>
 
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <h5 class="panel-title">Название панели</h5>
-                                </div>
-                                <div class="panel-body">Содержимое панели</div>
-                            </div>
+                            <table class="table table-stats table-condensed table-hover">
+                                <tbody>
+                                @foreach(\App\Helpers\PurchaseHelper::getPricingGridMixForProduct($product->id, $purchase->id) as $pricing_grid_mix)
+                                    <tr>
+                                        <td>
+                                            {{ $pricing_grid_mix['title'] }}
+                                            <br><span style="font-size: 12px">Срок истечения: {{ $pricing_grid_mix['expiry_date'] }}</span>
+                                            <div class="progress" style="height: 8px; margin: 3px 0 0">
+                                                <div class="progress-bar progress-bar-danger progress-bar-striped"
+                                                     role="progressbar" aria-valuenow="84" aria-valuemin="0"
+                                                     aria-valuemax="100" style="width: 84%"></div>
+                                            </div>
+                                        </td>
+                                        <td class="data-value">{{ $pricing_grid_mix['price'] }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="sidebar-block">
+                        <div class="content-block">
+                            <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
 
+                            <table class="table table-stats table-condensed table-hover">
+                                <tr>
+                                    <td style="width: 22px"><span class="glyphicon glyphicon-eye-open"></span></td>
+                                    <td>Просмотры</td>
+                                    <td class="data-value">250</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-thumbs-up"></span></td>
+                                    <td>Рекомендации</td>
+                                    <td class="data-value">10</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="glyphicon glyphicon-comment"></span></td>
+                                    <td>Комментарии</td>
+                                    <td class="data-value">12</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>

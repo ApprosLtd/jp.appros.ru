@@ -11,7 +11,7 @@
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"-->
     <!-- Optional theme -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"-->
-
+    <link rel="stylesheet" href="/public/buttons/css/buttons.css">
     <link rel="stylesheet" href="/css/app.css">
 
     <script src="http://yastatic.net/jquery/2.1.3/jquery.min.js"></script>
