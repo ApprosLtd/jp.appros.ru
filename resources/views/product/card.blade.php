@@ -11,11 +11,11 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div style="text-align: center">
-                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!--div id="carousel-images-gallery" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-images-gallery" data-slide-to="0" class="active"></li>
                                         @for($im = 1; $im <= ($product_images->count() - 1); $im++)
-                                            <li data-target="#carousel-example-generic" data-slide-to="{{ $im }}" class=""></li>
+                                            <li data-target="#carousel-images-gallery" data-slide-to="{{ $im }}" class=""></li>
                                         @endfor
                                     </ol>
                                     <div class="carousel-inner" role="listbox">
@@ -25,15 +25,15 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                    <a class="left carousel-control" href="#carousel-images-gallery" role="button" data-slide="prev">
                                         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
                                         <span class="sr-only">Previous</span>
                                     </a>
-                                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                    <a class="right carousel-control" href="#carousel-images-gallery" role="button" data-slide="next">
                                         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                         <span class="sr-only">Next</span>
                                     </a>
-                                </div>
+                                </div-->
                             </div>
                         </div>
                         <div class="col-md-7">
@@ -42,24 +42,109 @@
                                     <span style="font-size: 27px; line-height: 23px;">{{ $product->name }} <img src="/img/stars_110.png"></span>
                                     <h4>{{ $product->attr('brand') }} ({{ $product->attr('country') }})</h4>
                                     <p>Объем: {{ $product->attr('weight') }}</p>
-                                    <p>{{ $product->description }}</p>
-
+                                    <p class="truncate" style="height: 110px">{{ $product->description }}</p>
+                                    <a href="#" class="button button-rounded button-flat button-small">подробнее</a>
                                     <p style="padding: 5px 0">
-                                        <button class="btn btn-danger"><span class="glyphicon glyphicon-shopping-cart"></span> ПРИСОЕДИНИТЬСЯ К ЗАКУПКЕ</button>
+                                        <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                            ДОБАВИТЬ В КОРЗИНУ
+                                        </button>
                                     </p>
-
-                                    <div class="alert alert-warning" role="alert" style="margin: 0">
-                                        <strong>Внимание!</strong> Лучше посмотрите, что-то здесь не в порядке.
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12" style="background: #373737; padding: 20px 50px; margin: 10px 0; color: #f5f5f9">
-                        текст
+                        <div class="col-md-12">
+                            <div style="background: #373737; padding: 20px 50px; margin: 10px -1px 10px -2px; color: #f5f5f9">
+                                <div id="carousel-similar-offers" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-similar-offers" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-similar-offers" data-slide-to="1" class=""></li>
+                                    </ol>
+                                    <div class="carousel-inner" role="listbox">
+                                        <ul class="media-list media-slider item active">
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="media-list media-slider item">
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                            <li class="media">
+                                                <div class="media-left">
+                                                    <a href="#">
+                                                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjE0LjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                                    </a>
+                                                </div>
+                                                <div class="media-body">
+                                                    <h5 class="media-heading">Nested media heading</h5>
+                                                    Cras sit amet nibh libero, in gravida nulla.
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="left carousel-control" href="#carousel-similar-offers" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-similar-offers" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -160,7 +245,7 @@
                                 </div>
                             </div>
                             <div class="comments-footer">
-                                <a href="#" class="button button-block button-rounded button-flat-primary" onclick="return false;">показать еще</a>
+                                <a href="#" class="button button-block button-rounded button-flat" onclick="return false;">показать еще</a>
                             </div>
                         </div>
                     </div>
@@ -168,6 +253,12 @@
                 <div class="col-md-4 container-item">
                     <div class="sidebar-block">
                         <div class="content-block">
+                            <div class="alert alert-warning alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <strong>Как работать с закупками?</strong><br>
+                                Если Вы впервые совершаете совместную покупку и не знакомы с процессом заказа, то рекомендуем
+                                <br><a href="#">ознакомиться с документацией</a>.
+                            </div>
                             <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
 
                             <table class="table table-stats table-condensed table-hover">
@@ -231,33 +322,21 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                    <div class="sidebar-block">
-                        <div class="content-block">
-                            <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
 
-                            <table class="table table-stats table-condensed table-hover">
-                                <tr>
-                                    <td style="width: 22px"><span class="glyphicon glyphicon-eye-open"></span></td>
-                                    <td>Просмотры</td>
-                                    <td class="data-value">250</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="glyphicon glyphicon-thumbs-up"></span></td>
-                                    <td>Рекомендации</td>
-                                    <td class="data-value">10</td>
-                                </tr>
-                                <tr>
-                                    <td><span class="glyphicon glyphicon-comment"></span></td>
-                                    <td>Комментарии</td>
-                                    <td class="data-value">12</td>
-                                </tr>
-                            </table>
+                        </div>
+                        <div class="content-block">
+                            <a href="#" class="button button-rounded button-flat button-small"><span class="glyphicon glyphicon-link"></span> Перейти к закупке</a>
+                            <!--p><span class="glyphicon glyphicon-link"></span> <a href="#">http://exsemple.com/product-10</a></p-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        $(function(){
+            //$('.carousel').carousel();
+        })
+    </script>
 @endsection

@@ -24,6 +24,19 @@
 	<![endif]-->
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">LOGO</div>
+            <div class="col-md-5">LOGO</div>
+            <div class="col-md-5">
+                <a href="#" class="button button-rounded button-flat button-small">Главная</a>
+                <a href="#" class="button button-rounded button-flat button-small">Доставка</a>
+                <a href="#" class="button button-rounded button-flat button-small">Оплата</a>
+                <a href="#" class="button button-rounded button-flat button-small">Личный кабинет</a>
+            </div>
+        </div>
+    </div>
+
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
@@ -37,14 +50,15 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
+				<ul class="nav navbar-nav nav-pills">
 					<li><a href="/">Home</a></li>
 					<li><a href="/">Оплата</a></li>
-					<li><a href="/">Доставка</a></li>
+					<li class="active"><a href="/">Доставка</a></li>
 					<li><a href="/">Правила</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 3 покупки на 1`320,45 руб.</a></li>
 					@if (Auth::guest())
 						<li><a href="/auth/login">Login</a></li>
 						<li><a href="/auth/register">Register</a></li>
