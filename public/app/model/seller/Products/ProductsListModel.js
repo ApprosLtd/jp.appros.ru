@@ -4,6 +4,10 @@ Ext.define('App.model.seller.Products.ProductsListModel', {
     fields: [
         {name: 'id',  type: 'int'},
         {name: 'name',  type: 'string'},
-        {name: 'cn_link',   type: 'string'}
-    ]
+        {name: 'cn_link',   type: 'string'},
+        {name: 'categories_ids',   type: 'string'}
+    ],
+    attachToCategory: function(categoryId){
+        this.set('categories_ids', categoryId);
+    }
 });

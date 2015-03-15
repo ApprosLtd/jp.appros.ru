@@ -73,6 +73,7 @@ Ext.define('App.view.seller.Products.TopToolbarPanel', {
                         });
 
                         productsListGridPanelView.getStore().currentPricingGridId = record.getId();
+                        productsListGridPanelView.getStore().load();
 
                         productsListGridPanelView.reconfigure(productsListGridPanelView.getStore(), columns);
                     }

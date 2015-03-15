@@ -13,28 +13,16 @@ Ext.define('App.view.seller.Products.CatalogListTreePanel', {
     rootVisible: true,
     viewConfig: {
         listeners: {
-            beforedrop: function(nodeEl, data) { // dropNode, dragNode, overModel
+            beforedrop: function(node, data, overModel, dropPosition, dropHandlers) { // dropNode, dragNode, overModel
 
-                var record = data.records[0];
-
-                if (record.store !== this.getStore()) {
-                    // Record from the grid. Take a copy ourselves
-                    // because the built-in copying messes it up.
-                    var copy = {children: []};
-
-                    console.log(record);
-                    /*
-                    record.fields.each(function(field) {
-                        copy[field.name] = record.get(field.name);
-                    }); */
-
-                    data.records = [copy];
-
-                    // Remove the record from the grid
-                    //record.store.remove(record);
+                if (dropPosition == 'append') {
+                    return false;
                 }
 
-                return true;
+                var record = data.records[0];
+                record.attachToCategory(overModel.getId());
+
+                return false;
             }
         },
         plugins: {
@@ -87,11 +75,15 @@ Ext.define('App.view.seller.Products.CatalogListTreePanel', {
             });
             e.stopEvent();
         },
+        itemclick: function(el, record, item, index, e, eOpts){
+            var gridStore = Ext.getCmp('productsListGridPanelView').getStore();
+            gridStore.getProxy().setExtraParam('root_category_id', record.getId());
+            gridStore.load();
+        },
         cellcontextmenu: function(el, td, cellIndex, record, tr, rowIndex, e, eOpts){
             this.contextmenu.record = record;
             this.contextmenu.showAt(e.getXY());
             e.stopEvent();
         }
-
     }
 });

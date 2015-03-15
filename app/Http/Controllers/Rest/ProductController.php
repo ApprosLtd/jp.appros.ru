@@ -17,7 +17,32 @@ class ProductController extends RestController {
         $start = intval(\Input::get('start', 0));
         $limit = intval(\Input::get('limit', 40));
 
-        $products = \App\Models\ProductModel::offset($start)->take($limit)->get(['id', 'name']);
+        $root_category_id = intval(\Input::get('root_category_id', \App\Models\CatalogModel::ROOT_NESTED_SETS_ID));
+
+        if ($root_category_id == \App\Models\CatalogModel::ROOT_NESTED_SETS_ID) {
+
+            $products = \App\Models\ProductModel::offset($start)->take($limit)->get(['id', 'name']);
+
+        } else {
+
+            $ns_categories_list = \App\Models\CatalogModel::find($root_category_id)->descendants()->get(['id']);
+
+            $categories_ids_arr = [$root_category_id];
+            if ($ns_categories_list->count()) {
+                foreach ($ns_categories_list as $ns_category) {
+                    $categories_ids_arr[] = intval($ns_category->id);
+                }
+            }
+
+            $products = \App\Models\ProductModel::offset($start)
+                ->take($limit)
+                ->leftJoin('category_product', function($join) {
+                    $join->on('products.id', '=', 'category_product.product_id');
+                })
+                ->whereIn('category_product.category_id', $categories_ids_arr)
+                ->get(['id', 'name']);
+
+        }
 
         if (!$products) {
             return [];
@@ -145,6 +170,17 @@ class ProductController extends RestController {
             return;
         }
 
+        if (array_key_exists('categories_ids', $input_fields)) {
+            $categories_ids_str = str_replace(' ', '', $input_fields['categories_ids']);
+            $categories_ids_arr = explode(',', $categories_ids_str);
+            $categories_ids_arr = array_unique($categories_ids_arr);
+
+            $product->categories()->sync($categories_ids_arr);
+        }
+
+        /**
+         * Установка цен
+         */
         foreach ($input_fields as $field_name => $field_value) {
             \App\Models\PricingGridModel::setPriceByPriceCode($field_name, $field_value, $product->id);
         }

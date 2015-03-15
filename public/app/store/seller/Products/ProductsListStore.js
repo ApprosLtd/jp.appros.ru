@@ -7,9 +7,8 @@ Ext.define('App.store.seller.Products.ProductsListStore', {
     model: 'App.model.seller.Products.ProductsListModel',
     proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/product'}),
     listeners: {
-        beforesync: function(options, eOpts){
-            var me = this;
-            me.getProxy().setExtraParam('pricing_grid_id', me.currentPricingGridId);
+        beforeload: function(options, eOpts){
+            this.getProxy().setExtraParam('pricing_grid_id', this.currentPricingGridId);
         }
     }
 });
