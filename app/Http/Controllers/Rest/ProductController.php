@@ -104,27 +104,55 @@ class ProductController extends RestController {
 	 */
 	public function store()
 	{
-        $product = \App\Models\ProductModel::create([
-            'user_id' => \Auth::user()->id,
-            'name' => \Input::get('name'),
-            'description' => \Input::get('description'),
-        ]);
-
-        if (!$product) {
-            return;
-        }
+        $product_id = intval(\Input::get('product_id', 0));
 
         $attributes_mix_arr = (array) \Input::get('attributes', []);
 
-        if (!empty($attributes_mix_arr)) {
-            foreach ($attributes_mix_arr as $attribute_mix) {
-                $attributes[] = new \App\Models\AttributeValueModel([
-                    'attribute_id' => $attribute_mix['id'],
-                    'value' => $attribute_mix['value'],
-                ]);
+        if ($product_id) {
+            $product = \App\Models\ProductModel::find($product_id);
+
+            if (!$product) {
+                return;
             }
 
-            $product->attributes()->saveMany($attributes);
+            $product->user_id = \Auth::user()->id;
+            $product->name = \Input::get('name');
+            $product->description = \Input::get('description');
+
+            $product->save();
+
+            if (!empty($attributes_mix_arr)) {
+                foreach ($attributes_mix_arr as $attribute_mix) {
+                    $attribute = $product->attributes()->where('attribute_id', '=', $attribute_mix['id'])->first();
+                    if ($attribute) {
+                        $attribute->value = $attribute_mix['value'];
+                        $attribute->save();
+                    }
+                }
+            }
+
+        } else {
+            $product = \App\Models\ProductModel::create([
+                'user_id' => \Auth::user()->id,
+                'name' => \Input::get('name'),
+                'description' => \Input::get('description'),
+            ]);
+
+            if (!$product) {
+                return;
+            }
+
+            if (!empty($attributes_mix_arr)) {
+                $attributes = [];
+                foreach ($attributes_mix_arr as $attribute_mix) {
+                    $attributes[] = new \App\Models\AttributeValueModel([
+                        'attribute_id' => $attribute_mix['id'],
+                        'value' => $attribute_mix['value'],
+                    ]);
+                }
+
+                $product->attributes()->saveMany($attributes);
+            }
         }
 	}
 
@@ -136,7 +164,15 @@ class ProductController extends RestController {
 	 */
 	public function show($id)
 	{
-		//
+		$product = \App\Models\ProductModel::find($id);
+
+        if (!$product) {
+            return [];
+        }
+
+        $product->attributes = $product->attributes()->get(['attribute_id', 'value']);
+
+        return $product;
 	}
 
 	/**

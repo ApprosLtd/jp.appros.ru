@@ -63,7 +63,10 @@ Ext.define('App.view.seller.Products.ProductsListGridPanel', {
     listeners: {
         itemdblclick: function(el, record, item, index, e, eOpts){
             var data = record.getData();
-            //
+            Ext.create('App.view.seller.Products.ProductEditWindow', {
+                title: 'Редактирование продукта',
+                record: record
+            });
             e.stopEvent();
         },
         cellcontextmenu: function(el, td, cellIndex, record, tr, rowIndex, e, eOpts){

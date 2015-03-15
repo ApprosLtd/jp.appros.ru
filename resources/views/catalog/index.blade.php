@@ -7,19 +7,9 @@
 
                 <div class="col-md-3 container-item">
                     <div class="sidebar-block">
-                        <div class="content-block">
 
-                            <div class="list-group" style="margin: 0 -20px">
-                                <a href="#" class="list-group-item active">Косметика</a>
-                                <a href="#" class="list-group-item">Парфюмерия</a>
-                                <a href="#" class="list-group-item">Парфюмерия</a>
-                                <a href="#" class="list-group-item">Подарки</a>
-                                <a href="#" class="list-group-item">Макияж</a>
-                                <a href="#" class="list-group-item">Мама и малыш</a>
-                                <a href="#" class="list-group-item">Бытовая химия</a>
-                            </div>
+                        {!! \App\Helpers\WidgetHelper::region('left_side') !!}
 
-                        </div>
                         <div class="content-block">
                             <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
 

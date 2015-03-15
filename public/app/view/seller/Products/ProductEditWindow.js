@@ -10,7 +10,41 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
     constrain: true,
     modal: true,
     layout: 'fit',
-    constructor: function() {
+    productId: 0,
+    fieldsData: null,
+    setFieldsData: function(record){
+        if (!record) {
+            return;
+        }
+        var me = this;
+        me.productId = record.getId();
+
+        me.attributesStore.on('load', function(){
+            Ext.Ajax.request({
+                url: '/rest/product/' + me.productId,
+                success: function(response){
+                    var json = Ext.JSON.decode(response.responseText);
+
+                    me.baseForm.getForm().setValues({
+                        id: json.id,
+                        name: json.name,
+                        description: json.description
+                    });
+
+                    if (json.attributes.length > 0) {
+                        Ext.Array.each(json.attributes, function(mix) {
+                            var attrRecord = me.attributesStore.findRecord('id', mix.attribute_id);
+                            if (attrRecord) {
+                                attrRecord.set('value', mix.value);
+                            }
+                        });
+                        me.attributesStore.commitChanges();
+                    }
+                }
+            });
+        });
+    },
+    constructor: function(config) {
         var me = this;
 
         me.attributesStore = Ext.create('Ext.data.Store', {
@@ -18,6 +52,33 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             autoLoad: true,
             groupField: 'group',
             proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/attribute'})
+        });
+
+        me.setFieldsData(config.record);
+
+        me.baseForm = Ext.create('Ext.form.Panel', {
+            id: 'productEditWindowBaseForm',
+            layout: 'anchor',
+            bodyPadding: 5,
+            border: false,
+            defaults: {
+                anchor: '100%'
+            },
+            items: [{
+                xtype: 'hidden',
+                name: 'id'
+            },{
+                fieldLabel: 'Наименование',
+                xtype: 'textfield',
+                name: 'name',
+                allowBlank: false
+            },{
+                fieldLabel: 'Описание',
+                xtype: 'textarea',
+                name: 'description',
+                height: 200,
+                allowBlank: true
+            }]
         });
 
         me.items = {
@@ -30,28 +91,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             items: [{
                 title: 'Главная',
                 xtype: 'panel',
-                items: {
-                    xtype: 'form',
-                    id: 'productEditWindowBaseForm',
-                    layout: 'anchor',
-                    bodyPadding: 5,
-                    border: false,
-                    defaults: {
-                        anchor: '100%'
-                    },
-                    items: [{
-                        fieldLabel: 'Наименование',
-                        xtype: 'textfield',
-                        name: 'name',
-                        allowBlank: false
-                    },{
-                        fieldLabel: 'Описание',
-                        xtype: 'textarea',
-                        name: 'description',
-                        height: 200,
-                        allowBlank: true
-                    }]
-                }
+                items: me.baseForm
             },{
                 title: 'Атрибуты',
                 items: {
@@ -87,7 +127,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                     }],
                     store: me.attributesStore
                 }
-            },{
+            },/*{
                 title: 'Каталог',
                 items: {
                     xtype: 'treepanel',
@@ -95,7 +135,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                     border: false,
                     store: Ext.create('App.store.seller.Catalog.CatalogListStore')
                 }
-            },{
+            },*/{
                 title: 'Фотогалерея',
                 items: [{
                     xtype: 'form',
@@ -156,6 +196,7 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                     });
 
                     var product = Ext.create('App.model.seller.Products.ProductModel', {
+                        product_id: fields.id,
                         name: fields.name,
                         description: fields.description,
                         catalog_ids: [],
@@ -185,6 +226,6 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             }]
         }];
 
-        this.callParent(arguments);
+        this.callParent([config]);
     }
 })
