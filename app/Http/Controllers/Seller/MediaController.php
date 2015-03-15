@@ -7,7 +7,7 @@ class MediaController extends SellerController {
     {
         $file_data = $_FILES['files'];
 
-        $tmp_name = $file_data['tmp_name'][0];
+        $tmp_name = is_array($file_data['tmp_name']) ? $file_data['tmp_name'][0] : $file_data['tmp_name'];
 
         $file_extention = 'jpg';
 
@@ -23,7 +23,9 @@ class MediaController extends SellerController {
         $media_model->file_name  = $file_name;
         $media_model->save();
 
-        return ['file_path' => $file_path];
+        $media_model->success = true;
+
+        return $media_model;
     }
 
     public function getImage($width_height, $file_name)

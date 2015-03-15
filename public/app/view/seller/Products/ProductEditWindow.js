@@ -12,6 +12,9 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
     layout: 'fit',
     productId: 0,
     fieldsData: null,
+    getProductId: function(){
+        return this.productId;
+    },
     setFieldsData: function(record){
         if (!record) {
             return;
@@ -40,6 +43,12 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                         });
                         me.attributesStore.commitChanges();
                     }
+
+                    if (json.media.length > 0) {
+                        Ext.Array.each(json.media, function(mix) {
+                            me.mediaStore.add(mix);
+                        });
+                    }
                 }
             });
         });
@@ -52,6 +61,10 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
             autoLoad: true,
             groupField: 'group',
             proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/attribute'})
+        });
+
+        me.mediaStore = Ext.create('Ext.data.Store', {
+            fields: ['id', 'file_name', 'position', 'type']
         });
 
         me.setFieldsData(config.record);
@@ -79,6 +92,20 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                 height: 200,
                 allowBlank: true
             }]
+        });
+
+        me.contextmenu = Ext.create('Ext.menu.Menu', {
+            items: [{
+                text: 'Удалить',
+                handler: function(item, e){
+                    //me.store.remove(this.up('menu').record);
+                }
+            }]
+        });
+
+        me.mediaViewPanel = Ext.create('Ext.panel.Panel', {
+            region: 'east',
+            width: 200
         });
 
         me.items = {
@@ -137,40 +164,68 @@ Ext.define('App.view.seller.Products.ProductEditWindow', {
                 }
             },*/{
                 title: 'Фотогалерея',
+                layout: 'border',
                 items: [{
                     xtype: 'form',
-                    padding: 5,
+                    region: 'north',
+                    //padding: 5,
                     border: false,
                     items: [{
-                        xtype: 'filefield',
-                        name: 'photo',
-                        fieldLabel: 'Файл',
-                        labelWidth: 50,
-                        msgTarget: 'side',
-                        allowBlank: false,
-                        anchor: '100%',
-                        buttonText: 'Выбрать фото',
-                        listeners: {
-                            //
-                        }
+                        layout: 'hbox',
+                        items: [{
+                            xtype: 'filefield',
+                            name: 'files',
+                            fieldLabel: 'Файл',
+                            labelWidth: 50,
+                            msgTarget: 'side',
+                            allowBlank: false,
+                            anchor: '100%',
+                            buttonText: 'Выбрать',
+                            listeners: {
+                                //
+                            }
+                        },{
+                            xtype: 'button',
+                            text: 'Загрузить',
+                            handler: function(){
+                                var form = this.up('form').getForm();
+                                form.submit({
+                                    url: '/seller/media/upload',
+                                    params: {
+                                        _token: __TOKEN__,
+                                        product_id: me.getProductId()
+                                    },
+                                    waitMsg: 'Загрузка изображения...',
+                                    success: function(fp, o) {
+                                        //console.log(fp, o.result); return;
+                                        me.mediaStore.add(o.result);
+                                    }
+                                });
+                            }
+                        }]
                     }]
-                }/*,{
-                    xtype: 'dataview',
-                    tpl: [
-                        '<tpl for=".">',
-                        '<div class="dataview-multisort-item">',
-                        '<img src="resources/images/touch-icons/{thumb}" />',
-                        '<h3>{name}</h3>',
-                        '</div>',
-                        '</tpl>'
-                    ],
-                    store: Ext.create('Ext.data.Store', {
-                        autoLoad: true,
-                        sortOnLoad: true,
-                        fields: ['name', 'thumb', 'url', 'type'],
-                        proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/media'})
-                    })
-                }*/]
+                },{
+                    xtype: 'grid',
+                    region: 'center',
+                    store: me.mediaStore,
+                    columns: [{
+                        text: 'Имя файла',
+                        dataIndex: 'file_name',
+                        flex: 1
+                    }],
+                    listeners: {
+                        itemclick: function(el, record, item, index, e, eOpts){
+                            me.mediaViewPanel.update('<img alt="" src="/media/images/200x255/'+record.getData().file_name+'">');
+                        },
+                        cellcontextmenu: function(el, td, cellIndex, record, tr, rowIndex, e, eOpts){
+                            me.contextmenu.record = record;
+                            me.contextmenu.showAt(e.getXY());
+                            e.stopEvent();
+                        }
+                    }
+                },
+                    me.mediaViewPanel
+                ]
             }]
         };
 

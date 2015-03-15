@@ -172,6 +172,8 @@ class ProductController extends RestController {
 
         $product->attributes = $product->attributes()->get(['attribute_id', 'value']);
 
+        $product->media = $product->media('image')->get(['id', 'file_name', 'position', 'type']);
+
         return $product;
 	}
 
