@@ -8,6 +8,10 @@ body {
     margin-bottom: 5px;
 }
 
+.font-mini {
+    font: 11px/14px tahoma;
+}
+
 .truncate {
  /*   white-space: nowrap;*/
     overflow: hidden;
@@ -26,7 +30,8 @@ body {
 }
 
 .sidebar-block {
-    padding: 18px 50px 10px;
+    /*padding: 18px 50px 10px;*/
+    padding: 18px 13% 10px;
     border-bottom: 1px solid #DFDFDF;
 }
 .sidebar-block:last-of-type {
@@ -54,7 +59,14 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .container-item-shadow {
+    background: #FFF;
+    min-height: 700px;
+}
+.container-item:first-of-type.container-item-shadow {
     box-shadow: 2px 0 6px 0 rgba(0, 0, 0, 0.1);
+}
+.container-item:last-of-type.container-item-shadow {
+    box-shadow: -2px 0 6px 0 rgba(0, 0, 0, 0.1);
 }
 
 .tab-content {
@@ -92,6 +104,9 @@ body {
     font-size: 20px;
 }
 .comment-stars {
+    color: #FF7E00
+}
+.stars-small {
     color: #FF7E00
 }
 /*-- /stars --*/
@@ -199,3 +214,73 @@ body {
 .nav-tabs-modern a:hover {
     color: #337AB7;
 }
+
+.modern-red {
+    background: #DB0A0A;
+    color: #FFDCDC;
+}
+
+/*-- catalog --*/
+.catalog-item {
+
+}
+.catalog-item-wrapper {
+    border-radius: 4px;
+    margin: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    background: #FFF;
+}
+.catalog-item-header {
+    height: 140px
+}
+.catalog-item-header img {
+    width: 100%;
+    display: block;
+    border-radius: 4px 4px 0 0;
+}
+.catalog-item-body {
+    padding: 5px 10px;
+}
+.catalog-item-body .title {
+    margin: 5px 0 4px;
+    font-size: 12px;
+    font-weight: bold;
+    height: 26px;
+    overflow: hidden;
+}
+.catalog-item-body .title a{
+    color: #2B2B2B;
+}
+.catalog-item-info {
+    margin: 0;
+    padding: 5px 0 0;
+    border-top: 1px solid #E8E8E8;
+}
+.catalog-item-footer {
+    padding: 7px 10px;
+    border-radius: 0 0 4px 4px;
+    background-color: #F6F6F6;
+    border-top: 1px solid #E7E7E7;
+    box-shadow: 0 1px 0 0 #FFF inset;
+    font-size: 11px;
+    color: #848484;
+    line-height: 12px;
+    vertical-align: top;
+}
+.catalog-item-footer .glyphicon {
+    padding-left: 12px;
+}
+.catalog-item-footer .glyphicon:first-of-type {
+    padding-left: 0;
+}
+.catalog-item-footer .modern {
+    float: right;
+    width: 28px;
+    height: 28px;
+    margin: -6px -10px 0 0;
+    text-align: center;
+    border-radius: 0 0 5px 0;
+    font-size: 16px;
+    line-height: 30px;
+}
+/*-- /catalog --*/

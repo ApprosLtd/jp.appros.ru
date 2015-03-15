@@ -26,7 +26,7 @@ class ProductModel extends Model {
 
     public function purchases()
     {
-        return $this->belongsToMany('\App\Models\PurchaseModel');
+        return $this->belongsToMany('\App\Models\PurchaseModel', 'products_in_purchase', 'product_id', 'purchase_id');
     }
 
     public function categories()
@@ -64,6 +64,11 @@ class ProductModel extends Model {
         }
 
         return $res->get(['column_id', 'price']);
+    }
+
+    public function getFirstPriceByPurchaseId($purchase_id)
+    {
+        //
     }
 
     /**

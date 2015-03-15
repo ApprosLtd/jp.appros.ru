@@ -14,8 +14,8 @@ class ProductController extends RestController {
 	 */
 	public function index()
 	{
-        $start = intval(\Input::get('start'));
-        $limit = intval(\Input::get('limit'));
+        $start = intval(\Input::get('start', 0));
+        $limit = intval(\Input::get('limit', 40));
 
         $products = \App\Models\ProductModel::offset($start)->take($limit)->get(['id', 'name']);
 

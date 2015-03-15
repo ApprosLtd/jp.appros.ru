@@ -26,11 +26,40 @@ class MediaController extends SellerController {
         return ['file_path' => $file_path];
     }
 
-    public function getImage()
+    public function getImage($width_height, $file_name)
     {
-        $image_path = base_path() . '/public' . \Input::get('src');
+        /*
+        $file_name = \Input::get('src');
+        $width  = \Input::get('w', 273);
+        $height = \Input::get('h', 200);
+        */
 
-        $img = \Image::make($image_path)->fit(273, 200);
+        $width_height_arr = explode('x', $width_height);
+        $width  = $width_height_arr[0];
+        $height = $width_height_arr[1];
+
+        $image_path = base_path() . '/public/cdn/images/' . $file_name;
+
+        if (!file_exists($image_path)) {
+            $img = \Image::canvas($width, $height);
+            $img->text('Image not found ;{', 110, 110, function($font) {
+                $font->size(48);
+                $font->align('center');
+            });
+            return $img->response('jpg');
+        }
+
+        $img = \Image::make($image_path)->fit($width, $height);
+
+        $storage_dir = base_path() . '/public/media/images/' . $width_height;
+
+        $storage_file = $storage_dir . '/' . $file_name;
+
+        if (!file_exists($storage_dir)) {
+            mkdir($storage_dir);
+        }
+
+        $img->save($storage_file);
 
         return $img->response('jpg');
     }

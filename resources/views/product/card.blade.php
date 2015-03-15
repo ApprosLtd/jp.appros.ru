@@ -2,6 +2,11 @@
 
 @section('content')
     <?php
+    /**
+     * @var $product_in_purchase \App\Models\ProductInPurchaseModel
+     */
+    $product = $product_in_purchase->product;
+
     $product_images = $product->media('image')->get();
     ?>
     <div class="container">
@@ -10,7 +15,7 @@
                 <div class="col-md-8 container-item container-item-shadow">
                     <div class="row product-info">
                         <div class="col-md-5">
-                            <div style="text-align: center">
+                            <div style="text-align: center; padding: 10px;">
                                 <div id="carousel-images-gallery" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         <li data-target="#carousel-images-gallery" data-slide-to="0" class="active"></li>
@@ -80,7 +85,7 @@
                                     <div class="row">
                                         <div class="col-md-6" style="text-align: center">
                                             <div style="font-size: 35px; padding: 0; line-height: 34px;">
-                                                от 560,00
+                                                от {{ $product_in_purchase->price }}
                                                 <sup style="font-size: 20px"><span class="glyphicon glyphicon-ruble" title="Рублей"></span></sup>
                                             </div>
                                             <a href="#" style="font-size: 12px; color: #DB3232;">как формируются цены?</a>
@@ -208,7 +213,7 @@
                                             <h4 class="media-heading">Ирина Завалова</h4>
                                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                                             <div class="media-footer">
-                                                <span class="comment-stars">
+                                                <span class="stars-small">
                                                     <span class="glyphicon glyphicon-star"></span>
                                                     <span class="glyphicon glyphicon-star"></span>
                                                     <span class="glyphicon glyphicon-star"></span>

@@ -15,6 +15,8 @@ Route::get('phpinfo', function(){
     return phpinfo();
 });
 
+//Route::get('catalog', 'ProductController@getProduct');
+
 Route::get('product-{alias}', 'ProductController@getProduct');
 
 Route::get('admin', 'DashboardController@getIndex');
@@ -27,9 +29,12 @@ Route::get('home', 'HomeController@index');
 
 Route::get('zakupka/{id}', 'PurchasesController@getPurchase');
 
+Route::get('/media/images/{width_height}/{file_name}', 'Seller\MediaController@getImage');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
+    'catalog' => 'CatalogController'
 ]);
 
 /**
@@ -62,7 +67,7 @@ Route::group(['prefix' => 'admin'], function()
 Route::group(['prefix' => 'seller'], function()
 {
     Route::post('media/upload', 'Seller\MediaController@postUpload');
-    Route::get('media/image', 'Seller\MediaController@getImage');
+    Route::get('media/image/{file_name}/{width?}/{height?}', 'Seller\MediaController@getImage');
 
     Route::get('attribute-group/{id}', 'Seller\AttributesController@getGroup');
     Route::get('product/{id}', 'Seller\ProductsController@getProduct');
@@ -84,6 +89,7 @@ Route::group(['prefix' => 'seller'], function()
  */
 Route::group(['prefix' => 'api'], function()
 {
+    Route::resource('product', 'Api\ProductController');
     Route::resource('model', 'Api\ModelController');
     Route::resource('catalog-tree', 'Api\CatalogTreeController');
 });

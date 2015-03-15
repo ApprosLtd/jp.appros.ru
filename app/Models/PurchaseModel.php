@@ -14,7 +14,7 @@ class PurchaseModel extends Model {
      */
 	public function products()
     {
-        return $this->belongsToMany('\App\Models\ProductModel');
+        return $this->belongsToMany('\App\Models\ProductModel', 'products_in_purchase', 'purchase_id', 'product_id');
     }
 
     /**
