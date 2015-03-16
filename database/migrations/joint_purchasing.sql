@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 15.03.2015 23:42:15
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 16.03.2015 19:52:56
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -161,6 +161,24 @@ CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
 --
+-- Описание для таблицы permissions
+--
+CREATE TABLE permissions (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  display_name VARCHAR(255) DEFAULT NULL,
+  description VARCHAR(255) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id),
+  UNIQUE INDEX permissions_name_unique (name)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 1
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
+
+--
 -- Описание для таблицы prices
 --
 CREATE TABLE prices (
@@ -301,6 +319,24 @@ COLLATE utf8_general_ci
 COMMENT = 'Закупки';
 
 --
+-- Описание для таблицы roles
+--
+CREATE TABLE roles (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  display_name VARCHAR(255) DEFAULT NULL,
+  description VARCHAR(255) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  updated_at TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (id),
+  UNIQUE INDEX roles_name_unique (name)
+)
+ENGINE = INNODB
+AUTO_INCREMENT = 1
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
+
+--
 -- Описание для таблицы users
 --
 CREATE TABLE users (
@@ -342,6 +378,38 @@ AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
 COMMENT = 'Виджеты';
+
+--
+-- Описание для таблицы permission_role
+--
+CREATE TABLE permission_role (
+  permission_id INT(10) UNSIGNED NOT NULL,
+  role_id INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (permission_id, role_id),
+  CONSTRAINT permission_role_permission_id_foreign FOREIGN KEY (permission_id)
+    REFERENCES permissions(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT permission_role_role_id_foreign FOREIGN KEY (role_id)
+    REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
+
+--
+-- Описание для таблицы role_user
+--
+CREATE TABLE role_user (
+  user_id INT(10) UNSIGNED NOT NULL,
+  role_id INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (user_id, role_id),
+  CONSTRAINT role_user_role_id_foreign FOREIGN KEY (role_id)
+    REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT role_user_user_id_foreign FOREIGN KEY (user_id)
+    REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = INNODB
+CHARACTER SET utf8
+COLLATE utf8_unicode_ci;
 
 -- 
 -- Вывод данных для таблицы attribute_values
@@ -410,7 +478,8 @@ INSERT INTO media VALUES
 --
 INSERT INTO migrations VALUES
 ('2014_10_12_000000_create_users_table', 1),
-('2014_10_12_100000_create_password_resets_table', 1);
+('2014_10_12_100000_create_password_resets_table', 1),
+('2015_03_16_153651_entrust_setup_tables', 2);
 
 -- 
 -- Вывод данных для таблицы nested_sets
@@ -481,6 +550,12 @@ INSERT INTO nested_sets VALUES
 --
 
 -- Таблица joint_purchasing.password_resets не содержит данных
+
+-- 
+-- Вывод данных для таблицы permissions
+--
+
+-- Таблица joint_purchasing.permissions не содержит данных
 
 -- 
 -- Вывод данных для таблицы prices
@@ -572,6 +647,12 @@ INSERT INTO purchases VALUES
 (4, 1, 1, 1, '2015-03-05 04:34:03', 'вамви', '2015-02-26 04:34:22', '2015-02-26 04:34:22');
 
 -- 
+-- Вывод данных для таблицы roles
+--
+
+-- Таблица joint_purchasing.roles не содержит данных
+
+-- 
 -- Вывод данных для таблицы users
 --
 INSERT INTO users VALUES
@@ -584,6 +665,18 @@ INSERT INTO widgets VALUES
 (1, 'Каталог товаров', 'Основной блок каталога товаров на главной', '\\App\\Widgets\\BaseCatalog', NULL, 'left_side', 2, 1, '2015-02-24 16:50:50', '2015-02-24 16:50:50'),
 (2, 'Навигационное меню "Seller"', 'Верхнее навигационное меню для раздела "Продавцы"', '\\App\\Widgets\\SellerBaseNav', 'seller', 'top', 0, 1, '2015-02-25 11:45:15', '2015-02-25 11:45:15'),
 (3, 'Навигационное меню "Admin"', 'Верхнее навигационное меню Админки', '\\App\\Widgets\\AdminBaseNav', 'admin', 'top', 0, 1, '2015-02-25 20:21:00', '2015-02-25 20:21:00');
+
+-- 
+-- Вывод данных для таблицы permission_role
+--
+
+-- Таблица joint_purchasing.permission_role не содержит данных
+
+-- 
+-- Вывод данных для таблицы role_user
+--
+
+-- Таблица joint_purchasing.role_user не содержит данных
 
 -- 
 -- Восстановить предыдущий режим SQL (SQL mode)
