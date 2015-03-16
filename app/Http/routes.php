@@ -17,6 +17,8 @@ Route::get('phpinfo', function(){
 
 //Route::get('catalog', 'ProductController@getProduct');
 
+Route::get('app/{alias?}', 'ExtGeneratorController@getComponent');
+
 Route::get('product-{alias}', 'ProductController@getProduct');
 
 Route::get('admin', 'DashboardController@getIndex');

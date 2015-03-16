@@ -148,6 +148,7 @@ return [
         'Maatwebsite\Excel\ExcelServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Zizaco\Entrust\EntrustServiceProvider',
 	],
 
 	/*
@@ -200,6 +201,7 @@ return [
         'Node'      => 'Kalnoy\Nestedset\Node',
         'Debugbar'  => 'Barryvdh\Debugbar\Facade',
         'Image'     => 'Intervention\Image\Facades\Image',
+        'ACL'       => 'Zizaco\Entrust\EntrustFacade'
 	],
 
 ];
