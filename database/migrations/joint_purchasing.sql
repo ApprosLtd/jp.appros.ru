@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 17.03.2015 8:36:11
--- Версия сервера: 5.5.41-0ubuntu0.14.04.1
+-- Дата скрипта: 17.03.2015 18:15:09
+-- Версия сервера: 5.5.40-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -332,7 +332,8 @@ CREATE TABLE roles (
   UNIQUE INDEX roles_name_unique (name)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 1
+AUTO_INCREMENT = 3
+AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
 
@@ -351,7 +352,7 @@ CREATE TABLE users (
   UNIQUE INDEX users_email_unique (email)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 6
 AVG_ROW_LENGTH = 16384
 CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
@@ -373,7 +374,7 @@ CREATE TABLE widgets (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 15
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -679,14 +680,16 @@ INSERT INTO purchases VALUES
 -- 
 -- Вывод данных для таблицы roles
 --
-
--- Таблица joint_purchasing.roles не содержит данных
+INSERT INTO roles VALUES
+(1, 'qwre', 'wasrt', 'asrt', '2015-03-17 15:07:37', '2015-03-17 15:07:37'),
+(2, 'wret', 'ert', 'tgdsgf', '2015-03-17 15:07:38', '2015-03-17 15:07:38');
 
 -- 
 -- Вывод данных для таблицы users
 --
 INSERT INTO users VALUES
-(1, 'Виталий Серов', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-02-25 10:35:35');
+(1, 'Виталий Серов', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-02-25 10:35:35'),
+(5, 'Vitaly Serov', 'foo@bar.ru', '123', NULL, '2015-03-17 07:17:17', '2015-03-17 07:17:17');
 
 -- 
 -- Вывод данных для таблицы widgets
@@ -694,7 +697,7 @@ INSERT INTO users VALUES
 INSERT INTO widgets VALUES
 (1, 'Каталог товаров', 'Основной блок каталога товаров на главной', '\\App\\Widgets\\BaseCatalog', NULL, 'left_side', 2, 1, '2015-02-24 16:50:50', '2015-02-24 16:50:50'),
 (2, 'Навигационное меню "Seller"', 'Верхнее навигационное меню для раздела "Продавцы"', '\\App\\Widgets\\SellerBaseNav', 'seller', 'top', 0, 1, '2015-02-25 11:45:15', '2015-02-25 11:45:15'),
-(3, 'Навигационное меню "Admin"', 'Верхнее навигационное меню Админки', '\\App\\Widgets\\AdminBaseNav', 'admin', 'top', 0, 1, '2015-02-25 20:21:00', '2015-02-25 20:21:00');
+(3, 'Навигационное меню "Admin"', 'Верхнее навигационное меню Админки', '\\App\\Widgets\\AdminBaseNav', 'admin', 'top', 3, 1, '2015-02-25 20:21:00', '2015-03-17 13:03:57');
 
 -- 
 -- Вывод данных для таблицы permission_role

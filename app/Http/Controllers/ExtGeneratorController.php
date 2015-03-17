@@ -13,16 +13,36 @@ class ExtGeneratorController extends Controller {
             return;
         }
 
-        $model_name = $alias_mix[2];
+        $class_name = $alias_mix[2];
 
-        $model_full_name = $this->getModelFullName($model_name);
+        $model_full_name = $this->getModelFullName($class_name);
+        if (!$model_full_name) {
+            $model_full_name = $this->getModelFullName($class_name . 'Model');
+        }
 
         switch (strtolower($alias_mix[1])) {
             case 'store':
-                $content = view('ext.data.Store', ['model_name' => $model_name]);
+                $content = view('ext.data.Store', ['model_name' => $class_name]);
                 break;
             case 'treestore':
-                $content = view('ext.data.TreeStore', ['model_name' => $model_name]);
+                $content = view('ext.data.TreeStore', ['model_name' => $class_name]);
+                break;
+            case 'grid':
+
+                $grid_columns = [];
+
+                if ($model_full_name) {
+                    $model = new $model_full_name;
+
+                    if (property_exists($model, 'grid_columns')) {
+                        $grid_columns = $model->grid_columns;
+                    }
+                }
+
+                $content = view('ext.grid.Panel', [
+                    'class_name' => $class_name,
+                    'columns' => $grid_columns
+                ]);
                 break;
             case 'model':
 
@@ -38,7 +58,30 @@ class ExtGeneratorController extends Controller {
                     $fields_str = '"' . implode('","', $fields) . '"';
                 }
 
-                $content = view('ext.data.Model', ['model_name' => $model_name, 'fields' => $fields_str]);
+                $content = view('ext.data.Model', ['model_name' => $class_name, 'fields' => $fields_str]);
+                break;
+            case 'treemodel':
+
+                $fields_str = [];
+
+                if ($model_full_name) {
+                    $model = new $model_full_name;
+
+                    $column_listing = \Schema::getColumnListing($model->getTable());
+
+                    $fields = array_diff($column_listing, $model->getHidden());
+
+                    if (property_exists($model, 'tree_text_field')) {
+                        $fields[] = [
+                            'name' => 'text',
+                            'mapping' => $model->tree_text_field,
+                        ];
+                    }
+
+                    $fields_str = json_encode($fields);
+                }
+
+                $content = view('ext.data.TreeModel', ['model_name' => $class_name, 'fields' => $fields_str]);
                 break;
             case 'controller':
                 //
@@ -52,17 +95,22 @@ class ExtGeneratorController extends Controller {
     public function restModel($model_name, $id = null)
     {
         $model_full_name = $this->getModelFullName($model_name);
+        if (!$model_full_name) {
+            $model_full_name = $this->getModelFullName($model_name . 'Model');
+        }
 
         switch (strtolower(\Request::method())) {
             case 'get':
+
+                $id = intval($id);
 
                 if ($id) {
                     return $model_full_name::find($id);
                 }
 
                 $page  = intval(\Input::get('page'));
-                $start = intval(\Input::get('start'));
-                $limit = intval(\Input::get('limit'));
+                $start = intval(\Input::get('start', 0));
+                $limit = intval(\Input::get('limit', 40));
 
                 return $model_full_name::offset($start)->take($limit)->get();
 
@@ -83,6 +131,19 @@ class ExtGeneratorController extends Controller {
                 }
 
                 return ['success'=>true, 'model' => $model];
+
+                break;
+
+            case 'put':
+
+                $id = intval(\Input::get('id'));
+
+                if ($id) {
+                    $model = $model_full_name::find($id);
+                    if ($model) {
+                        $model->update(\Input::all());
+                    }
+                }
 
                 break;
 

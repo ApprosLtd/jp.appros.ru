@@ -3,6 +3,7 @@
  */
 Ext.define('App.view.seller.Users.RolesListTreePanel', {
     extend: 'Ext.tree.Panel',
+    id: 'mainRolesListTreePanel',
     title: 'Роли',
     width: 300,
     minWidth: 200,
@@ -10,25 +11,21 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
     split: true,
     resizable: true,
     collapsible: true,
-    rootVisible: true,
-    viewConfig: {
-        listeners: {
-            beforedrop: function(node, data, overModel, dropPosition, dropHandlers) { // dropNode, dragNode, overModel
-
-                if (dropPosition == 'append') {
-                    return false;
-                }
-
-                var record = data.records[0];
-                record.attachToCategory(overModel.getId());
-
-                return false;
-            }
-        },
-        plugins: {
-            ptype: 'treeviewdragdrop',
-            ddGroup: 'catalog-tree-dg'
+    rootVisible: false,
+    root: {
+        expanded: true,
+        text: 'Роли'
+    },
+    editWindowClass: 'App.view.seller.Users.RoleEditWindow',
+    createEditWindow: function(title, record){
+        if (!this.editWindowClass) {
+            return;
         }
+        Ext.create(this.editWindowClass, {
+            title: title,
+            record: record,
+            store: this.store
+        });
     },
     constructor: function() {
         var me = this;
@@ -63,16 +60,7 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
     },
     listeners: {
         itemdblclick: function(el, record, item, index, e, eOpts){
-            var data = record.getData();
-            Ext.create('App.view.seller.Catalog.CatalogEditWindow', {
-                title: 'Новый элемент каталога',
-                fields: {
-                    id: data.id,
-                    name: data.text,
-                    parent_id: data.parentId
-                }
-            });
-            e.stopEvent();
+            this.createEditWindow('Редактирование роли', record);
         },
         itemclick: function(el, record, item, index, e, eOpts){
             var gridStore = Ext.getCmp('productsListGridPanelView').getStore();

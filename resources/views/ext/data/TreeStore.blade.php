@@ -3,6 +3,6 @@ Ext.define('App.treestore.{{ $model_name }}', {
     storeId:'treestore{{ $model_name }}',
     autoLoad: true,
     autoSync: true,
-    model: 'App.model.{{ $model_name }}',
+    model: 'App.treemodel.{{ $model_name }}',
     proxy: Ext.create('App.common.proxies.RestProxy', {url: '/rest/{{ strtolower($model_name) }}'})
 });

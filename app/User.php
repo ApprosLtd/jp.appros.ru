@@ -32,6 +32,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public $grid_columns = [
+        [
+            'text' => 'ID',
+            'dataIndex' => 'id',
+            'width' => 50
+        ],
+        [
+            'text' => 'Имя',
+            'dataIndex' => 'name',
+            'width' => 400
+        ],
+        [
+            'text' => 'Email',
+            'dataIndex' => 'email',
+            'flex' => 1
+        ],
+    ];
+
     public function getBaseRole()
     {
         return 'buyer';
