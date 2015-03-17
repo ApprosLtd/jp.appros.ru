@@ -8,7 +8,7 @@ Ext.define('App.view.seller.Users.UsersListGridPanel', {
     constructor: function(config) {
         var me = this;
 
-        me.store = Ext.create('App.store.seller.Users.UsersListStore');
+        me.store = Ext.create('App.store.User');
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
@@ -26,6 +26,14 @@ Ext.define('App.view.seller.Users.UsersListGridPanel', {
             }]
         });
 
+        me.dockedItems = [
+            Ext.create('Ext.toolbar.Paging', {
+                store: me.store,
+                dock: 'bottom',
+                displayInfo: true
+            })
+        ],
+
         this.callParent([config]);
     },
     plugins: [
@@ -42,10 +50,7 @@ Ext.define('App.view.seller.Users.UsersListGridPanel', {
         {
             text: 'Имя пользователя',
             dataIndex: 'name',
-            flex: 1,
-            renderer: function(value, metaData, rec){
-                return value + ' (<a href="' + rec.get('cn_link') + '" target="_blank">ссылка</a>)';
-            }
+            flex: 1
         },
         {
             text: 'Email',
@@ -61,20 +66,12 @@ Ext.define('App.view.seller.Users.UsersListGridPanel', {
             enableDrop: false
         }
     },
-    dockedItems: [{
-        xtype: 'pagingtoolbar',
-        store: 'sellerProductsListStore',
-        dock: 'bottom',
-        displayInfo: true
-    }],
     listeners: {
         itemdblclick: function(el, record, item, index, e, eOpts){
-            var data = record.getData();
-            Ext.create('App.view.seller.Products.ProductEditWindow', {
-                title: 'Редактирование продукта',
+            Ext.create('App.view.seller.Users.UserEditWindow', {
+                title: 'Редактирование пользователя',
                 record: record
             });
-            e.stopEvent();
         },
         cellcontextmenu: function(el, td, cellIndex, record, tr, rowIndex, e, eOpts){
             this.contextmenu.record = record;

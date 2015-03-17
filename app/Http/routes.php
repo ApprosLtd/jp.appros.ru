@@ -17,7 +17,7 @@ Route::get('phpinfo', function(){
 
 //Route::get('catalog', 'ProductController@getProduct');
 
-Route::get('app/{alias?}', 'ExtGeneratorController@getComponent');
+Route::get('app/{alias?}', 'ExtGeneratorController@getComponent')->where('alias', '[A-Za-z0-9\/\.]+');
 
 Route::get('product-{alias}', 'ProductController@getProduct');
 
@@ -51,6 +51,8 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('pricing-grid-column', 'Rest\PricingGridColumnController');
     Route::resource('media', 'Rest\MediaController');
 });
+
+Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');
 
 /**
  * Раздел "Админка"

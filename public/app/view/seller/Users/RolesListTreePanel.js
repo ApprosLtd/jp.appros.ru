@@ -33,7 +33,7 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
     constructor: function() {
         var me = this;
 
-        me.store = Ext.create('App.store.seller.Catalog.CatalogListStore');
+        me.store = Ext.create('App.treestore.Role');
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
@@ -61,7 +61,6 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
 
         this.callParent(arguments);
     },
-    //store: Ext.create('App.store.seller.Catalog.CatalogListStore'),
     listeners: {
         itemdblclick: function(el, record, item, index, e, eOpts){
             var data = record.getData();

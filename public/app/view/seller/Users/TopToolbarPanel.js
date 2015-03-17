@@ -8,17 +8,19 @@ Ext.define('App.view.seller.Users.TopToolbarPanel', {
 
         me.items = [
             {
-                text: 'Добавить роль',
+                text: 'Создать роль',
                 iconCls: 'fa fa-users fa-lg',
                 handler: function(){
                     //
                 }
             },
             {
-                text: 'Добавить пользователя',
+                text: 'Создать пользователя',
                 iconCls: 'fa fa-user-plus fa-lg',
                 handler: function(){
-                    //
+                    Ext.create('App.view.seller.Users.UserEditWindow', {
+                        title: 'Новый пользователь'
+                    });
                 }
             },
             '->',
