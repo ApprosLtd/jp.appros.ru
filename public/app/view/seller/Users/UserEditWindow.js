@@ -64,6 +64,24 @@ Ext.define('App.view.seller.Users.UserEditWindow', {
         if (me.record) {
             me.record.load({
                 success: function(record, operation){
+
+                    var roles = record.get('roles');
+                    if (roles.length) {
+                        var rolesValues = [];
+                        Ext.Array.each(roles, function(role){
+                            rolesValues['roles['+role.id+']'] = true;
+                        });
+                        me.baseForm.getForm().setValues(rolesValues);
+                    }
+                    console.log(rolesValues);
+                    return;
+
+                    var fields = me.baseForm.getForm().getFields();
+
+                    fields.each(function(field){
+                        console.log(field.getName());
+                    });
+
                     record.set('roles', {
                         1:'on',
                         2:1,
