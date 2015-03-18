@@ -33,14 +33,14 @@ Ext.define('App.view.seller.Users.RoleEditWindow', {
                 xtype: 'hidden',
                 name: 'id'
             },{
-                fieldLabel: 'Уник. имя',
-                xtype: 'textfield',
-                name: 'name',
-                allowBlank: false
-            },{
                 fieldLabel: 'Видимое имя',
                 xtype: 'textfield',
                 name: 'display_name',
+                allowBlank: false
+            },{
+                fieldLabel: 'Уник. имя',
+                xtype: 'textfield',
+                name: 'name',
                 allowBlank: false
             },{
                 fieldLabel: 'Описание',
@@ -98,17 +98,8 @@ Ext.define('App.view.seller.Users.RoleEditWindow', {
                         rec.set('display_name', fields.display_name);
                         rec.endEdit();
                     } else {
-                        //console.log(fields);
-                        console.log(me.store.getRoot().appendChild(fields));
-                        //appendChild(fields);
-                        //me.store.add(fields);
-                        //me.store.loadRecords([fields]);
-                        //me.store.sync();
-
-                        //fields.text = 'hello world';
-
-                        //var rec = Ext.create('App.treemodel.Role', fields);
-                        //me.store.add(rec);
+                        var rec = Ext.create('App.treemodel.Role', fields);
+                        me.store.getRoot().appendChild(rec);
                     }
                     upWindow.destroy();
                 }

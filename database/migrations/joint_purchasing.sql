@@ -1,8 +1,8 @@
 ﻿--
 -- Скрипт сгенерирован Devart dbForge Studio for MySQL, Версия 6.3.341.0
 -- Домашняя страница продукта: http://www.devart.com/ru/dbforge/mysql/studio
--- Дата скрипта: 17.03.2015 18:15:09
--- Версия сервера: 5.5.40-0ubuntu0.14.04.1
+-- Дата скрипта: 18.03.2015 9:32:30
+-- Версия сервера: 5.5.41-0ubuntu0.14.04.1
 -- Версия клиента: 4.1
 --
 
@@ -141,7 +141,7 @@ CREATE TABLE nested_sets (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 61
+AUTO_INCREMENT = 59
 AVG_ROW_LENGTH = 5461
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
@@ -332,7 +332,7 @@ CREATE TABLE roles (
   UNIQUE INDEX roles_name_unique (name)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 4
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_unicode_ci;
@@ -374,7 +374,7 @@ CREATE TABLE widgets (
   PRIMARY KEY (id)
 )
 ENGINE = INNODB
-AUTO_INCREMENT = 15
+AUTO_INCREMENT = 4
 AVG_ROW_LENGTH = 8192
 CHARACTER SET utf8
 COLLATE utf8_general_ci
@@ -681,14 +681,15 @@ INSERT INTO purchases VALUES
 -- Вывод данных для таблицы roles
 --
 INSERT INTO roles VALUES
-(1, 'qwre', 'wasrt', 'asrt', '2015-03-17 15:07:37', '2015-03-17 15:07:37'),
-(2, 'wret', 'ert', 'tgdsgf', '2015-03-17 15:07:38', '2015-03-17 15:07:38');
+(1, 'admin', 'Администратор', 'Пользователи с полными правами', '2015-03-17 19:21:12', '2015-03-17 19:21:12'),
+(2, 'buyer', 'Покупатель', 'Зарегистрированный пользователь с правами на заказы', '2015-03-17 19:24:40', '2015-03-17 19:24:40'),
+(3, 'guest', 'Гость', 'Все неавторизованные пользователи', '2015-03-17 19:19:41', '2015-03-17 19:19:41');
 
 -- 
 -- Вывод данных для таблицы users
 --
 INSERT INTO users VALUES
-(1, 'Виталий Серов', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-02-25 10:35:35'),
+(1, 'Виталий Серов', 'serovvitaly@gmail.com', '$2y$10$B9utwkSzweDFIzTsSJa3oOq5slqDE85Ow1KK8n2tzoTb69PFbKQ9W', 'bexQ97ucY6jVk64elmhCtWIzVlFbxvtWg0gng3Nf3vGFMRGfDCIPIvsV3NOR', '2015-02-24 13:20:58', '2015-03-17 19:34:55'),
 (5, 'Vitaly Serov', 'foo@bar.ru', '123', NULL, '2015-03-17 07:17:17', '2015-03-17 07:17:17');
 
 -- 

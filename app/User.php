@@ -50,6 +50,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         ],
     ];
 
+    public $attached_relations = ['roles'];
+
     public function getBaseRole()
     {
         return 'buyer';

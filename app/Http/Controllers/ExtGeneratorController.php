@@ -105,7 +105,16 @@ class ExtGeneratorController extends Controller {
                 $id = intval($id);
 
                 if ($id) {
-                    return $model_full_name::find($id);
+
+                    $model = $model_full_name::find($id);
+                    $output_data = $model->toArray();
+                    if (isset($model->attached_relations) and !empty($model->attached_relations)) {
+                        foreach ($model->attached_relations as $relation) {
+                            $output_data[$relation] = $model->$relation()->get();
+                        }
+                    }
+
+                    return $output_data;
                 }
 
                 $page  = intval(\Input::get('page'));
@@ -128,6 +137,34 @@ class ExtGeneratorController extends Controller {
                     $model->update($data_fields);
                 } else {
                     $model = $model_full_name::create($data_fields);
+                }
+
+                foreach ($data_fields as $relation_name => $field_value) {
+                    if (!in_array($relation_name, $model->attached_relations)) {
+                        continue;
+                    }
+                    if (!method_exists($model, $relation_name)) {
+                        continue;
+                    }
+                    if (!is_array($field_value) or empty($field_value)) {
+                        continue;
+                    }
+                    $attached_items = [];
+                    $detached_items = [];
+                    foreach ($field_value as $key => $value) {
+                        if ($value == 1) {
+                            $attached_items[] = $key;
+                        } else {
+                            $detached_items[] = $key;
+                        }
+                    }
+                    if (!empty($attached_items)) {
+                        $model->$relation_name()->attach($attached_items);
+                    }
+                    if (!empty($detached_items)) {
+                        $model->$relation_name()->detach($detached_items);
+                    }
+
                 }
 
                 return ['success'=>true, 'model' => $model];

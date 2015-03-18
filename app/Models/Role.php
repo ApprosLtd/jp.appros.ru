@@ -9,6 +9,6 @@ class Role extends EntrustRole {
     /**
      * Поле, которое выступает в роли text в модели Ext.data.TreeModel
      */
-    public $tree_text_field = 'name';
+    public $tree_text_field = 'display_name';
 
 }

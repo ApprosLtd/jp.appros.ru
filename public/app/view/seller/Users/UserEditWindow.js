@@ -10,17 +10,28 @@ Ext.define('App.view.seller.Users.UserEditWindow', {
     constrain: true,
     modal: true,
     layout: 'fit',
-    setFieldsData: function(record){
-        if (!record) {
-            return;
-        }
-        var me = this;
-        me.productId = record.getId();
-    },
+    store: null,
+    record: null,
     constructor: function(config) {
         var me = this;
 
-        me.setFieldsData(config.record);
+        if (config.record) {
+            me.record = config.record;
+        }
+
+        var rolesListItems = [];
+
+        var rolesStore = Ext.data.StoreManager.lookup('treestoreRole');
+
+        Ext.Array.each(rolesStore.getRoot().childNodes, function(roleModel){
+            rolesListItems.push({
+                boxLabel  : roleModel.get('display_name'),
+                name      : 'roles['+roleModel.get('id')+']',
+                inputValue: 1,
+                uncheckedValue: 0
+            });
+        });
+
 
         me.baseForm = Ext.create('Ext.form.Panel', {
             layout: 'anchor',
@@ -43,31 +54,27 @@ Ext.define('App.view.seller.Users.UserEditWindow', {
                 name: 'email',
                 allowBlank: false
             },{
-                fieldLabel: 'Пароль',
-                xtype: 'textfield',
-                name: 'password',
-                allowBlank: false
+                xtype: 'fieldcontainer',
+                fieldLabel: 'Роли',
+                defaultType: 'checkboxfield',
+                items: rolesListItems
             }]
         });
 
-        me.items = {
-            xtype: 'tabpanel',
-            border: false,
-            defaults: {
-                border: false,
-                layout: 'fit'
-            },
-            items: [{
-                title: 'Главная',
-                xtype: 'panel',
-                items: me.baseForm
-            },{
-                title: 'Роли',
-                items: {
-                    //
+        if (me.record) {
+            me.record.load({
+                success: function(record, operation){
+                    record.set('roles', {
+                        1:'on',
+                        2:1,
+                        3:1
+                    });
+                    me.baseForm.getForm().loadRecord(record);
                 }
-            }]
-        };
+            });
+        }
+
+        me.items = me.baseForm;
 
         me.dockedItems = [{
             dock: 'bottom',

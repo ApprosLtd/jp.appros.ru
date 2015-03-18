@@ -11,10 +11,10 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
     split: true,
     resizable: true,
     collapsible: true,
-    rootVisible: false,
+    rootVisible: true,
     root: {
         expanded: true,
-        text: 'Роли'
+        text: 'Все роли'
     },
     editWindowClass: 'App.view.seller.Users.RoleEditWindow',
     createEditWindow: function(title, record){
