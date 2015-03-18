@@ -44,6 +44,12 @@ class ExtGeneratorController extends Controller {
                     'columns' => $grid_columns
                 ]);
                 break;
+            case 'tree':
+                $content = view('ext.tree.Panel', [
+                    'class_name' => $class_name,
+                    //'columns' => $grid_columns
+                ]);
+                break;
             case 'model':
 
                 $fields_str = '';

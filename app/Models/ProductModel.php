@@ -8,6 +8,19 @@ class ProductModel extends Model {
 
     protected $fillable = ['user_id', 'name', 'description'];
 
+    public $grid_columns = [
+        [
+            'text' => 'ID',
+            'dataIndex' => 'id',
+            'width' => 50
+        ],
+        [
+            'text' => 'Наименование',
+            'dataIndex' => 'name',
+            'flex' => 1
+        ],
+    ];
+
     public function delete()
     {
         \DB::table(\App\Helpers\ProjectHelper::PRICES_TABLE_NAME)->where('product_id', '=', $this->id)->delete();

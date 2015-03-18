@@ -1,3 +1,4 @@
+//<script>
 Ext.define('App.model.{{ $model_name }}', {
     extend: 'Ext.data.Model',
     entityName: 'model{{ $model_name }}',

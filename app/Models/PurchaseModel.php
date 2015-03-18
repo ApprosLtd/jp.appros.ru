@@ -9,6 +9,31 @@ class PurchaseModel extends Model {
     protected $fillable = ['user_id', 'description', 'pricing_grid_id', 'pricing_grid_column', 'expiration_time'];
 
     /**
+     * Поле, которое выступает в роли text в модели Ext.data.TreeModel
+     */
+    public $tree_text_field = 'description';
+
+    public $grid_columns = [
+        [
+            'text' => 'ID',
+            'dataIndex' => 'id',
+            'width' => 50
+        ],
+        [
+            'text' => 'Наименование',
+            'dataIndex' => 'description',
+            'width' => 400
+        ],
+        [
+            'text' => 'Время истечения',
+            'xtype' =>'datecolumn',
+            'format' =>'d.m.Yг.  hч. iмин.',
+            'dataIndex' => 'expiration_time',
+            'flex' => 1
+        ],
+    ];
+
+    /**
      * Продукты в закупке
      * @return \App\Models\ProductModel
      */

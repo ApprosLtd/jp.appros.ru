@@ -13,13 +13,15 @@ Ext.define('App.grid.{{ $class_name }}', {
         });
     },
     constructor: function(config) {
+
         var me = this;
 
-        if (config.editWindowClass && config.editWindowClass != '') {
-            me.editWindowClass = config.editWindowClass;
-        }
-
-        me.store = Ext.create('App.store.{{ $class_name }}');
+        Ext.apply(me, config, {
+            addButtonText: 'Добавить',
+            setToolBar: true,
+            editWindowClass: null,
+            store: Ext.create('App.store.{{ $class_name }}')
+        });
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
@@ -41,29 +43,26 @@ Ext.define('App.grid.{{ $class_name }}', {
                 }]
         });
 
-        var addButtonText = 'Добавить';
-        if (config.addButtonText && config.addButtonText != '') {
-            addButtonText = config.addButtonText;
+        if (me.setToolBar) {
+            me.dockedItems = [
+                Ext.create('Ext.toolbar.Toolbar', {
+                    dock: 'top',
+                    items: [{
+                        text: me.addButtonText,
+                        handler: function(){
+                            me.createEditWindow('Создание');
+                        }
+                    }]
+                }),
+                Ext.create('Ext.toolbar.Paging', {
+                    store: me.store,
+                    dock: 'bottom',
+                    displayInfo: true
+                })
+            ];
         }
 
-        me.dockedItems = [
-            Ext.create('Ext.toolbar.Toolbar', {
-                dock: 'top',
-                items: [{
-                    text: addButtonText,
-                    handler: function(){
-                        me.createEditWindow('Создание');
-                    }
-                }]
-            }),
-            Ext.create('Ext.toolbar.Paging', {
-                store: me.store,
-                dock: 'bottom',
-                displayInfo: true
-            })
-        ];
-
-        this.callParent([config]);
+        this.callParent(arguments);
     },
     plugins: [
         Ext.create('Ext.grid.plugin.CellEditing', {

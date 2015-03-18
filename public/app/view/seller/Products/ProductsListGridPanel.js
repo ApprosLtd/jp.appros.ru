@@ -22,7 +22,12 @@ Ext.define('App.view.seller.Products.ProductsListGridPanel', {
             },{
                 text: 'Удалить',
                 handler: function(item, e){
-                    me.store.remove(this.up('menu').record);
+                    var self = this;
+                    Ext.MessageBox.confirm('Удаление', 'Будут удалены все связанные с записью данные. Продолжить?', function(btn, text){
+                        if (btn == 'yes') {
+                            me.store.remove(self.up('menu').record);
+                        }
+                    });
                 }
             }]
         });
