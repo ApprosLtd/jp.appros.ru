@@ -6,12 +6,19 @@ Ext.define('App.view.seller.Purchases.MainTab', {
     title: 'Управление закупками',
     layout: 'border',
     items: [
+        Ext.create('App.view.seller.Purchases.TopToolbarPanel', {
+            region: 'north'
+        }),
         Ext.create('App.tree.Purchase', {
             title: 'Закупки',
             region: 'west',
             split: true,
-            rootVisible: false,
+            rootVisible: true,
             width: 300,
+            root: {
+                id: 0,
+                text: 'hello root'
+            },
             listeners: {
                 itemclick: function(self, record, item, index, e, eOpts){
                     var basePanel =Ext.getCmp('purchasesBasePanel');
@@ -21,6 +28,11 @@ Ext.define('App.view.seller.Purchases.MainTab', {
                             purchasesId: record.getId()
                         })
                     );
+                },
+                cellcontextmenu: function(el, td, cellIndex, record, tr, rowIndex, e, eOpts){
+                    this.contextmenu.record = record;
+                    this.contextmenu.showAt(e.getXY());
+                    e.stopEvent();
                 }
             }
         }),

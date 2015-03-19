@@ -50,8 +50,12 @@ Ext.define('App.view.seller.Users.RolesListTreePanel', {
             },{
                 text: 'Удалить',
                 handler: function(item, e){
-                    var record = this.up('menu').record;
-                    me.getRootNode().removeChild(this.up('menu').record);
+                    var self = this;
+                    Ext.MessageBox.confirm('Удаление', 'Будут удалены все связанные с записью данные. Продолжить?', function(btn, text){
+                        if (btn == 'yes') {
+                            me.getRootNode().removeChild(self.up('menu').record);
+                        }
+                    });
                 }
             }]
         });

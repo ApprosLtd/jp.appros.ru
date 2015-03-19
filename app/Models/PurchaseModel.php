@@ -6,12 +6,12 @@ class PurchaseModel extends Model {
 
     public $table = 'purchases';
 
-    protected $fillable = ['user_id', 'description', 'pricing_grid_id', 'pricing_grid_column', 'expiration_time'];
+    protected $fillable = ['user_id', 'name', 'description', 'pricing_grid_id', 'pricing_grid_column', 'expiration_time'];
 
     /**
      * Поле, которое выступает в роли text в модели Ext.data.TreeModel
      */
-    public $tree_text_field = 'description';
+    public $tree_text_field = 'name';
 
     public $grid_columns = [
         [

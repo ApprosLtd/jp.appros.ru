@@ -3,14 +3,22 @@
  */
 Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
     extend: 'Ext.window.Window',
-    height: 700,
-    width: 1200,
+    height: 300,
+    width: 500,
     autoShow: true,
     constrain: true,
     modal: true,
     layout: 'fit',
     store: null,
-    record: null,
+    getStore: function(){
+        if (!this.storeName) {
+            return null;
+        }
+        if (!this.store) {
+            this.store = Ext.StoreManager.lookup(this.storeName);
+        }
+        return this.store;
+    },
     setFieldsData: function(record){
         if (!record) {
             return;
@@ -21,27 +29,9 @@ Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
     constructor: function(config) {
         var me = this;
 
-        me.catalogTree = Ext.create('App.tree.Catalog', {
-            region: 'west',
-            title: 'Каталог',
-            width: 200,
-            split: true,
-            collapsed: false,
-            collapsible: true
-        });
-
-        me.productsGrid = Ext.create('App.grid.Product', {
-            region: 'center',
-            title: 'Товары',
-            setToolBar: false
-        });
-
-        me.productInPurchaseGrid = Ext.create('App.grid.ProductInPurchase', {
-            region: 'east',
-            width: 500,
-            title: 'Товары в закупке',
-            split: true,
-            setToolBar: false
+        Ext.apply(me, config, {
+            storeName: null,
+            record: null
         });
 
         me.baseForm = Ext.create('Ext.form.Panel', {
@@ -64,6 +54,14 @@ Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
                 xtype: 'textarea',
                 name: 'description',
                 allowBlank: true
+            },{
+                fieldLabel: 'Завершения',
+                xtype: 'datefield',
+                name: 'expiration_time',
+                anchor: '70%',
+                allowBlank: false,
+                format: 'Y-m-d H:i:s',
+                value: (new Date()) + (3600 * 24 * 7)
             }]
         });
 
@@ -71,21 +69,7 @@ Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
             me.baseForm.getForm().loadRecord(me.record);
         }
 
-        me.items = {
-            xtype: 'tabpanel',
-            items: [{
-                title: 'Главная',
-                items: me.baseForm
-            },{
-                title: 'Товары',
-                layout: 'border',
-                items: [
-                    me.catalogTree,
-                    me.productsGrid,
-                    me.productInPurchaseGrid
-                ]
-            }]
-        };
+        me.items = me.baseForm;
 
         me.dockedItems = [{
             dock: 'bottom',
@@ -100,20 +84,23 @@ Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
                     if (!me.baseForm.isValid()) {
                         return;
                     }
-                    if (!me.store) {
+
+                    var store = me.getStore();
+
+                    if (!store) {
                         return;
                     }
 
                     if (fields.id > 0) {
-                        var rec = me.store.findRecord('id', fields.id);
+                        var rec = store.findRecord('id', fields.id);
                         rec.beginEdit();
                         rec.set('name', fields.name);
                         rec.set('description', fields.description);
-                        rec.set('display_name', fields.display_name);
                         rec.endEdit();
                     } else {
-                        var rec = Ext.create('App.treemodel.Role', fields);
-                        me.store.getRoot().appendChild(rec);
+                        var rec = Ext.create('App.treemodel.Purchase', fields);
+                        console.log( store.getNodeById(0).appendChild(rec) );
+                        //store.getRoot().appendChild(rec);
                     }
                     upWindow.destroy();
                 }
@@ -126,6 +113,6 @@ Ext.define('App.view.seller.Purchases.PurchasesEditWindow', {
             }]
         }];
 
-        this.callParent([config]);
+        this.callParent(arguments);
     }
 })

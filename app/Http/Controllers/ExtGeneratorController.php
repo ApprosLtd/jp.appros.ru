@@ -145,32 +145,34 @@ class ExtGeneratorController extends Controller {
                     $model = $model_full_name::create($data_fields);
                 }
 
-                foreach ($data_fields as $relation_name => $field_value) {
-                    if (!in_array($relation_name, $model->attached_relations)) {
-                        continue;
-                    }
-                    if (!method_exists($model, $relation_name)) {
-                        continue;
-                    }
-                    if (!is_array($field_value) or empty($field_value)) {
-                        continue;
-                    }
-                    $attached_items = [];
-                    $detached_items = [];
-                    foreach ($field_value as $key => $value) {
-                        if ($value == 1) {
-                            $attached_items[] = $key;
-                        } else {
-                            $detached_items[] = $key;
+                if (property_exists('attached_relations', $model)) {
+                    foreach ($data_fields as $relation_name => $field_value) {
+                        if (!in_array($relation_name, $model->attached_relations)) {
+                            continue;
                         }
-                    }
-                    if (!empty($attached_items)) {
-                        $model->$relation_name()->attach($attached_items);
-                    }
-                    if (!empty($detached_items)) {
-                        $model->$relation_name()->detach($detached_items);
-                    }
+                        if (!method_exists($model, $relation_name)) {
+                            continue;
+                        }
+                        if (!is_array($field_value) or empty($field_value)) {
+                            continue;
+                        }
+                        $attached_items = [];
+                        $detached_items = [];
+                        foreach ($field_value as $key => $value) {
+                            if ($value == 1) {
+                                $attached_items[] = $key;
+                            } else {
+                                $detached_items[] = $key;
+                            }
+                        }
+                        if (!empty($attached_items)) {
+                            $model->$relation_name()->attach($attached_items);
+                        }
+                        if (!empty($detached_items)) {
+                            $model->$relation_name()->detach($detached_items);
+                        }
 
+                    }
                 }
 
                 return ['success'=>true, 'model' => $model];
