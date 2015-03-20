@@ -17,6 +17,19 @@ Ext.define('App.view.seller.Purchases.TopToolbarPanel', {
 
         me.items = [
             {
+                text: 'Создать папку закупок',
+                scale: 'medium',
+                handler: function(){
+                    var store = Ext.StoreManager.lookup('treestorePurchase');
+
+                    store.getRootNode().appendChild({
+                        text: 'Новая папка',
+                        name: 'Новая папка',
+                        leaf: true
+                    });
+                }
+            },
+            {
                 text: 'Создать закупку',
                 scale: 'medium',
                 handler: function(){

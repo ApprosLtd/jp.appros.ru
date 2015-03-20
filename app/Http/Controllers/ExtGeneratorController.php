@@ -133,10 +133,7 @@ class ExtGeneratorController extends Controller {
 
                 $data_fields = \Input::all();
 
-                $id = 0;
-                if (array_key_exists('id', $data_fields)) {
-                    $id = intval($data_fields['id']);
-                }
+                $id = intval(\Input::get('id'));
 
                 if ($id) {
                     $model = $model_full_name::find($id);

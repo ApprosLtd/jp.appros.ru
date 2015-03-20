@@ -13,11 +13,10 @@ Ext.define('App.view.seller.Purchases.MainTab', {
             title: 'Закупки',
             region: 'west',
             split: true,
-            rootVisible: true,
+            rootVisible: false,
             width: 300,
             root: {
-                id: 0,
-                text: 'hello root'
+                id: 0
             },
             listeners: {
                 itemclick: function(self, record, item, index, e, eOpts){

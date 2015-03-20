@@ -13,6 +13,9 @@ class PurchaseModel extends Model {
      */
     public $tree_text_field = 'name';
 
+    /**
+     * Колонки для вывода в Ext.grid.Panel
+     */
     public $grid_columns = [
         [
             'text' => 'ID',
@@ -39,6 +42,9 @@ class PurchaseModel extends Model {
      */
 	public function products()
     {
+        /**
+         * TODO: здень нужно выбирать только продукт для данной закупки, т.е. \App\Models\ProductInPurchaseModel
+         */
         return $this->belongsToMany('\App\Models\ProductModel', 'products_in_purchase', 'purchase_id', 'product_id');
     }
 
@@ -65,6 +71,11 @@ class PurchaseModel extends Model {
         return $pricing_grid_columns;
     }
 
+    /**
+     * Возвращает структуру цен по ценовым колонкам для продукта
+     * @param $product_id
+     * @return array
+     */
     public function getPricingGridMixForProduct($product_id)
     {
         $headers = [];
@@ -72,6 +83,9 @@ class PurchaseModel extends Model {
 
         $pricing_grid_id = $this->pricing_grid->id;
 
+        /**
+         * TODO: здень неправильно запрашивается ценовая колонка, нужно определять еще саму закупку
+         */
         $pricing_grid_columns = \App\Models\PricingGridColumnModel::where('pricing_grid_id', '=', $pricing_grid_id)->orderBy('min_sum')->get();
 
         $columns_ids_arr = [];
@@ -81,6 +95,9 @@ class PurchaseModel extends Model {
             $columns_ids_arr[] = $column->id;
         }
 
+        /**
+         * TODO: здень нужно выбирать только продукт для данной закупки, т.е. \App\Models\ProductInPurchaseModel, через $this->products()
+         */
         $product = \App\Models\ProductModel::find($product_id);
         $product_prices = $product->prices($columns_ids_arr);
 

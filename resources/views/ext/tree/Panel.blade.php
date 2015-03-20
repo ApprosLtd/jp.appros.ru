@@ -13,6 +13,11 @@ Ext.define('App.tree.{{ $class_name }}', {
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
+                text: 'Добавить папку',
+                handler: function(item, e){
+                    //
+                }
+            },{
                 text: 'Редактировать',
                 handler: function(item, e){
                     var record = this.up('menu').record;
