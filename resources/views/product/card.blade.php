@@ -5,7 +5,7 @@
     /**
      * @var $product_in_purchase \App\Models\ProductInPurchaseModel
      */
-    $product = $product_in_purchase->product;
+    //$product = $product_in_purchase->product;
 
     $product_images = $product->media('image')->get();
     ?>

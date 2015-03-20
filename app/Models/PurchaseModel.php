@@ -64,7 +64,8 @@ class PurchaseModel extends Model {
      */
     public function getPricingGridColumns($order_by = 'asc')
     {
-        $pricing_grid_id = $this->pricing_grid->id;
+        //$pricing_grid_id = $this->pricing_grid()->first()->id;
+        $pricing_grid_id = 1;
 
         $pricing_grid_columns = \App\Models\PricingGridColumnModel::where('pricing_grid_id', '=', $pricing_grid_id)->orderBy('min_sum', $order_by)->get();
 
