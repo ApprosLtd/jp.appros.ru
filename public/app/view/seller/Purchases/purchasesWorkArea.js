@@ -29,8 +29,8 @@ Ext.define('App.view.seller.Purchases.PurchasesWorkArea', {
             items: [
                 Ext.create('App.tree.Catalog', {
                     title: 'Каталог',
-                    width: 300,
-                    store: Ext.StoreManager.lookup('treestoreCatalog')
+                    width: 300//,
+                    //store: Ext.StoreManager.lookup('treestoreCatalog')
                 }),
                 {
                     xtype: 'splitter'
@@ -38,8 +38,21 @@ Ext.define('App.view.seller.Purchases.PurchasesWorkArea', {
                 Ext.create('App.grid.Product', {
                     title: 'Продукты',
                     setToolBar: false,
+                    xtype: 'checkbox-selection',
+                    selType: 'checkboxmodel',
                     flex: 1,
-                    store: Ext.StoreManager.lookup('storeProduct')
+                    store: Ext.StoreManager.lookup('storeProduct'),
+                    setToolBar: false,
+                    dockedItems: ['->',{
+                        xtype: 'toolbar',
+                        dock: 'top',
+                        items: [{
+                            text: 'Добавить выделенные в закупку',
+                            handlers: function(){
+                                //
+                            }
+                        }]
+                    }]
                 }),
                 {
                     xtype: 'splitter'
@@ -47,7 +60,20 @@ Ext.define('App.view.seller.Purchases.PurchasesWorkArea', {
                 Ext.create('App.grid.ProductInPurchase', {
                     title: 'Продукты в закупке',
                     setToolBar: false,
-                    flex: 1
+                    xtype: 'checkbox-selection',
+                    selType: 'checkboxmodel',
+                    flex: 1,
+                    setToolBar: false,
+                    dockedItems: [{
+                        xtype: 'toolbar',
+                        dock: 'top',
+                        items: [{
+                            text: 'Удалить выделенные',
+                            handlers: function(){
+                                //
+                            }
+                        }]
+                    }]
                 })
             ]
         },{

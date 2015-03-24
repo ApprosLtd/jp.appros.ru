@@ -20,8 +20,13 @@ Ext.define('App.grid.{{ $class_name }}', {
             addButtonText: 'Добавить',
             setToolBar: true,
             editWindowClass: null,
-            store: Ext.create('App.store.{{ $class_name }}')
+            storeClass: 'App.store.{{ $class_name }}',
+            store: null
         });
+
+        if (!me.store) {
+            me.store = Ext.create(me.storeClass);
+        }
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{

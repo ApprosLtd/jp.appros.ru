@@ -7,10 +7,13 @@ Ext.define('App.tree.{{ $class_name }}', {
 
         Ext.apply(me, {
             rootVisible: false,
-            storeClass: 'App.treestore.{{ $class_name }}'
+            storeClass: 'App.treestore.{{ $class_name }}'//,
+            //store: null
         }, config);
 
-        me.store = Ext.create(me.storeClass);
+        //if (!me.store) {
+            me.store = Ext.create(me.storeClass);
+        //}
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{
