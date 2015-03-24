@@ -1,4 +1,4 @@
-Ext.define('App.view.seller.Purchases.purchasesWorkArea', {
+Ext.define('App.view.seller.Purchases.PurchasesWorkArea', {
     extend: 'Ext.tab.Panel',
     requires: [
         'App.store.Product'
@@ -27,11 +27,19 @@ Ext.define('App.view.seller.Purchases.purchasesWorkArea', {
                 align: 'stretch'
             },
             items: [
+                Ext.create('App.tree.Catalog', {
+                    title: 'Каталог',
+                    width: 300,
+                    store: Ext.StoreManager.lookup('treestoreCatalog')
+                }),
+                {
+                    xtype: 'splitter'
+                },
                 Ext.create('App.grid.Product', {
                     title: 'Продукты',
                     setToolBar: false,
-                    store: Ext.data.StoreManager.lookup('storeProduct'),
-                    flex: 1
+                    flex: 1,
+                    store: Ext.StoreManager.lookup('storeProduct')
                 }),
                 {
                     xtype: 'splitter'

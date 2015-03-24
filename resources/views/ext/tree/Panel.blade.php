@@ -6,10 +6,11 @@ Ext.define('App.tree.{{ $class_name }}', {
         var me = this;
 
         Ext.apply(me, {
-            //
+            rootVisible: false,
+            storeClass: 'App.treestore.{{ $class_name }}'
         }, config);
 
-        me.store = Ext.create('App.treestore.{{ $class_name }}');
+        me.store = Ext.create(me.storeClass);
 
         me.contextmenu = Ext.create('Ext.menu.Menu', {
             items: [{

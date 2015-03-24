@@ -23,7 +23,7 @@ Ext.define('App.view.seller.Purchases.MainTab', {
                     var basePanel =Ext.getCmp('purchasesBasePanel');
                     basePanel.removeAll(true);
                     basePanel.add(
-                        Ext.create('App.view.seller.Purchases.purchasesWorkArea', {
+                        Ext.create('App.view.seller.Purchases.PurchasesWorkArea', {
                             purchasesId: record.getId()
                         })
                     );
