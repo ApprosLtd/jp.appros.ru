@@ -28,10 +28,20 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
                 </div>
 
                 <div class="panel-body">
-                    <ul>
-                    @foreach ($categories_models as $category_model)
-                        <li><a href="#{{ $category_model->id }}">{{ $category_model->name }}</a></li>
-                    @endforeach
+                    <?php
+                    $catalog = \App\Models\CatalogModel::getRootNode()->getDescendants()->toTree();
+                    //var_dump(count($catalog));
+                    ?>
+                    <ul class="list-unstyled">
+                        @foreach($catalog as $catalog_item)
+                            <li><h5>{{ $catalog_item->name }}</h5>
+                                <ul>
+                                    @foreach($catalog_item->children as $catalog_sub_item)
+                                        <li><a href="#">{{ $catalog_sub_item->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
 

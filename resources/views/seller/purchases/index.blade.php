@@ -23,16 +23,20 @@
                             <th>Обработчик</th>
                             <th>Регион</th>
                             <th>Статус</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($items_models_arr as $item_model)
                             <tr>
                                 <th scope="row">{{$item_model->id}}</th>
-                                <td>{{ $item_model->name }}<div style="font-size: 80%">{{ $item_model->description }}</div></td>
+                                <td><a data-toggle="modal" data-target="#editProduct" href="#">{{ $item_model->name }}</a><div style="font-size: 80%">{{ $item_model->description }}</div></td>
                                 <td>{{ $item_model->handler }}</td>
                                 <td>{{ $item_model->region }}</td>
                                 <td>{{ $item_model->status }}</td>
+                                <td>
+                                  <a href="/seller/purchases/products/{{ $item_model->id }}" class="btn btn-info btn-xs">Товары</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

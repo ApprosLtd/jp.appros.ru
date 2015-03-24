@@ -13,6 +13,17 @@ class PurchasesController extends SellerController {
         return view('seller.purchases.index', ['items_models_arr' => $items_models_arr]);
     }
 
+    public function getProducts($id)
+    {
+        $purchase = \App\Models\PurchaseModel::find($id);
+
+        if (!$purchase) {
+            abort(404);
+        }
+
+        return view('seller.purchases.products', ['purchase' => $purchase]);
+    }
+
     public function postSave(Request $request)
     {
         $post_fields_arr = $request->all();
