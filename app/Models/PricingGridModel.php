@@ -30,9 +30,42 @@ class PricingGridModel extends Model {
         return $this->belongsToMany('\App\Models\ProjectModel', 'projects_pricing_grids', 'pricing_grid_id', 'project_id');
     }
 
+    /**
+     * Возвращает модели ценовых колонок в порядке роста цен, предварительно проверив корректность ценовых диапазонов
+     * @return array
+     * @throws \Exception
+     */
     public function columns()
     {
-        return $this->hasMany('\App\Models\PricingGridColumnModel', 'pricing_grid_id');
+        $columns_models = $this->hasMany('\App\Models\PricingGridColumnModel', 'pricing_grid_id')->orderBy('min_sum');
+
+        if (!$columns_models->count()) {
+            return [];
+        }
+
+        $columns_models_arr = [];
+
+        $last_max_sum = 0;
+
+        foreach ($columns_models->get() as $column_model) {
+
+            $current_min_sum = doubleval($column_model->min_sum);
+            $current_max_sum = doubleval($column_model->max_sum);
+
+            if ($current_min_sum >= $current_max_sum) {
+                \App\Helpers\Assistant::exception('Неверные значения цен в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
+            }
+
+            if ($current_min_sum != $last_max_sum) {
+                \App\Helpers\Assistant::exception('Неверные значения цен в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
+            }
+
+            $last_max_sum = $current_max_sum;
+
+            $columns_models_arr[] = $column_model;
+        }
+
+        return $columns_models_arr;
     }
 
     /**

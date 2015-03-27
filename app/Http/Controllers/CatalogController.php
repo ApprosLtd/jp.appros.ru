@@ -28,7 +28,7 @@ class CatalogController extends Controller {
             ];
         }
 
-        return view('catalog.index', ['products' => $products]);
+        return view('catalog.index', ['products' => $products_in_purchase]);
     }
 
 }
