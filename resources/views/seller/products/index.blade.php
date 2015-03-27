@@ -67,21 +67,28 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
                     <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
                         <thead>
                         <tr>
-                            <th>ID</th>
+                            <th style="width: 50px">ID</th>
+                            <th style="width: 34px"></th>
                             <th>Товар</th>
-                            <th></th>
-                            <th></th>
-                            <th style="width: 80px"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($goods_models_arr as $product)
                             <tr>
-                                <th scope="row">{{ $product->id }}</th>
+                                <th>{{ $product->id }}</th>
+                                <th>
+                                    <div class="btn-group btn-group-xs">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#" onclick="openProduct({{ $product->id }}); return false;">Редактировать</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#" onclick="deleteProduct({{ $product->id }}); return false;">Удалить</a></li>
+                                        </ul>
+                                    </div>
+                                </th>
                                 <td><a href="#" onclick="openProduct({{ $product->id }}); return false;">{{ $product->name }}</a></td>
-                                <td></td>
-                                <td></td>
-                                <td><button class="btn btn-danger btn-xs" onclick="deleteProduct({{ $product->id }})">Удалить</button></td>
                             </tr>
                         @endforeach
                         </tbody>
