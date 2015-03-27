@@ -87,4 +87,8 @@ class ProductModel extends Model {
         return $attribute_value_obj->value;
     }
 
+    public function alias()
+    {
+        return '/product-' . $this->id;
+    }
 }

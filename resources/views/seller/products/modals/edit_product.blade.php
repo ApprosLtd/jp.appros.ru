@@ -66,14 +66,14 @@
                                 <table class="table" role="pricing_grid">
                                     <thead>
                                         <tr>
-                                        @foreach ($pricing_grid_model->columns as $column)
+                                        @foreach ($pricing_grid_model->columns() as $column)
                                             <th>{{ $column->column_title }}</th>
                                         @endforeach
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                        @foreach ($pricing_grid_model->columns as $column)
+                                        @foreach ($pricing_grid_model->columns() as $column)
                                             <td><input style="width: 65px" name="col_{{ $column->id }}" value=""></td>
                                         @endforeach
                                         </tr>

@@ -117,7 +117,7 @@ class ProductsController extends SellerController {
                     $attribute->value = $attribute_value;
                     $attribute->save();
                 } else {
-                    \App\Models\AttributeValue::create([
+                    \App\Models\AttributeValueModel::create([
                         'product_id' => $product->id,
                         'attribute_id' => $attribute_id,
                         'value' => $attribute_value

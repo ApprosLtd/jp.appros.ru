@@ -4,7 +4,7 @@
             <img alt="" src="/media/images/177x139/{{ $product->image_min }}">
         </div>
         <div class="catalog-item-body">
-            <h5 class="title"><a href="{{ $product->alias }}" title="{{ $product->name }}">{{ $product->name }}</a></h5>
+            <h5 class="title"><a href="{{ $product->alias() }}" title="{{ $product->name }}">{{ $product->name }}</a></h5>
 
         <span class="stars-small">
 
