@@ -1,9 +1,22 @@
 <?php namespace App\Http\Controllers\Seller;
 
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input as Input;
+use Intervention\Image\Facades\Image as Image;
+
 class MediaController extends SellerController {
 
-    public function postUpload()
+    public function getOriginDir($media_type = 'images')
+    {
+        return base_path() . '/storage/app/media/' . $media_type . '/';
+    }
+
+    /**
+     * @param Request $request
+     * @return \App\Models\MediaModel
+     */
+    public function postUpload(Request $request)
     {
         $file_data = $_FILES['files'];
 
@@ -13,13 +26,11 @@ class MediaController extends SellerController {
 
         $file_name = md5(microtime()) . '.' . $file_extention;
 
-        $file_path = "/cdn/images/" . $file_name;
-
-        move_uploaded_file($tmp_name, base_path() . "/public" . $file_path);
+        move_uploaded_file($tmp_name, $this->getOriginDir() . $file_name);
 
         $media_model = new \App\Models\MediaModel;
 
-        $media_model->product_id = \Input::get('product_id');
+        $media_model->product_id = Input::get('product_id');
         $media_model->file_name  = $file_name;
         $media_model->save();
 
@@ -28,22 +39,29 @@ class MediaController extends SellerController {
         return $media_model;
     }
 
+    public function getRemove($id)
+    {
+        $media_model = \App\Models\MediaModel::find($id);
+
+        if (!$media_model) {
+            return ['success' => false];
+        }
+
+        $media_model->delete();
+
+        return ['success' => true];
+    }
+
     public function getImage($width_height, $file_name)
     {
-        /*
-        $file_name = \Input::get('src');
-        $width  = \Input::get('w', 273);
-        $height = \Input::get('h', 200);
-        */
-
         $width_height_arr = explode('x', $width_height);
         $width  = $width_height_arr[0];
         $height = $width_height_arr[1];
 
-        $image_path = base_path() . '/public/cdn/images/' . $file_name;
+        $image_path = $this->getOriginDir() . $file_name;
 
         if (!file_exists($image_path)) {
-            $img = \Image::canvas($width, $height);
+            $img = Image::canvas($width, $height);
             $img->text('Image not found ;{', 110, 110, function($font) {
                 $font->size(48);
                 $font->align('center');
@@ -51,7 +69,7 @@ class MediaController extends SellerController {
             return $img->response('jpg');
         }
 
-        $img = \Image::make($image_path)->fit($width, $height);
+        $img = Image::make($image_path)->fit($width, $height);
 
         $storage_dir = base_path() . '/public/media/images/' . $width_height;
 

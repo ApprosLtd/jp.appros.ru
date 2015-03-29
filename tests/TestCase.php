@@ -18,7 +18,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
     public function getFullUrl($url)
     {
-        //
+        $url = ltrim($url, '/');
+
+        return 'http://localhost/' . $url;
     }
 
 }

@@ -47,4 +47,30 @@ class PurchaseHelper {
         return $rows;
     }
 
+    public static function getProductIdByAlias($alias)
+    {
+        $matches = [];
+
+        preg_match('/^(\d+)_/', $alias, $matches);
+
+        if (count($matches) != 2) {
+            return null;
+        }
+
+        return (int) $matches[1];
+    }
+
+    public static function getPurchaseIdByAlias($alias)
+    {
+        $matches = [];
+
+        preg_match('/_(\d+)$/', $alias, $matches);
+
+        if (count($matches) != 2) {
+            return null;
+        }
+
+        return (int) $matches[1];
+    }
+
 }

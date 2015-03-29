@@ -139,7 +139,11 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
             });
 
             $.each(data.images, function(index, item){
-                modal.find('#files').append('<img src="/cdn/images/'+item.file_name+'" alt="" class="img-rounded" style="width:100px; height:100px">');
+                var box = '<div id="product-media-'+item.id+'" class="col-lg-3" style="margin-bottom: 5px; text-align: center">'+
+                        '<img src="/media/images/100x100/'+item.file_name+'" alt="" class="img-thumbnail" style="width:100%;">'+
+                        '<br><button class="btn btn-link btn-xs" onclick="removeImage('+item.id+');">удалить</button>'+
+                        '</div>';
+                modal.find('#files').append(box);
             });
 
             modal.modal('show');
@@ -174,6 +178,15 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
         });
     }
 
+    function removeImage(id){
+        $.get('/seller/media/remove/'+id, function(data){
+            if (data.success != true) {
+                return;
+            }
+            $('#product-media-'+id).remove();
+        }, 'json');
+    }
+
     $(document).ready(function(){
         $('#editProduct').on('hidden.bs.modal', function (e) {
             var modal = $('#editProduct');
@@ -206,7 +219,11 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
             };
         })
         .bind('fileuploaddone', function (e, data) {
-            $('#editProduct #files').append('<img src="'+data.result.file_path+'" alt="" class="img-rounded" style="width:100px; height:100px">');
+            var box = '<div id="product-media-'+data.result.id+'" class="col-lg-3" style="margin-bottom: 5px; text-align: center">'+
+                    '<img src="/media/images/100x100/'+data.result.file_name+'" alt="" class="img-thumbnail" style="width:100%;">'+
+                    '<br><button class="btn btn-link btn-xs" onclick="removeImage('+data.result.id+');">удалить</button>'+
+                    '</div>';
+            $('#editProduct #files').append(box);
         })
     });
 
