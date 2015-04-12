@@ -60,6 +60,10 @@
                 <form method="post" action="/seller/purchases/save">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="form-group">
+                        <label>Наименование</label>
+                        <input class="form-control" name="name" value="">
+                    </div>
+                    <div class="form-group">
                         <label>Описание</label>
                         <textarea name="description" class="form-control" rows="2"></textarea>
                     </div>

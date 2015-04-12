@@ -8,27 +8,9 @@ class CatalogController extends Controller {
         $offset = intval(\Input::get('start', 0));
         $limit = intval(\Input::get('limit', 40));
 
-        $products_in_purchase = \App\Helpers\CatalogHelper::getProducts();
+        $products_in_purchases = \App\Helpers\PurchaseHelper::getProductsAvailableForSale();
 
-        $products = [];
-        foreach ($products_in_purchase as $product) {
-
-            $image_min = '';
-            $first_image = $product->media('image')->first();
-            if ($first_image) {
-                $image_min = $first_image->file_name;
-            }
-
-            $products[] = (object) [
-                'id' => $product->id,
-                'name' => $product->name,
-                'image_min' => $image_min,
-                'alias' => 'product-' . $product->id,
-                'stars' => rand(1,5),
-            ];
-        }
-
-        return view('catalog.index', ['products' => $products_in_purchase]);
+        return view('catalog.index', ['products_in_purchases' => $products_in_purchases]);
     }
 
 }

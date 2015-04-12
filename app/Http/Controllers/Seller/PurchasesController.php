@@ -29,6 +29,7 @@ class PurchasesController extends SellerController {
         $post_fields_arr = $request->all();
 
         $validator = \Validator::make($post_fields_arr, [
+            'name' => 'required|max:255',
             'description' => 'max:255',
             'pricing_grid_id' => 'required',
             'pricing_grid_column' => '',
@@ -42,16 +43,16 @@ class PurchasesController extends SellerController {
         $post_fields_arr['user_id'] = $this->user->id;
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\PurchaseModel::find($post_fields_arr['id']);
+            $purchase_model = \App\Models\PurchaseModel::find($post_fields_arr['id']);
 
-            if (!$widget_model) {
-                return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
+            if (!$purchase_model) {
+                return 'Ошибка: нет закупки с таким ID - ' . $post_fields_arr['id'];
             }
 
-            $widget_model->name        = $post_fields_arr['name'];
-            $widget_model->description = $post_fields_arr['description'];
+            $purchase_model->name        = $post_fields_arr['name'];
+            $purchase_model->description = $post_fields_arr['description'];
 
-            $widget_model->save();
+            $purchase_model->save();
         } else {
             \App\Models\PurchaseModel::create($post_fields_arr);
         }

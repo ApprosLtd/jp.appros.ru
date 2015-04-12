@@ -3,6 +3,29 @@
 
 class PurchaseHelper {
 
+    public static function getProductsAvailableForSale($limit = 40, $offset = 0)
+    {
+        $products_in_purchase_relations = \DB::table('products_in_purchase')->get();
+
+        if (empty($products_in_purchase_relations)) {
+            return [];
+        }
+
+        $products_in_purchase_arr = [];
+
+        foreach ($products_in_purchase_relations as $product_in_purchase_relation) {
+            $product_in_purchase = new \App\Models\ProductsInPurchase($product_in_purchase_relation->product_id, $product_in_purchase_relation->purchase_id);
+
+            if ($product_in_purchase) {
+                $products_in_purchase_arr[] = $product_in_purchase;
+            }
+        }
+
+        //$products_in_purchase_arr = \App\Models\ProductModel::offset($offset)->take($limit)->get();
+
+        return $products_in_purchase_arr;
+    }
+
     /**
      * Возвращает коллекцию данных для построения "Таблицы цен"
      * @param $product_id
@@ -47,6 +70,11 @@ class PurchaseHelper {
         return $rows;
     }
 
+    /**
+     * Возвращает ID продукта по псевдониму(URL)
+     * @param $alias
+     * @return int|null
+     */
     public static function getProductIdByAlias($alias)
     {
         $matches = [];
@@ -60,6 +88,11 @@ class PurchaseHelper {
         return (int) $matches[1];
     }
 
+    /**
+     * Возвращает ID закупки по псевдониму(URL)
+     * @param $alias
+     * @return int|null
+     */
     public static function getPurchaseIdByAlias($alias)
     {
         $matches = [];

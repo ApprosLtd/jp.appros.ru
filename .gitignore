@@ -3,4 +3,5 @@
 .env
 .idea
 /composer.lock
-public/test.php
+/public/test.php
+/public/media/images

@@ -25,7 +25,7 @@ Route::get('admin', 'DashboardController@getIndex');
 
 Route::get('test', 'WelcomeController@test');
 
-Route::get('/', 'IndexController@getIndex');
+Route::get('/', 'CatalogController@getIndex');
 
 Route::get('home', 'HomeController@index');
 

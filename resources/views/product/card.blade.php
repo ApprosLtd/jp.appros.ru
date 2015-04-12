@@ -26,7 +26,7 @@
                                     <div class="carousel-inner" role="listbox">
                                         @foreach($product_images as $key => $image)
                                             <div class="item @if ($key == 0) active @endif">
-                                                <img alt="" src="/media/images/100x100/{{ $image->file_name }}">
+                                                <img alt="" src="/media/images/294x435/{{ $image->file_name }}">
                                             </div>
                                         @endforeach
                                     </div>

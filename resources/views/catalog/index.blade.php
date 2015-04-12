@@ -61,7 +61,7 @@
 
                 <div class="col-md-9 container-item container-item-shadow" style="padding: 30px;">
                     <div class="row">
-                        @foreach($products as $product)
+                        @foreach($products_in_purchases as $product_in_purchase)
                             @include('product.list_item')
                         @endforeach
                     </div>

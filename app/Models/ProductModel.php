@@ -87,8 +87,11 @@ class ProductModel extends Model {
         return $attribute_value_obj->value;
     }
 
-    public function alias()
+    public function image()
     {
-        return '/product-' . $this->id;
+        $first_image = $this->media('image')->first();
+        if ($first_image) {
+            return $first_image->file_name;
+        }
     }
 }
