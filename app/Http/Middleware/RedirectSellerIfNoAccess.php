@@ -4,7 +4,7 @@ use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
 
-class RedirectSellerIfAuthenticated {
+class RedirectSellerIfNoAccess {
 
     /**
      * The Guard implementation.
@@ -33,9 +33,14 @@ class RedirectSellerIfAuthenticated {
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->check())
+        if ($this->auth->guest())
         {
-            return new RedirectResponse(url('/seller'));
+            return redirect()->guest('auth/login');
+        }
+
+        if (!$this->auth->user()->hasRole('seller'))
+        {
+            return response(view('seller.403'), 403);
         }
 
         return $next($request);

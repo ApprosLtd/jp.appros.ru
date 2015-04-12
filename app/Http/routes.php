@@ -68,7 +68,7 @@ Route::group(['prefix' => 'admin'], function()
 /**
  * Раздел "Продавцы"
  */
-Route::group(['prefix' => 'seller'], function()
+Route::group(['prefix' => 'seller', 'middleware' => 'seller'], function()
 {
     Route::post('media/upload', 'Seller\MediaController@postUpload');
     Route::get('media/remove/{id}', 'Seller\MediaController@getRemove');
