@@ -7,7 +7,7 @@ class ProductsController extends SellerController {
 
     public function getIndex()
     {
-        $goods_models_arr = \App\Models\ProductModel::paginate(50);
+        $goods_models_arr = $this->user->products()->paginate(50);
 
         return view('seller.products.index', ['goods_models_arr' => $goods_models_arr]);
     }

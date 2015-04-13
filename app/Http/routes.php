@@ -78,8 +78,11 @@ Route::group(['prefix' => 'seller', 'middleware' => 'seller'], function()
     Route::get('product/{id}', 'Seller\ProductsController@getProduct');
     Route::get('product/delete/{id}', 'Seller\ProductsController@getDelete');
 
+    Route::get('suppliers/{id}', 'Seller\SuppliersController@getShow');
+
     Route::controllers([
         'auth' => 'Seller\AuthController',
+        'suppliers' => 'Seller\SuppliersController',
         'products' => 'Seller\ProductsController',
         'pricing-grids' => 'Seller\PricingGridsController',
         'purchases' => 'Seller\PurchasesController',

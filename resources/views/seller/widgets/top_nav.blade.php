@@ -14,6 +14,7 @@
                     </select>
                 </li>
                 <li style="padding: 9px 10px 0 0"><button class="btn btn-success" title="Создать новый проект">+</button></li>
+                <li><a href="/seller/suppliers">Поставщини</a></li>
                 <li><a href="/seller/products">Товары</a></li>
                 <li><a href="/seller/pricing-grids">Ценовые сетки</a></li>
                 <li><a href="/seller/purchases">Закупки</a></li>

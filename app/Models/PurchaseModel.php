@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Модель "Закупка"
+ * @package App\Models
+ */
 class PurchaseModel extends Model {
 
     public $table = 'purchases';

@@ -32,47 +32,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-    public $grid_columns = [
-        [
-            'text' => 'ID',
-            'dataIndex' => 'id',
-            'width' => 50
-        ],
-        [
-            'text' => 'Имя',
-            'dataIndex' => 'name',
-            'width' => 400
-        ],
-        [
-            'text' => 'Email',
-            'dataIndex' => 'email',
-            'flex' => 1
-        ],
-    ];
-
-    public $attached_relations = ['roles'];
-
-    public function getBaseRole()
+    public function suppliers()
     {
-        return 'buyer';
+        return $this->hasMany('\App\Models\SupplierModel');
     }
 
-    public function isBuyer()
+    public function products()
     {
-        if ($this->getBaseRole() == 'buyer') {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isSeller()
-    {
-        if ($this->getBaseRole() == 'seller') {
-            return true;
-        }
-
-        return false;
+        return $this->hasMany('\App\Models\ProductModel');
     }
 
 }
