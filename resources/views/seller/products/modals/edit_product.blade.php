@@ -28,13 +28,25 @@
                     <div class="tab-content" style="margin-top: 20px">
                         <div class="tab-pane in active" id="home">
                             <input type="hidden" name="id" value="">
-                            <input type="hidden" name="supplier_id" value="{{ $supplier_model->id }}">
                             <input type="hidden" name="attributes_group_id" value="{{ $attributes_group_id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">
                                 <label>Наименование*</label>
                                 <input name="name" class="form-control">
                             </div>
+                            @if($supplier_model)
+                                <input type="hidden" name="supplier_id" value="{{ $supplier_model->id }}">
+                            @else
+                                <div class="form-group">
+                                    <label>Поставщик*</label>
+                                    <select class="form-control" name="supplier_id">
+                                        <option></option>
+                                        @foreach ($user->suppliers as $supplier_model)
+                                            <option value="{{ $supplier_model->id }}">{{ $supplier_model->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label>Описание</label>
                                 <textarea name="description" class="form-control" rows="6"></textarea>

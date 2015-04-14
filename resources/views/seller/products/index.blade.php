@@ -18,54 +18,52 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">Товары</div>
+            <?php
+            $supplier_id = \Input::get('supplier_id');
+            $supplier_model = null;
+            if($supplier_id) {
+                $supplier_model = $user->suppliers()->find($supplier_id);
+                \App\Helpers\Assistant::assertModel($supplier_model);
+            }
+            ?>
 
-                <div class="pull-right">
-                    <div class="pagination pagination-sm" style="margin: 10px 10px 0 0">
-                        <!-- pager -->
-                    </div>
-                </div>
-
-                <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct">
-                        Добавить товар
-                    </button>
-                </div>
-
-                <div class="">
-                    <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
-                        <thead>
-                        <tr>
-                            <th style="width: 50px">ID</th>
-                            <th style="width: 34px"></th>
-                            <th>Товар</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($goods_models_arr as $product)
-                            <tr>
-                                <th>{{ $product->id }}</th>
-                                <th>
-                                    <div class="btn-group btn-group-xs">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                            <span class="glyphicon glyphicon-menu-hamburger"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#" onclick="openProduct({{ $product->id }}); return false;">Редактировать</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#" onclick="deleteProduct({{ $product->id }}); return false;">Удалить</a></li>
-                                        </ul>
-                                    </div>
-                                </th>
-                                <td><a href="#" onclick="openProduct({{ $product->id }}); return false;">{{ $product->name }}</a></td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                    <?= $goods_models_arr->render() ?>
-                </div>
+            <div class="btn-toolbar" role="toolbar" style="padding: 10px 0;">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct">
+                    Добавить товар
+                </button>
             </div>
+
+            <table class="table table-condensed table-striped table-hover table-bordered">
+                <thead>
+                <tr>
+                    <th style="width: 50px">ID</th>
+                    <th style="width: 34px"></th>
+                    <th>Товар</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($goods_models_arr as $product)
+                    <tr>
+                        <th>{{ $product->id }}</th>
+                        <th>
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#" onclick="openProduct({{ $product->id }}); return false;">Редактировать</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#" onclick="deleteProduct({{ $product->id }}); return false;">Удалить</a></li>
+                                </ul>
+                            </div>
+                        </th>
+                        <td><a href="#" onclick="openProduct({{ $product->id }}); return false;">{{ $product->name }}</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            <?= $goods_models_arr->render() ?>
+
         </div>
     </div>
 </div>

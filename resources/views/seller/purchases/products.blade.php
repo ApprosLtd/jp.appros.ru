@@ -69,7 +69,7 @@
                                     <th scope="row">{{ $product->id }}</th>
                                     <td>
                                         <input style="margin: 0" type="checkbox">
-                                        <a href="#" onclick="openProduct({{ $product->id }}); return false;" title="{{ $product->name }}">{{ str_limit($product->name, 40) }}</a>
+                                        <a href="#" onclick="openProduct({{ $product->id }}); return false;" title="{{ $product->name }}">{{ str_limit($product->name, 70) }}</a>
                                     </td>
                                 </tr>
                             @endforeach
