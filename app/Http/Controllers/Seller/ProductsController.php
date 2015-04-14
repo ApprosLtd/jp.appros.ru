@@ -79,6 +79,7 @@ class ProductsController extends SellerController {
         }
 
         $post_fields_arr['user_id'] = $this->user->id;
+        $post_fields_arr['supplier_id'] = \Input::get('supplier_id');
 
         $product_id = 0;
         if (isset($post_fields_arr['id']) and intval($post_fields_arr['id']) > 0) {

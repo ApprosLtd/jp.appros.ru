@@ -9,45 +9,15 @@ $project_id = 1;
 $project = \App\Models\ProjectModel::find($project_id);
 
 $categories_models = \App\Helpers\ProjectHelper::getCategoriesByProjectId($project_id);
-$pricing_grids_models = \App\Helpers\ProjectHelper::getPricingGridsByProjectId($project_id);
 
 $attributes_group_id = \App\Helpers\ProjectHelper::getDefaultAttributesGroupId();
 
 $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attributes_group_id)->get();
 ?>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Категории</div>
-                <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
-                    <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editCategory">
-                        Добавить категорию
-                    </button>
-                </div>
-
-                <div class="panel-body">
-                    <?php
-                    $catalog = \App\Models\CatalogModel::getRootNode()->getDescendants()->toTree();
-                    //var_dump(count($catalog));
-                    ?>
-                    <ul class="list-unstyled">
-                        @foreach($catalog as $catalog_item)
-                            <li><h5>{{ $catalog_item->name }}</h5>
-                                <ul>
-                                    @foreach($catalog_item->children as $catalog_sub_item)
-                                        <li><a href="#">{{ $catalog_sub_item->name }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Товары</div>
 
@@ -102,7 +72,6 @@ $attributes = \App\Models\AttributeModel::where('attribute_group_id', '=', $attr
 
 <!-- Modals -->
 @include('seller.products.modals.edit_product')
-@include('seller.products.modals.edit_category')
 
 <!-- Scripts -->
 <script>

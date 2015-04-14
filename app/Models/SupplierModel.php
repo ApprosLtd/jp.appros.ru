@@ -21,4 +21,13 @@ class SupplierModel extends Model {
         return $this->hasMany('\App\Models\ProductModel', 'supplier_id');
     }
 
+    /**
+     * Закупки
+     * @return \App\Models\ProductModel
+     */
+    public function purchases()
+    {
+        return $this->hasMany('\App\Models\PurchaseModel', 'supplier_id');
+    }
+
 }

@@ -8,20 +8,23 @@ class PurchasesController extends SellerController {
 
     public function getIndex()
     {
-        $items_models_arr = \App\Models\PurchaseModel::where('user_id', '=', $this->user->id)->paginate(50);
-
-        return view('seller.purchases.index', ['items_models_arr' => $items_models_arr]);
+        return view('seller.purchases.index', ['user' => $this->user]);
     }
 
-    public function getProducts($id)
+    public function getProducts($purchase_id)
     {
-        $purchase = \App\Models\PurchaseModel::find($id);
+        $purchase_model = $this->user->purchases()->find($purchase_id);
+        \App\Helpers\Assistant::assertModel($purchase_model);
 
-        if (!$purchase) {
-            abort(404);
-        }
+        return view('seller.purchases.products', ['purchase_model' => $purchase_model]);
+    }
 
-        return view('seller.purchases.products', ['purchase' => $purchase]);
+    public function getShow($purchase_id)
+    {
+        $purchase_model = $this->user->purchases()->find($purchase_id);
+        \App\Helpers\Assistant::assertModel($purchase_model);
+
+        return view('seller.purchases.purchase', ['purchase_model' => $purchase_model]);
     }
 
     public function postSave(Request $request)
@@ -31,8 +34,8 @@ class PurchasesController extends SellerController {
         $validator = \Validator::make($post_fields_arr, [
             'name' => 'required|max:255',
             'description' => 'max:255',
-            'pricing_grid_id' => 'required',
-            'pricing_grid_column' => '',
+            //'pricing_grid_id' => 'required',
+            //'pricing_grid_column' => '',
             'expiration_time' => 'required',
         ]);
 

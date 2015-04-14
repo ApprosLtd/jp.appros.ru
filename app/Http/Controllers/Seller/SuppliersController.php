@@ -26,17 +26,17 @@ class SuppliersController extends SellerController {
 
         $products_models_arr = $supplier_model->products()->paginate(50);
 
-        return view('seller.products.index', ['goods_models_arr' => $products_models_arr]);
+        return view('seller.suppliers.products', ['supplier_model' => $supplier_model, 'goods_models_arr' => $products_models_arr]);
     }
 
     public function getPricingGrids($supplier_id)
     {
-        return 'pricing-grids-'.$supplier_id;
-    }
+        $supplier_model = $this->user->suppliers()->find($supplier_id);
+        \App\Helpers\Assistant::assertModel($supplier_model);
 
-    public function getPurchases($supplier_id)
-    {
-        return 'purchases-'.$supplier_id;
+        $products_models_arr = $supplier_model->products()->paginate(50);
+
+        return view('seller.suppliers.pricing-grids', ['supplier_model' => $supplier_model, 'goods_models_arr' => $products_models_arr]);
     }
 
     public function postSave(Request $request)

@@ -79,6 +79,7 @@ Route::group(['prefix' => 'seller', 'middleware' => 'seller'], function()
     Route::get('product/delete/{id}', 'Seller\ProductsController@getDelete');
 
     Route::get('suppliers/{id}', 'Seller\SuppliersController@getShow');
+    Route::get('purchases/{id}', 'Seller\PurchasesController@getShow');
 
     Route::controllers([
         'auth' => 'Seller\AuthController',

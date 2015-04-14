@@ -28,7 +28,7 @@
                     <div class="tab-content" style="margin-top: 20px">
                         <div class="tab-pane in active" id="home">
                             <input type="hidden" name="id" value="">
-                            <input type="hidden" name="project_id" value="{{ $project_id }}">
+                            <input type="hidden" name="supplier_id" value="{{ $supplier_model->id }}">
                             <input type="hidden" name="attributes_group_id" value="{{ $attributes_group_id }}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group">

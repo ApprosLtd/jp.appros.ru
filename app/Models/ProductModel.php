@@ -6,7 +6,7 @@ class ProductModel extends Model {
 
     public $table = 'products';
 
-    protected $fillable = ['user_id', 'name', 'description'];
+    protected $fillable = ['user_id', 'name', 'description', 'supplier_id'];
 
     public function delete()
     {

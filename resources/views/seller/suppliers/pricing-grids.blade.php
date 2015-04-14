@@ -2,6 +2,6 @@
 
 @section('container')
 
-    Основная
+    Ценовые сетки
 
 @endsection

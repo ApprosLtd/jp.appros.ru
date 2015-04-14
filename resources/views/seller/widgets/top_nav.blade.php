@@ -17,7 +17,7 @@
                 <li><a href="/seller/suppliers">Поставщини</a></li>
                 <li><a href="/seller/products">Товары</a></li>
                 <li><a href="/seller/pricing-grids">Ценовые сетки</a></li>
-                <li><a href="/seller/purchases">Закупки</a></li>
+                <li @if(\Request::is('seller/purchases')) class="active" @endif ><a href="/seller/purchases">Закупки</a></li>
                 <li><a href="/seller/prices">Управление ценами</a></li>
                 <li><a href="/seller/attributes">Атрибуты</a></li>
             </ul>

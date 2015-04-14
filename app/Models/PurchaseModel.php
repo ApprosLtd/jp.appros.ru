@@ -10,7 +10,16 @@ class PurchaseModel extends Model {
 
     public $table = 'purchases';
 
-    protected $fillable = ['user_id', 'name', 'description', 'pricing_grid_id', 'expiration_time'];
+    protected $fillable = ['user_id', 'name', 'description', 'pricing_grid_id', 'expiration_time', 'supplier_id'];
+
+    /**
+     * "Поставщик товаров"
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function supplier()
+    {
+        return $this->belongsTo('\App\Models\SupplierModel');
+    }
 
     /**
      * Продукты в закупке
