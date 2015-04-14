@@ -94,4 +94,33 @@ class ProductModel extends Model {
             return $first_image->file_name;
         }
     }
+
+    public function getFullData()
+    {
+        $product_obj = (object) $this->toArray();
+
+        $attributes_arr = [];
+        $attributes = $this->attributes()->get();
+        if ($attributes->count()) {
+            foreach ($attributes as $attribute) {
+                $attributes_arr[$attribute->attribute_id] = $attribute->value;
+            }
+        }
+        $product_obj->attributes = $attributes_arr;
+
+        $categories_ids_arr = [];
+        $categories = $this->categories()->get(['id']);
+        if ($categories) {
+            foreach ($categories as $category) {
+                $categories_ids_arr[] = intval($category->id);
+            }
+        }
+        $product_obj->categories_ids_arr = $categories_ids_arr;
+
+        $product_obj->prices = $this->prices();
+
+        $product_obj->images = $this->media('image')->get();
+
+        return $product_obj;
+    }
 }

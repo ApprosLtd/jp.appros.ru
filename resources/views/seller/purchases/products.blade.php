@@ -37,22 +37,28 @@
                         </div>
                     </div-->
                     <div class="col-md-6">
-                        <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
+                        <div class="btn-toolbar" role="toolbar" style="padding: 10px 0;">
 
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-default" title="Выбрать все"><span class="glyphicon glyphicon-collapse-down"></span></button>
-                                <button type="button" class="btn btn-default" title="Отменить все"><span class="glyphicon glyphicon-unchecked"></span></button>
-                                <button type="button" class="btn btn-default" title="Инвертировать"><span class="glyphicon glyphicon-random"></span></button>
+                                <button type="button" class="btn btn-default" title="Выбрать все" onclick="manipulationChoices('check-all', '#supplier-products-list')">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </button>
+                                <button type="button" class="btn btn-default" title="Отменить все" onclick="manipulationChoices('uncheck-all', '#supplier-products-list')">
+                                    <span class="glyphicon glyphicon-unchecked"></span>
+                                </button>
+                                <button type="button" class="btn btn-default" title="Инвертировать" onclick="manipulationChoices('invert', '#supplier-products-list')">
+                                    <span class="glyphicon glyphicon-random"></span>
+                                </button>
                             </div>
 
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editProduct">Добавить в закупку</button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editProduct">Добавить все</button>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="addToPurchase({{ $purchase_model->id }});">Добавить в закупку</button>
+                                <button type="button" class="btn btn-default btn-sm" onclick="addAllToPurchase({{ $purchase_model->id }});">Добавить все</button>
                             </div>
 
                         </div>
 
-                        <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
+                        <table class="table table-condensed table-striped table-hover table-bordered" id="supplier-products-list">
                             <thead>
                             <tr>
                                 <th style="width: 40px">ID</th>
@@ -68,8 +74,10 @@
                                 <tr>
                                     <th scope="row">{{ $product->id }}</th>
                                     <td>
-                                        <input style="margin: 0" type="checkbox">
-                                        <a href="#" onclick="openProduct({{ $product->id }}); return false;" title="{{ $product->name }}">{{ str_limit($product->name, 70) }}</a>
+                                        <label title="{{ $product->name }}" style="font-weight: normal; margin: 0">
+                                            <input style="margin: 0" type="checkbox" value="{{ $product->id }}">
+                                            {{ str_limit($product->name, 70) }}
+                                        </label>
                                     </td>
                                 </tr>
                             @endforeach
@@ -79,23 +87,29 @@
 
                     </div>
                     <div class="col-md-6">
-                        <div class="btn-toolbar" role="toolbar" style="padding: 10px;">
+                        <div class="btn-toolbar" role="toolbar" style="padding: 10px 0;">
 
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-default" title="Выбрать все"><span class="glyphicon glyphicon-collapse-down"></span></button>
-                                <button type="button" class="btn btn-default" title="Отменить все"><span class="glyphicon glyphicon-unchecked"></span></button>
-                                <button type="button" class="btn btn-default" title="Инвертировать"><span class="glyphicon glyphicon-random"></span></button>
+                                <button type="button" class="btn btn-default" title="Выбрать все" onclick="manipulationChoices('check-all', '#supplier-products-in-purchase-list')">
+                                    <span class="glyphicon glyphicon-collapse-down"></span>
+                                </button>
+                                <button type="button" class="btn btn-default" title="Отменить все" onclick="manipulationChoices('uncheck-all', '#supplier-products-in-purchase-list')">
+                                    <span class="glyphicon glyphicon-unchecked"></span>
+                                </button>
+                                <button type="button" class="btn btn-default" title="Инвертировать" onclick="manipulationChoices('invert', '#supplier-products-in-purchase-list')">
+                                    <span class="glyphicon glyphicon-random"></span>
+                                </button>
                             </div>
 
                             <div class="btn-group btn-group-sm">
-                                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#editProduct">Удалить из закупки</button>
-                                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#editProduct">Удалить все</button>
+                                <button type="button" class="btn btn-danger btn-sm">Удалить из закупки</button>
+                                <button type="button" class="btn btn-default btn-sm">Удалить все</button>
                             </div>
 
 
                         </div>
 
-                        <table class="table table-condensed table-striped table-hover" style="border-bottom: 1px solid #DDD; border-top: 1px solid #DDD">
+                        <table class="table table-condensed table-striped table-hover table-bordered" id="supplier-products-in-purchase-list">
                             <thead>
                             <tr>
                                 <th style="width: 40px">ID</th>
@@ -130,14 +144,62 @@
     </div>
 
     <script>
-        function loadCatalog(id){
+        function addToPurchase(purchaseId){
+
+            var productsIdsArr = [];
+
+            $('#supplier-products-list').find('input:checked').each(function(index, item){
+                productsIdsArr.push(item.value);
+            });
+
+            if (productsIdsArr.length < 1) {
+                return;
+            }
+
             $.ajax({
-                url: '',
-                dataType: 'html',
+                url: '/seller/purchases/add-products',
+                dataType: 'json',
+                type: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    purchase_id: purchaseId,
+                    products_ids_arr: productsIdsArr
+                },
+                success: function(data){
+                    window.location = window.location;
+                }
+            });
+        }
+        function addAllToPurchase(purchaseId){
+            $.ajax({
+                url: '/seller/purchases/add-all-products',
+                dataType: 'json',
+                type: 'post',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    purchase_id: purchaseId
+                },
                 success: function(html){
                     //
                 }
             });
+        }
+        function manipulationChoices(action, targetElement){
+            targetElement = $(targetElement);
+
+            switch (action) {
+                case 'check-all':
+                    targetElement.find('input:checkbox').prop('checked', true);
+                    break;
+                case 'uncheck-all':
+                    targetElement.find('input:checkbox').prop('checked', false);
+                    break;
+                case 'invert':
+                    var checkeds = targetElement.find('input:checked');
+                    targetElement.find('input:checkbox').prop('checked', true);
+                    checkeds.prop('checked', false);
+                    break;
+            }
         }
     </script>
 

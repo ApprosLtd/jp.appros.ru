@@ -5,25 +5,9 @@ class PurchaseHelper {
 
     public static function getProductsAvailableForSale($limit = 40, $offset = 0)
     {
-        $products_in_purchase_relations = \DB::table('products_in_purchase')->get();
+        $products_in_purchase_models = \App\Models\ProductsInPurchaseModel::paginate(30);
 
-        if (empty($products_in_purchase_relations)) {
-            return [];
-        }
-
-        $products_in_purchase_arr = [];
-
-        foreach ($products_in_purchase_relations as $product_in_purchase_relation) {
-            $product_in_purchase = new \App\Models\ProductsInPurchase($product_in_purchase_relation->product_id, $product_in_purchase_relation->purchase_id);
-
-            if ($product_in_purchase) {
-                $products_in_purchase_arr[] = $product_in_purchase;
-            }
-        }
-
-        //$products_in_purchase_arr = \App\Models\ProductModel::offset($offset)->take($limit)->get();
-
-        return $products_in_purchase_arr;
+        return $products_in_purchase_models;
     }
 
     /**

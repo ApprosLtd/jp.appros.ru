@@ -62,4 +62,49 @@ class PurchasesController extends SellerController {
 
         return redirect('/seller/purchases');
     }
+
+    /**
+     * Добавление указанных продуктов в закупку
+     * @throws \Exception
+     */
+    public function postAddProducts()
+    {
+        $purchase_id = \Input::get('purchase_id');
+        $purchase_model = $this->user->purchases()->find($purchase_id);
+        \App\Helpers\Assistant::assertModel($purchase_model);
+
+        $products_ids_arr = \Input::get('products_ids_arr', []);
+        if (empty($products_ids_arr)) {
+            return ['success' => false, 'message' => 'Список продуктов пуст'];
+        }
+
+        $products_models = $this->user->products()->whereIn('id', $products_ids_arr)->get();
+
+        if (!$products_models->count()) {
+            return ['success' => false, 'message' => 'Продукты не найдены'];
+        }
+
+        foreach ($products_models as $product_model) {
+            $product_full_data = $product_model->getFullData();
+
+            \App\Models\ProductsInPurchaseModel::create([
+                'purchase_id' => $purchase_id,
+                'product_id' => $product_model->id,
+                'product_data' => json_encode($product_full_data)
+            ]);
+        }
+
+        return ['success' => true];
+    }
+
+    /**
+     * Добавление всех продуктов поставщика в закупку
+     * @throws \Exception
+     */
+    public function postAddAllProducts()
+    {
+        $purchase_id = \Input::get('purchase_id');
+        $purchase_model = $this->user->purchases()->find($purchase_id);
+        \App\Helpers\Assistant::assertModel($purchase_model);
+    }
 }
