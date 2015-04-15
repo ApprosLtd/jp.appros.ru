@@ -119,7 +119,7 @@ class ProductModel extends Model {
 
         $product_obj->prices = $this->prices();
 
-        $product_obj->images = $this->media('image')->get();
+        $product_obj->images = $this->media('image')->get(['id', 'file_name']);
 
         return $product_obj;
     }

@@ -13,6 +13,7 @@
                 <ul class="nav nav-pills">
                     <li class="active"><a href="/seller/purchases/{{ $purchase_model->id }}">Основная</a></li>
                     <li><a href="/seller/purchases/products/{{ $purchase_model->id }}">Товары</a></li>
+                    <li><a href="/seller/purchases/history/{{ $purchase_model->id }}">История</a></li>
                 </ul>
 
                 <form method="post" action="/seller/purchases/save" style="margin-top: 30px">

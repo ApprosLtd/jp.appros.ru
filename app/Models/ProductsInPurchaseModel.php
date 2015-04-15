@@ -38,9 +38,26 @@ class ProductsInPurchaseModel extends Model {
         return $this->belongsTo('\App\Models\PurchaseModel');
     }
 
-    public function image()
+    public function images()
     {
-        //
+        $full_data = $this->getFullData();
+
+        if (property_exists($full_data, 'images')) {
+            return $full_data->images;
+        }
+
+        return [];
+    }
+
+    public function getFirstImageFileName()
+    {
+        $images = $this->images();
+
+        if (empty($images)){
+            return null;
+        }
+
+        return $images[0]->file_name;
     }
 
     public function alias()
@@ -55,6 +72,6 @@ class ProductsInPurchaseModel extends Model {
 
     public function getFullData()
     {
-        return json_decode($this->data);
+        return json_decode($this->product_data);
     }
 }
