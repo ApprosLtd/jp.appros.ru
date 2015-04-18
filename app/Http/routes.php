@@ -57,7 +57,7 @@ Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');
 /**
  * Раздел "Админка"
  */
-Route::group(['prefix' => 'admin'], function()
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
     Route::controllers([
         'widgets' => 'Admin\WidgetsController',
