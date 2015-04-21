@@ -7,9 +7,9 @@
 
                 <a style="font-size: 18px" href="/seller/purchases?supplier_id={{ $purchase_model->supplier->id }}">
                     <span class="glyphicon glyphicon-menu-left"></span>
-                    {{ $purchase_model->supplier->name }}
+                    Поставщик: {{ $purchase_model->supplier->name }}
                 </a>
-                <h3 style="margin: 5px 0 25px">{{ $purchase_model->name }}</h3>
+                <h3 style="margin: 5px 0 25px">Закупка: {{ $purchase_model->name }}</h3>
                 <ul class="nav nav-pills">
                     <li class="active"><a href="/seller/purchases/{{ $purchase_model->id }}">Основная</a></li>
                     <li><a href="/seller/purchases/products/{{ $purchase_model->id }}">Товары</a></li>

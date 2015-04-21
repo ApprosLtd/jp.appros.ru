@@ -30,4 +30,13 @@ class SupplierModel extends Model {
         return $this->hasMany('\App\Models\PurchaseModel', 'supplier_id');
     }
 
+    /**
+     * Ценовые сетки
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function pricing_grids()
+    {
+        return $this->belongsToMany('\App\Models\PricingGridModel', 'projects_pricing_grids', 'project_id', 'pricing_grid_id');
+    }
+
 }

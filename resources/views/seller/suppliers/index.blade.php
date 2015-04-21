@@ -6,8 +6,8 @@
         <div class="col-md-12">
 
             <div class="btn-toolbar" style="margin-bottom: 10px">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editFormModal">
-                    Добавить
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editFormModal">
+                    Добавить поставщика
                 </button>
             </div>
 

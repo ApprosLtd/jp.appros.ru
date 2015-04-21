@@ -33,26 +33,6 @@ class ProjectHelper {
     }
 
 
-    public static function getPricingGridsByProjectId($project_id)
-    {
-        $user = \Auth::user();
-
-        if (!$user) {
-            return [];
-        }
-
-        /**
-         * @var $project_model \App\Models\ProjectModel
-         */
-        $project_model = \App\Models\ProjectModel::where('id', '=', $project_id)->where('user_id', '=', $user->id)->first();
-
-        if (!$project_model) {
-            return [];
-        }
-
-        return $project_model->pricing_grids()->get();
-    }
-
     public static function getAttributesGroups()
     {
         $user = \Auth::user();
