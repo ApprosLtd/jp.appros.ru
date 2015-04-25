@@ -21,7 +21,7 @@ class MediaTest extends TestCase {
 
         \Session::start();
 
-        $response = $this->call('POST', $this->getFullUrl('/seller/media/upload'),
+        $this->call('POST', $this->getFullUrl('/seller/media/upload'),
             [
                 'product_id' => $product_model->id,
                 '_token' => \Session::token()

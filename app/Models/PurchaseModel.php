@@ -13,6 +13,15 @@ class PurchaseModel extends Model {
     protected $fillable = ['user_id', 'name', 'description', 'pricing_grid_id', 'expiration_time', 'supplier_id'];
 
     /**
+     * "Продавец"
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function seller()
+    {
+        return $this->belongsTo('\App\User', 'user_id');
+    }
+
+    /**
      * "Поставщик товаров"
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
