@@ -15,10 +15,10 @@
                 @foreach ($suppliers_models_arr as $supplier_model)
                 <div class="col-md-3">
                     <div class="panel panel-info">
-                        <div class="panel-heading" title="{{ $supplier_model->name }}">{{ str_limit($supplier_model->name, 34, '*') }}</div>
+                        <div class="panel-heading" title="{{ $supplier_model->name }}">{{ str_limit($supplier_model->name, 32, '...') }}</div>
                         <div class="panel-body">
                             <a href="/seller/suppliers/{{ $supplier_model->id }}">{{ $supplier_model->name }}</a>
-                            <p>{{ str_limit($supplier_model->description, 200, '...') }}</p>
+                            <p style="padding-top: 10px">{{ str_limit($supplier_model->description, 200, '...') }}</p>
                         </div>
                     </div>
                 </div>

@@ -15,14 +15,14 @@ class ProductController extends Controller {
         $purchase_id = \App\Helpers\PurchaseHelper::getPurchaseIdByAlias($alias);
         $purchase_model = \App\Models\PurchaseModel::find($purchase_id);
 
-        //$product_in_purchase = \App\Models\ProductInPurchaseModel::find(1, $alias);
+        $product_in_purchase = \App\Models\ProductInPurchaseModel::findByProductIdAndByPurchaseId($product_id, $purchase_id);
 
         if (!$product_model or !$purchase_model) {
             return response(view('errors.product_404'), 404);
         }
 
         return view('product.card', [
-            'product_in_purchase' => $product_model,
+            'product_in_purchase' => $product_in_purchase,
             'product' => $product_model,
             'purchase' => $purchase_model
         ]);

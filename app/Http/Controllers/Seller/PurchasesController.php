@@ -87,7 +87,7 @@ class PurchasesController extends SellerController {
         foreach ($products_models as $product_model) {
             $product_full_data = $product_model->getFullData();
 
-            \App\Models\ProductsInPurchaseModel::create([
+            \App\Models\ProductInPurchaseModel::create([
                 'purchase_id' => $purchase_id,
                 'product_id' => $product_model->id,
                 'product_data' => json_encode($product_full_data)

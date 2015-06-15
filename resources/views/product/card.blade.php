@@ -43,8 +43,8 @@
                         </div>
                         <div class="col-md-7">
                             <div>
-                                <div style="padding: 20px 20px 10px 10px">
-                                    <span style="font-size: 27px; line-height: 23px;">{{ $product->name }}</span>
+                                <div style="padding: 10px 20px 10px 10px">
+                                    <h1 style="font-size: 27px; line-height: 23px; margin-top: 0; font-weight: bold;">{{ $product->name }}</h1>
                                     <p>
                                         <span class="product-stars">
                                             <span class="glyphicon glyphicon-star"></span>
@@ -91,7 +91,11 @@
                                             <a href="#" style="font-size: 12px; color: #DB3232;">как формируются цены?</a>
                                         </div>
                                         <div class="col-md-6" style="text-align: right">
-                                            <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;">
+                                            @if(Auth::user())
+                                                <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;" onclick="productAddToBasket('{{ $product_in_purchase->getProductId() }}', '{{ $product_in_purchase->getPurchaseId() }}');">
+                                            @else
+                                                <button class="button button-rounded button-flat-caution" style="padding: 2px 12px;" onclick="mustAuthorize();">
+                                            @endif
                                                 <span class="glyphicon glyphicon-shopping-cart"></span>
                                                 ДОБАВИТЬ В КОРЗИНУ
                                             </button>
@@ -197,6 +201,8 @@
 
                     <div class="row">
                         <div class="col-md-12">
+                            @include('product.widgets.comment-form',  ['target_id' => $product_in_purchase->id, 'target_type' => \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE])
+                            @include('product.widgets.comments-list', ['target_id' => $product_in_purchase->id, 'target_type' => \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE])
                             {!! \App\Helpers\WidgetHelper::region('product_bottom', 'buyer') !!}
                         </div>
                     </div>
@@ -288,7 +294,86 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalAuthorization" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Авторизация / Регистрация</h4>
+                </div>
+                <div class="modal-body">
+
+                    <form class="form-horizontal" role="form" method="POST" action="/auth/login">
+                        <input type="hidden" name="_token" value="tNsSLCkoEGPUMlKitZxSM28vdjX5dS2Eet325VsK">
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" name="email" value="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Password</label>
+                            <div class="col-md-6">
+                                <input type="password" class="form-control" name="password">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary" style="margin-right: 15px;">
+                                    Login
+                                </button>
+
+                                <a href="/password/email">Forgot Your Password?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Вход / регистрация</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
+
+        function mustAuthorize(){
+            $('#modalAuthorization').modal('show');
+        }
+
+        function productAddToBasket(productId, purchaseId){
+            $.ajax({
+                url: '/rest/basket',
+                dataType: 'json',
+                type: 'post',
+                data: {
+                    _token: __TOKEN__,
+                    product_id: productId,
+                    purchase_id: purchaseId
+                },
+                success: function(data){
+                    console.log(data);
+                },
+                error: function(response){
+                    switch (response.status) {
+                        case 403:
+                            mustAuthorize();
+                            break;
+                        case 500:
+                            updateToken(function(){
+                                productAddToBasket(productId, purchaseId);
+                            });
+                            break;
+                    }
+                }
+            });
+        }
+
         $(function(){
             //$('.carousel').carousel();
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * @var $product_in_purchase \App\Models\ProductsInPurchaseModel
+ * @var $product_in_purchase \App\Models\ProductInPurchaseModel
  */
 
 ?>

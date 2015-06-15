@@ -6,6 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=cyrillic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=PT+Serif:400,400italic&subset=cyrillic' rel='stylesheet' type='text/css'>
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="/css/app_bootstrap.css">
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"-->
@@ -22,6 +25,17 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+    <script>
+        var __TOKEN__ = '{{ csrf_token() }}';
+        function updateToken(success){
+            $.get('/rest/token', function(res){
+                __TOKEN__ = res._token;
+                success();
+            });
+        }
+    </script>
+
 </head>
 <body>
     <div class="container">
@@ -64,11 +78,12 @@
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <span class="glyphicon glyphicon-shopping-cart"></span> 3 покупки на 1`320,45 руб.
+                                <span class="glyphicon glyphicon-shopping-cart"></span> {{ \App\Helpers\BasketHelper::getBasketContentMini() }}
                                 <span style="padding: 3px 10px"></span>
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 							<ul class="dropdown-menu" role="menu">
+								<li><a href="/orders">Список заказов</a></li>
 								<li><a href="/auth/logout">Logout</a></li>
 							</ul>
 						</li>

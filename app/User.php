@@ -11,6 +11,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword, EntrustUserTrait;
 
+    protected $basket = null;
+
 	/**
 	 * The database table used by the model.
 	 *
@@ -45,6 +47,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function purchases()
     {
         return $this->hasMany('\App\Models\PurchaseModel');
+    }
+
+    public function basket()
+    {
+        if (!$this->basket) {
+            $this->basket = new \App\Basket($this->id);
+        }
+
+        return $this->basket;
     }
 
 }

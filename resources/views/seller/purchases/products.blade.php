@@ -12,7 +12,7 @@
                 <h3 style="margin: 5px 0 25px">Закупка: {{ $purchase_model->name }}</h3>
                 <ul class="nav nav-pills">
                     <li><a href="/seller/purchases/{{ $purchase_model->id }}">Основная</a></li>
-                    <li class="active"><a href="/seller/purchases/products/{{ $purchase_model->id }}">Товары</a></li>
+                    <li class="active"><a href="/seller/purchases/products/{{ $purchase_model->id }}">Товары в закупке</a></li>
                     <li><a href="/seller/purchases/history/{{ $purchase_model->id }}">История</a></li>
                 </ul>
 

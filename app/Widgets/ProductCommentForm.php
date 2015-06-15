@@ -15,8 +15,8 @@ class ProductCommentForm {
     {
         $output = '';
 
-        $output .=  view('product.widgets.comment-form');
-        $output .= view('product.widgets.comments-list');
+        //$output .=  view('product.widgets.comment-form');
+        //$output .= view('product.widgets.comments-list');
 
         return $output;
     }

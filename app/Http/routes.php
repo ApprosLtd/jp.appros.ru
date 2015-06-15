@@ -50,6 +50,8 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('pricing-grid', 'Rest\PricingGridController');
     Route::resource('pricing-grid-column', 'Rest\PricingGridColumnController');
     Route::resource('media', 'Rest\MediaController');
+    Route::resource('basket', 'Rest\BasketController');
+    Route::resource('token', 'Rest\TokenController');
 });
 
 Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');

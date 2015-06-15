@@ -5,7 +5,7 @@ class PurchaseHelper {
 
     public static function getProductsAvailableForSale($limit = 40, $offset = 0)
     {
-        $products_in_purchase_models = \App\Models\ProductsInPurchaseModel::paginate(30);
+        $products_in_purchase_models = \App\Models\ProductInPurchaseModel::paginate(30);
 
         return $products_in_purchase_models;
     }
