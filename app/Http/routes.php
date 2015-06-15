@@ -52,6 +52,7 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('media', 'Rest\MediaController');
     Route::resource('basket', 'Rest\BasketController');
     Route::resource('token', 'Rest\TokenController');
+    Route::resource('comment', 'Rest\CommentController');
 });
 
 Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');
@@ -63,6 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function()
 {
     Route::controllers([
         'widgets' => 'Admin\WidgetsController',
+        'comments' => 'Admin\CommentsController',
     ]);
 });
 

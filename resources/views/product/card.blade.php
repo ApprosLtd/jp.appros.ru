@@ -78,7 +78,7 @@
                                             <span class="glyphicon glyphicon-thumbs-up"></span> Рекомендации: 5
                                         </div>
                                         <div class="col-md-4">
-                                            <span class="glyphicon glyphicon-comment"></span> Комментарии: 12
+                                            <span class="glyphicon glyphicon-comment"></span> Комментарии: {{ $product_in_purchase->getCommentsCount() }}
                                         </div>
                                     </div>
 
@@ -201,8 +201,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            @include('product.widgets.comment-form',  ['target_id' => $product_in_purchase->id, 'target_type' => \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE])
-                            @include('product.widgets.comments-list', ['target_id' => $product_in_purchase->id, 'target_type' => \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE])
+                            @include('product.widgets.comments',  ['target_id' => $product_in_purchase->id, 'target_type' => \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE])
                             {!! \App\Helpers\WidgetHelper::region('product_bottom', 'buyer') !!}
                         </div>
                     </div>

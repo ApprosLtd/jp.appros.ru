@@ -14,6 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 <li><a href="/admin/widgets">Виджеты</a></li>
+                <li><a href="/admin/comments">Комментарии</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">

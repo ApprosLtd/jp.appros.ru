@@ -93,4 +93,11 @@ class ProductInPurchaseModel extends Model {
     {
         return $this->purchase->id;
     }
+
+    public function getCommentsCount()
+    {
+        return \App\Models\CommentModel::where('target_id', '=', $this->id)
+            ->where('target_type', '=', \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE)
+            ->count();
+    }
 }

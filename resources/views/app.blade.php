@@ -111,6 +111,7 @@
     </div>
 
 	<!-- Scripts -->
+    <script src="/public/jquery/jquery.loadTemplate-1.4.5.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <script src="/front/app.js"></script>
 </body>
