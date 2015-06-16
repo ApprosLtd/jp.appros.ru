@@ -142,6 +142,7 @@ class PurchaseModel extends Model {
 
     /**
      * Возвращает структуру цен по ценовым колонкам для продукта
+     * @deprecated
      * @param $product_id
      * @return array
      */
@@ -255,6 +256,10 @@ class PurchaseModel extends Model {
 
         $pricing_grid_columns_models_arr = $this->getPricingGridColumns()->get();
 
+        if (!$pricing_grid_columns_models_arr) {
+            \App\Helpers\Assistant::exception("Не назначено ни одной ценовой колонки для закупки {$this->id}");
+        }
+
         /**
          * @var $pricing_grid_column_model \App\Models\PricingGridColumnModel
          */
@@ -274,6 +279,7 @@ class PurchaseModel extends Model {
 
             $this->orders_total_sum = $orders_total_sum_matrix[$pricing_grid_column_model->id];
 
+            break;
         }
     }
 
@@ -287,8 +293,21 @@ class PurchaseModel extends Model {
         if (!$this->current_max_pricing_grid_column_id) {
             $this->calculateCurrentMaxPricingGridColumnIdAndOrdersTotalSum();
         }
-        return 11;
+
         return $this->current_max_pricing_grid_column_id;
+    }
+
+    /**
+     * Возвращает общую сумму заказов
+     * @return float
+     */
+    public function getOrdersTotalSum()
+    {
+        if (!$this->orders_total_sum) {
+            $this->calculateCurrentMaxPricingGridColumnIdAndOrdersTotalSum();
+        }
+
+        return $this->orders_total_sum;
     }
 
     /**
@@ -319,5 +338,25 @@ class PurchaseModel extends Model {
         }
 
         return $products_ids_arr;
+    }
+
+    /**
+     * Возвращает количество участников(покупателей) закупки
+     */
+    public function getParticipantsCount()
+    {
+        return $this->orders()->groupBy('user_id')->get()->count();
+    }
+
+    /**
+     * Возвращает процент завершенности закупки
+     */
+    public function getCompletedOnPercents()
+    {
+        if ($this->minimum_total_amount <= 0) {
+            return 0;
+        }
+
+        return intval( $this->getOrdersTotalSum() * 100 / $this->minimum_total_amount );
     }
 }

@@ -54,7 +54,7 @@
                         <h4 class="media-heading">{{ \Auth::user()->name }}</h4>
                         <div data-content="content"></div>
                         <div class="media-footer">
-                            <span class="comment-published" data-content="created_at"></span>
+                            <span class="comment-published">только что</span>
                         </div>
                     </div>
                 </div>

@@ -10,5 +10,4 @@ class DateHelper {
 
         return $date->ago();
     }
-
 }

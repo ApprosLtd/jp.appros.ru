@@ -118,6 +118,11 @@ class ProductInPurchaseModel extends Model {
             ->where('column_id', '=', $current_max_pricing_grid_column_id)
             ->first();
 
+        if (!$price_obj) {
+            \App\Helpers\Assistant::exception("Не указана цена для продукта {$this->getProductId()} в колонке {$current_max_pricing_grid_column_id}");
+            return 0;
+        }
+
         return $price_obj->price;
     }
 }

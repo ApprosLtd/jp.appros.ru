@@ -4,7 +4,7 @@
  */
 
 ?>
-<div class="col-sm-6 col-md-3 catalog-item">
+<div class="col-sm-6 col-md-4 catalog-item">
     <div class="catalog-item-wrapper">
         <div class="catalog-item-header">
             <a href="{{ $product_in_purchase->alias() }}" title="{{ $product_in_purchase->product->name }}">
@@ -14,8 +14,17 @@
         <div class="catalog-item-body">
             <h5 class="title"><a href="{{ $product_in_purchase->alias() }}" title="{{ $product_in_purchase->product->name }}">{{ $product_in_purchase->product->name }}</a></h5>
 
-            <span class="stars-small">
+            <h2>
+                {{ $product_in_purchase->getCurrentMaxPrice() }}
+                <sup style="font-size: 14px"><span class="glyphicon glyphicon-ruble" title="Рублей"></span></sup>
+            </h2>
 
+            <span class="stars-small">
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
+                <span class="glyphicon glyphicon-star-empty"></span>
             </span>
             <?php
             $purchase = $product_in_purchase->purchase;
@@ -23,15 +32,15 @@
             <div class="font-mini catalog-item-info">
                 <span class="glyphicon glyphicon-user" title="Продавец" style="color: #00708e"></span> <a href="/seller/{{ $purchase->seller->id }}">{{ $purchase->seller->name }}</a><br>
                 <span class="glyphicon glyphicon-piggy-bank" title="Закупка" style="color: #00708e"></span> <a href="/zakupka/{{ $purchase->id }}">{{ $purchase->name }}</a><br>
-                Завершено на 84%
+                Завершено на {{ $purchase->getCompletedOnPercents() }}%
                 <br>
-                Покупателей - 13
+                Покупателей - {{ $purchase->getParticipantsCount() }}
             </div>
         </div>
         <div class="catalog-item-footer">
             <span class="glyphicon glyphicon-eye-open"></span> 250
             <span class="glyphicon glyphicon-thumbs-up"></span> 13
-            <span class="glyphicon glyphicon-comment"></span> 24
+            <span class="glyphicon glyphicon-comment"></span> {{ $product_in_purchase->getCommentsCount() }}
         </div>
     </div>
 </div>
