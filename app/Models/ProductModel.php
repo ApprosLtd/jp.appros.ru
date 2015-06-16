@@ -52,23 +52,44 @@ class ProductModel extends Model {
 
     /**
      * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток",
-     * @param int $column_id
+     * @param array $columns_ids_arr
      * @return array
      */
     public function prices(array $columns_ids_arr = [])
     {
         $res = \DB::table(\App\Helpers\ProjectHelper::PRICES_TABLE_NAME)->where('product_id', $this->id);
 
-        if (!empty($columns_ids_arr)) {
+        if (count($columns_ids_arr) === 1) {
+            $res = $res->where('column_id', '=', $columns_ids_arr[0]);
+        }
+        elseif (!empty($columns_ids_arr)) {
             $res = $res->whereIn('column_id', $columns_ids_arr);
         }
 
         return $res->get(['column_id', 'price']);
     }
 
-    public function getFirstPriceByPurchaseId($purchase_id)
+    /**
+     * Возвращает коллекцию цен данного продукта для связанных "Ценовых сеток" в виде массива,
+     * где "Ключ" - Id ценовой колонки, "Значение" - цена для этой ценовой колонки
+     * @param array $columns_ids_arr
+     * @return array
+     */
+    public function getPricesArr(array $columns_ids_arr = [])
     {
-        //
+        $prices_objs_arr = $this->prices($columns_ids_arr);
+
+        if (empty($prices_objs_arr)) {
+            return [];
+        }
+
+        $prices_arr = [];
+
+        foreach ($prices_objs_arr as $price_obj) {
+            $prices_arr[intval($price_obj->column_id)] = doubleval($price_obj->price);
+        }
+
+        return $prices_arr;
     }
 
     /**
@@ -122,5 +143,17 @@ class ProductModel extends Model {
         $product_obj->images = $this->media('image')->get(['id', 'file_name']);
 
         return $product_obj;
+    }
+
+    /**
+     * Возвращает цену данного продукта для указанной ценовой колонки
+     * @param $pricing_grid_column_id
+     * @return float
+     */
+    public function getPriceByColumnId($pricing_grid_column_id)
+    {
+        $price_objs_arr = $this->prices([$pricing_grid_column_id]);
+
+        return doubleval($price_objs_arr[0]->price);
     }
 }

@@ -94,10 +94,30 @@ class ProductInPurchaseModel extends Model {
         return $this->purchase->id;
     }
 
+    /**
+     * Возвращает количество комментариев
+     * @return int
+     */
     public function getCommentsCount()
     {
         return \App\Models\CommentModel::where('target_id', '=', $this->id)
             ->where('target_type', '=', \App\Models\CommentModel::TARGET_TYPE_PRODUCT_IN_PURCHASE)
             ->count();
+    }
+
+    /**
+     * Возвращает текущую максимальную цену
+     * @return float
+     */
+    public function getCurrentMaxPrice()
+    {
+        $current_max_pricing_grid_column_id = $this->purchase->getCurrentMaxPricingGridColumnId();
+
+        $price_obj = \DB::table('prices')
+            ->where('product_id', '=', $this->getProductId())
+            ->where('column_id', '=', $current_max_pricing_grid_column_id)
+            ->first();
+
+        return $price_obj->price;
     }
 }

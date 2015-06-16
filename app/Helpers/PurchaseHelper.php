@@ -26,7 +26,7 @@ class PurchaseHelper {
         $product = \App\Models\ProductModel::find($product_id);
         $purchase = \App\Models\PurchaseModel::find($purchase_id);
 
-        $pricing_grid_columns = $purchase->getPricingGridColumns();
+        $pricing_grid_columns = $purchase->getPricingGridColumns()->get();
 
         $columns_ids_arr = [];
         foreach ($pricing_grid_columns as $column) {

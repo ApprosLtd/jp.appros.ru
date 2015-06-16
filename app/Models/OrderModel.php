@@ -4,6 +4,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderModel extends Model {
 
-    protected $table = 'orders';
+    public $table = 'orders';
 
+    /**
+     * Возвращает общую сумму данного "Заказа"
+     */
+    public function getTotalSum()
+    {
+        return 0;
+    }
 }

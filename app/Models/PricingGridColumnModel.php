@@ -15,4 +15,24 @@ class PricingGridColumnModel extends Model {
         return $this->belongsTo('\App\Models\PricingGridModel');
     }
 
+    public function minSumInclusive()
+    {
+        return boolval($this->min_sum_inclusive);
+    }
+
+    public function maxSumInclusive()
+    {
+        return boolval($this->max_sum_inclusive);
+    }
+
+    public function minSum()
+    {
+        return doubleval($this->min_sum);
+    }
+
+    public function maxSum()
+    {
+        return doubleval($this->max_sum);
+    }
+
 }

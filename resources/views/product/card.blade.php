@@ -85,7 +85,7 @@
                                     <div class="row">
                                         <div class="col-md-6" style="text-align: center">
                                             <div style="font-size: 35px; padding: 0; line-height: 34px;">
-                                                от {{ $product_in_purchase->price }}
+                                                {{ $product_in_purchase->getCurrentMaxPrice() }}
                                                 <sup style="font-size: 20px"><span class="glyphicon glyphicon-ruble" title="Рублей"></span></sup>
                                             </div>
                                             <a href="#" style="font-size: 12px; color: #DB3232;">как формируются цены?</a>

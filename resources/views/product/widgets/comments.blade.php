@@ -1,7 +1,7 @@
 <div class="comments-header">
     <h3>Комментарии и обсуждение</h3>
     @if(\Auth::guest())
-        <p>Вы должны <a href="#">авторизоваться</a>, что бы оставить комментарий</p>
+        <p>Вы должны <a href="/auth/login">авторизоваться</a>, что бы оставить комментарий</p>
     @elseif(\Auth::user()->can('product-comments-add'))
         <p id="commentFormTextBox">
             <textarea name="description" class="form-control" rows="3" placeholder="введите текст комментария..." style="margin-bottom: 5px"></textarea>
