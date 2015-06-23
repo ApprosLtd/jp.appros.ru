@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="catalog-item-footer">
-            <span class="glyphicon glyphicon-eye-open"></span> 250
+            <span class="glyphicon glyphicon-eye-open"></span> {{ $product_in_purchase->getAttendance() }}
             <span class="glyphicon glyphicon-thumbs-up"></span> 13
             <span class="glyphicon glyphicon-comment"></span> {{ $product_in_purchase->getCommentsCount() }}
         </div>

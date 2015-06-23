@@ -17,6 +17,8 @@ class ProductController extends Controller {
 
         $product_in_purchase = \App\Models\ProductInPurchaseModel::findByProductIdAndByPurchaseId($product_id, $purchase_id);
 
+        \App\Models\AttendanceCounterModel::enrol($product_in_purchase->id, \App\Models\AttendanceCounterModel::TARGET_TYPE_PRODUCT_IN_PURCHASE);
+
         if (!$product_model or !$purchase_model) {
             return response(view('errors.product_404'), 404);
         }

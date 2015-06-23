@@ -125,4 +125,16 @@ class ProductInPurchaseModel extends Model {
 
         return $price_obj->price;
     }
+
+    /**
+     * Возвращает количество посещений
+     * @return int
+     */
+    public function getAttendance()
+    {
+        return \DB::table('attendance_counter')
+            ->where('target_id', '=', $this->id)
+            ->where('target_type', '=', \App\Models\AttendanceCounterModel::TARGET_TYPE_PRODUCT_IN_PURCHASE)
+            ->count();
+    }
 }
