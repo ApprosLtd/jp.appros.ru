@@ -30,7 +30,7 @@
             $purchase = $product_in_purchase->purchase;
             ?>
             <div class="font-mini catalog-item-info">
-                <span class="glyphicon glyphicon-user" title="Продавец" style="color: #00708e"></span> <a href="/seller/{{ $purchase->seller->id }}">{{ $purchase->seller->name }}</a><br>
+                <!--span class="glyphicon glyphicon-user" title="Продавец" style="color: #00708e"></span> <a href="/seller/{{ $purchase->seller->id }}">{{ $purchase->seller->name }}</a><br-->
                 <span class="glyphicon glyphicon-piggy-bank" title="Закупка" style="color: #00708e"></span> <a href="/zakupka/{{ $purchase->id }}">{{ $purchase->name }}</a><br>
                 Завершено на {{ $purchase->getCompletedOnPercents() }}%
                 <br>
@@ -39,7 +39,7 @@
         </div>
         <div class="catalog-item-footer">
             <span class="glyphicon glyphicon-eye-open"></span> {{ $product_in_purchase->getAttendance() }}
-            <span class="glyphicon glyphicon-thumbs-up"></span> 13
+            <!--span class="glyphicon glyphicon-thumbs-up"></span-->
             <span class="glyphicon glyphicon-comment"></span> {{ $product_in_purchase->getCommentsCount() }}
         </div>
     </div>

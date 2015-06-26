@@ -156,4 +156,42 @@ class ProductModel extends Model {
 
         return doubleval($price_objs_arr[0]->price);
     }
+
+    /**
+     * Устанавливает занчение атрибута по его ID
+     * @param $attribute_id
+     * @param $value
+     */
+    public function setAttributeById($attribute_id, $value)
+    {
+        $attribute_value_model = $this->attributes()->where('attribute_id', '=', $attribute_id)->first();
+
+        if (!$attribute_value_model) {
+            $attribute_value_model = new \App\Models\AttributeValueModel;
+            $attribute_value_model->product_id = $this->id;
+            $attribute_value_model->attribute_id = $attribute_id;
+        }
+
+        $attribute_value_model->value = $value;
+
+        $attribute_value_model->save();
+    }
+
+    /**
+     * Устанавливает цену для ценовой колонки по ID колонки
+     * @param $column_id
+     * @param $price
+     */
+    public function setPriceByColumnId($column_id, $price)
+    {
+        $price = str_replace(',', '.', $price);
+
+        $sql = "INSERT INTO `prices` (`product_id`, `column_id`, `price`) VALUES (?, ?, ?) ON duplicate KEY UPDATE `price` = VALUES(`price`)";
+
+        \DB::insert($sql, [
+            $this->id,
+            $column_id,
+            $price
+        ]);
+    }
 }

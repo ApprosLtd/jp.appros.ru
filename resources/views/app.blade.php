@@ -15,6 +15,7 @@
     <!-- Optional theme -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"-->
     <link rel="stylesheet" href="/public/buttons/css/buttons.css">
+    <link rel="stylesheet" href="//www.fuelcdn.com/fuelux/3.6.3/css/fuelux.min.css">
     <link rel="stylesheet" href="/css/app.css">
 
     <script src="http://yastatic.net/jquery/2.1.3/jquery.min.js"></script>
@@ -118,6 +119,7 @@
 	<!-- Scripts -->
     <script src="/public/jquery/jquery.loadTemplate-1.4.5.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="//www.fuelcdn.com/fuelux/3.6.3/js/fuelux.min.js"></script>
     <script src="/front/app.js"></script>
 </body>
 </html>

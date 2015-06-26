@@ -38,60 +38,31 @@ class TestExcel extends Command {
 	public function fire()
 	{
 
-        \Excel::selectSheetsByIndex(0)->load(base_path() . '/storage/app/price1.xls', function($reader) {
+        $catalog = \App\Helpers\CitynatureHelper::getCatalogArrayFromCsvFile( base_path('storage/app/price1.csv') );
 
-            /**
-             * @var $results \Maatwebsite\Excel\Readers\LaravelExcelReader
-             */
-            $results = $reader->skip(9)->get();
+        $this->info('Catalog count = ' . count($catalog));
 
-            if (empty($results)) {
-                return;
-            }
+        foreach ($catalog as $item) {
+            $product = new \App\Models\ProductModel;
 
-            foreach ($results as $row) {
+            $product->name = $item->title;
+            $product->user_id = 1;
+            $product->supplier_id = 5;
 
-                /**
-                 * @var $row \Maatwebsite\Excel\Readers\LaravelExcelReader
-                 */
-                $row_mix = $row->toArray();
+            $product->save();
 
-                if (count($row_mix) <= 10) {
-                    continue;
-                }
+            $product->setAttributeById(1, $item->volume);   // weight
+            $product->setAttributeById(4, $item->article);  // article
 
-                $column_first = trim($row_mix[0]);
-                $column_title = trim($row_mix[2]);
-                $column_weight = trim($row_mix[3]);
-                $column_price1 = trim($row_mix[4]);
-                $column_price2 = trim($row_mix[5]);
-                $column_price3 = trim($row_mix[6]);
-                $column_price4 = trim($row_mix[7]);
-                $column_price5 = trim($row_mix[8]);
-                $column_price6 = trim($row_mix[9]);
-                $column_price7 = trim($row_mix[10]);
+            $product->setPriceByColumnId(18, $item->price_1);
+            $product->setPriceByColumnId(19, $item->price_2);
+            $product->setPriceByColumnId(20, $item->price_3);
+            $product->setPriceByColumnId(21, $item->price_4);
 
-                if (empty($column_first)) {
-                    continue;
-                }
+            echo '.';
+        }
 
-                if (empty($column_title)) {
-                    continue;
-                }
-
-                $product = new \App\Models\ProductModel;
-
-                $product->article = $column_first;
-                $product->name = $column_title;
-                $product->user_id = 1;
-                //$product->weight = $column_weight;
-
-                $product->save();
-
-                echo '.';
-            }
-            echo "\n";
-        });
+        echo "\n";
 	}
 
 	/**

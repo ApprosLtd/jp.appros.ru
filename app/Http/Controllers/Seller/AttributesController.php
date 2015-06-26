@@ -51,7 +51,7 @@ class AttributesController extends SellerController {
         $post_fields_arr = $request->all();
 
         if (isset($post_fields_arr['id'])) {
-            $widget_model = \App\Models\Attribute::find($post_fields_arr['id']);
+            $widget_model = \App\Models\AttributeModel::find($post_fields_arr['id']);
 
             if (!$widget_model) {
                 return 'Ошибка: нет виджета с таким ID - ' . $post_fields_arr['id'];
@@ -63,7 +63,7 @@ class AttributesController extends SellerController {
 
             $widget_model->save();
         } else {
-            \App\Models\Attribute::create($post_fields_arr);
+            \App\Models\AttributeModel::create($post_fields_arr);
         }
 
         return redirect('/seller/attribute-group/' . $post_fields_arr['attribute_group_id']);

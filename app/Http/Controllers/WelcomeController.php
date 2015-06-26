@@ -53,7 +53,7 @@ class WelcomeController extends Controller {
 
         return '';
 
-        $catalog = \App\Helpers\CitynatureHelper::getCatalogArrayFromCsvFile( base_path('storage/app/price.csv') );
+        $catalog = \App\Helpers\CitynatureHelper::getCatalogArrayFromCsvFile( base_path('storage/app/price1.csv') );
 
         foreach ($catalog as $item_level_1) {
 

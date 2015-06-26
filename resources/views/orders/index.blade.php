@@ -50,7 +50,7 @@
                                         <tr id="orderValue-{{ $order_model->id }}">
                                             <td><a href="{{ $product_in_purchase_model->alias() }}">{{ $product_in_purchase_model->product->name }}</a></td>
                                             <td class="product-price">{{ $current_max_price }}</td>
-                                            <td><input style="width: 50px" data-order-id="{{ $order_model->id }}" value="{{ $order_model->amount }}"></td>
+                                            <td><input type="number" style="width: 50px" data-order-id="{{ $order_model->id }}" value="{{ $order_model->amount }}"></td>
                                             <td class="total-price">{{ number_format(\App\Helpers\OrdersHelper::getTotalPrice($current_max_price, $order_model->amount), 2) }}</td>
                                             <td style="text-align: right"><button class="btn btn-xs btn-danger" onclick="destroyOrder({{ $order_model->id }});">удалить</button></td>
                                         </tr>
