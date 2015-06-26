@@ -28,6 +28,9 @@
 
     <script>
         var __TOKEN__ = '{{ csrf_token() }}';
+        function getToken(){
+            return __TOKEN__;
+        }
         function updateToken(success){
             $.get('/rest/token', function(res){
                 __TOKEN__ = res._token;
@@ -84,7 +87,9 @@
                             </a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="/orders">Список заказов</a></li>
-								<li><a href="/auth/logout">Logout</a></li>
+								<li><a href="/orders">Избранное</a></li>
+                                <li role="separator" class="divider"></li>
+								<li><a href="/auth/logout">Выход</a></li>
 							</ul>
 						</li>
 					@endif

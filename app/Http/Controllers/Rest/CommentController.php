@@ -1,11 +1,10 @@
 <?php namespace App\Http\Controllers\Rest;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class CommentController extends Controller {
+class CommentController extends RestController {
 
 	/**
 	 * Display a listing of the resource.

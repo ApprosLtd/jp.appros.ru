@@ -284,7 +284,7 @@ class PurchaseModel extends Model {
     }
 
     /**
-     * Возвращает ID максимальной колонки
+     * Возвращает ID текущей максимальной колонки
      * @param $orders_total_sum
      * @return int
      */

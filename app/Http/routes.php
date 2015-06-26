@@ -36,7 +36,8 @@ Route::get('/media/images/{width_height}/{file_name}', 'Seller\MediaController@g
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
-    'catalog' => 'CatalogController'
+    'catalog' => 'CatalogController',
+    'orders' => 'OrdersController',
 ]);
 
 /**
@@ -53,6 +54,7 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('basket', 'Rest\BasketController');
     Route::resource('token', 'Rest\TokenController');
     Route::resource('comment', 'Rest\CommentController');
+    Route::resource('orders', 'Rest\OrdersController');
 });
 
 Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');

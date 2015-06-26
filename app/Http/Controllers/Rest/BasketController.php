@@ -37,7 +37,7 @@ class BasketController extends RestController {
             return \App\Helpers\RestHelper::exceptionInvalidData(['Product in purchase not found']);
         }
 
-        $this->user->basket()->addProduct($product_in_purchase->id, 1);
+        $this->user->basket()->addProduct($product_in_purchase, 1);
 
         return ['success' => true];
     }

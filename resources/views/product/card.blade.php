@@ -65,14 +65,14 @@
                                         <div class="col-md-4">
                                             <a href="#"><span class="glyphicon glyphicon-paperclip"></span> в избранное</a>
                                         </div>
-                                        <div class="col-md-4">
+                                        <!--div class="col-md-4">
                                             <a href="#"><span class="glyphicon glyphicon-duplicate"></span> к сравнению</a>
-                                        </div>
+                                        </div-->
                                     </div>
 
                                     <div class="row" style="margin: 20px 0 30px; color: #9B9B9B">
                                         <div class="col-md-4">
-                                            <span class="glyphicon glyphicon-eye-open"></span> Просмотры: 30
+                                            <span class="glyphicon glyphicon-eye-open"></span> Просмотры: {{ $product_in_purchase->getAttendance() }}
                                         </div>
                                         <div class="col-md-4">
                                             <span class="glyphicon glyphicon-thumbs-up"></span> Рекомендации: 5
@@ -136,9 +136,9 @@
                                 Если Вы впервые совершаете совместную покупку и не знакомы с процессом заказа, то рекомендуем
                                 <br><a href="#">ознакомиться с документацией</a>.
                             </div>
-                            <h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></h5>
+                            <!--h5 class="content-block-title">Информация о закупке <span class="glyphicon glyphicon-question-sign"></span></--h5>
 
-                            <table class="table table-stats table-condensed table-hover">
+                            <table-- class="table table-stats table-condensed table-hover">
                                 <tr>
                                     <td style="width: 22px"><span class="glyphicon glyphicon-eye-open"></span></td>
                                     <td>Просмотры</td>
@@ -154,7 +154,7 @@
                                     <td>Комментарии</td>
                                     <td class="data-value">12</td>
                                 </tr>
-                            </table>
+                            </table-->
                         </div>
                         <div class="content-block">
                             <h5 class="content-block-title">
