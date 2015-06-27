@@ -53,11 +53,11 @@ class PricingGridModel extends Model {
             $current_max_sum = doubleval($column_model->max_sum);
 
             if ($current_min_sum >= $current_max_sum) {
-                \App\Helpers\Assistant::exception('Неверные значения цен в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
+                \App\Helpers\Assistant::exception('Неверные значения цен (>=) в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
             }
 
             if ($current_min_sum != $last_max_sum) {
-                \App\Helpers\Assistant::exception('Неверные значения цен в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
+            //    \App\Helpers\Assistant::exception('Неверные значения цен (!=) в колонке ID#' . $column_model->id . ' для ценовой сетки ID#' . $this->id);
             }
 
             $last_max_sum = $current_max_sum;

@@ -89,8 +89,7 @@ class PurchasesController extends SellerController {
 
             \App\Models\ProductInPurchaseModel::create([
                 'purchase_id' => $purchase_id,
-                'product_id' => $product_model->id,
-                'product_data' => json_encode($product_full_data)
+                'product_id' => $product_model->id
             ]);
         }
 
