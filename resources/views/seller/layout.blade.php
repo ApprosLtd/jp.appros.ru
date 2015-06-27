@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <!-- Optional theme -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"-->
-
+    <link href="//www.fuelcdn.com/fuelux/3.6.3/css/fuelux.min.css" rel="stylesheet">
     <style>
         body{
             font-family: arial;
@@ -25,7 +25,7 @@
 
     <title></title>
 </head>
-<body>
+<body class="fuelux">
 
 {!! \App\Helpers\WidgetHelper::region('top', 'seller') !!}
 
@@ -33,6 +33,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="//www.fuelcdn.com/fuelux/3.6.3/js/fuelux.min.js"></script>
 
 <script src="/public/jquery-ui/jquery-ui.min.js"></script>
 

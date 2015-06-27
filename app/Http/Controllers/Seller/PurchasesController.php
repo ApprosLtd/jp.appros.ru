@@ -19,6 +19,14 @@ class PurchasesController extends SellerController {
         return view('seller.purchases.products', ['purchase_model' => $purchase_model]);
     }
 
+    public function getHistory($purchase_id)
+    {
+        $purchase_model = $this->user->purchases()->find($purchase_id);
+        \App\Helpers\Assistant::assertModel($purchase_model);
+
+        return view('seller.purchases.history', ['purchase_model' => $purchase_model]);
+    }
+
     public function getShow($purchase_id)
     {
         $purchase_model = $this->user->purchases()->find($purchase_id);

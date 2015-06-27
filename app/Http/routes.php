@@ -55,6 +55,7 @@ Route::group(['prefix' => 'rest'], function()
     Route::resource('token', 'Rest\TokenController');
     Route::resource('comment', 'Rest\CommentController');
     Route::resource('orders', 'Rest\OrdersController');
+    Route::resource('grid', 'Rest\GridController');
 });
 
 Route::any('rest/{model_name}/{id?}', 'ExtGeneratorController@restModel');
