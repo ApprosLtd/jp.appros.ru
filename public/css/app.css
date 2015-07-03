@@ -240,6 +240,13 @@ body {
     border-radius: 4px 4px 0 0;
     border: 3px solid #FFF;
 }
+.catalog-item-header .empty-image {
+    font-size: 194px;
+    color: #E8E8E8;
+    display: block;
+    margin: 0 24px;
+    line-height: 193px;
+}
 .catalog-item-body {
     padding: 5px 10px;
 }

@@ -35,6 +35,12 @@ class WelcomeController extends Controller {
 
     public function test()
     {
+        print_r(get_loaded_extensions());
+
+        //phpinfo();
+
+        return;
+
         $result = \App\Models\NestedSets::withDepth()->having('depth', '=', 1)->get();
 
         return $result;

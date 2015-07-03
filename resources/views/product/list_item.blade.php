@@ -8,7 +8,14 @@
     <div class="catalog-item-wrapper">
         <div class="catalog-item-header">
             <a href="{{ $product_in_purchase->alias() }}" title="{{ $product_in_purchase->product->name }}">
-                <img alt="" src="/media/images/177x139/{{ $product_in_purchase->getFirstImageFileName() }}">
+                <?php
+                    $first_image_file_name = $product_in_purchase->getFirstImageFileName();
+                ?>
+                @if(empty($first_image_file_name))
+                <span class="glyphicon glyphicon-picture empty-image"></span>
+                @else
+                <img alt="" src="/media/images/177x139/{{ $first_image_file_name }}">
+                @endif
             </a>
         </div>
         <div class="catalog-item-body">

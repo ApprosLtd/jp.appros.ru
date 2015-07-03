@@ -2,6 +2,7 @@
 /node_modules
 .env
 .idea
+.nginx
 /composer.lock
 /public/test.php
 /public/media/images

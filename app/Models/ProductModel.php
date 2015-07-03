@@ -105,6 +105,10 @@ class ProductModel extends Model {
 
         $attribute_value_obj = $this->attributes()->where('attribute_id', '=', $attribute_obj->id)->first(['value']);
 
+        if (!$attribute_value_obj) {
+            return null;
+        }
+
         return $attribute_value_obj->value;
     }
 
