@@ -4,7 +4,7 @@
  * Тестирование Пользователей
  * @author Vitaly Serov
  */
-class UsersTest
+class UsersTest extends TestCase
 {
     /**
      * Регистрация пользователя
@@ -18,14 +18,22 @@ class UsersTest
      */
     public function testRegistrationUser($name, $email, $password, $password_confirmation)
     {
-        echo $email . "\n";
+        $response = $this->call('POST', '/auth/register', [
+            '_token' => csrf_token(),
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'password_confirmation' => $password_confirmation
+        ]);
+
+        $this->assertEquals(200, $response->status());
     }
 
     public function getUsersListData()
     {
         $list = [];
 
-        for($u = 1; $u <= 100; $u++){
+        for($u = 1; $u <= 3; $u++){
 
             $name = 'Новый пользователь ' . $u;
 
