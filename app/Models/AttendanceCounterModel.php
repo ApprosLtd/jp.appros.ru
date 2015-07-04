@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Счетчик посещаемости
+ * РЎС‡РµС‚С‡РёРє РїРѕСЃРµС‰Р°РµРјРѕСЃС‚Рё
  * @package App\Models
  */
 class AttendanceCounterModel extends Model
@@ -21,7 +21,7 @@ class AttendanceCounterModel extends Model
     const TARGET_TYPE_PURCHASE = 'purchase';
 
     /**
-     * Записывает информацию о посещении
+     * Р РµРіРёСЃС‚СЂРёСЂСѓРµС‚ РїРѕСЃРµС‰РµРЅРёРµ
      * @param $target_id
      * @param $target_type
      */
